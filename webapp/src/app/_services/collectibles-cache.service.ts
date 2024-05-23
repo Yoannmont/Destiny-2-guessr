@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Category, DamageType, Tier, Type, Weapon } from '../_classes/weapon';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, of, tap, throwError } from 'rxjs';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +16,7 @@ export class CollectiblesCacheService {
   private damageTypesCache: DamageType[] | null = null;
 
   private readonly BASE_URL = environment.SERVER_BASE_URL;
-
-  // private readonly headers = new HttpHeaders({
-  //   'Access-Control-Allow-Origin':window,
-  // });
-
+  
   constructor(private httpClient: HttpClient) { }
 
   
