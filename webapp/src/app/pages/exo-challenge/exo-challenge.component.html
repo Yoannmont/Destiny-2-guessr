@@ -82,7 +82,7 @@
                                 class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
                             <div class="d-inline-flex align-items-center">
 
-                                <img [src]="this.utilsService.bungieUrl + (damageTypes | filter : collectible.defaultDamageType)[0].iconLink"
+                                <img [src]="this.utilsService.bungieUrl + this.utilsService.iconsPath +  (damageTypes | filter : collectible.defaultDamageType)[0].iconLink"
                                     class="smallDamageType" />
 
                                 <span class="categoryItalic"> &nbsp;{{(categories |

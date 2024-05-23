@@ -155,7 +155,7 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
     let spanElement = document.getElementById(`${id}`);
     let collectibleImage = spanElement?.childNodes.item(0) as HTMLImageElement;
     const collectible = this.getCollectibleObjectById(id);
-    collectibleImage.src = this.utilsService.bungieUrl + collectible?.iconLink;
+    collectibleImage.src = this.utilsService.bungieUrl + this.utilsService.iconsPath + collectible?.iconLink;
     collectibleImage.alt = collectible?.name[0][this.localizeProperty('name')]!;
 
     spanElement?.classList.add('shine');
