@@ -1,4 +1,4 @@
 export const environment = {
     production : false,
-    SERVER_BASE_URL : 'http://34.132.195.195:8000',
+    SERVER_BASE_URL : 'http://localhost:8000',
 };
