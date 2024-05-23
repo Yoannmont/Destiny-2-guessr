@@ -94,7 +94,7 @@ TEMPLATES = [
         },
     },
 ]
-
+ 
 WSGI_APPLICATION = "d2guessr.wsgi.app"
 
 
