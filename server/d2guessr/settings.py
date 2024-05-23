@@ -42,7 +42,8 @@ except KeyError as e:
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '*'
+    '*',
+    '.vercel.app'
 ]
 
 
@@ -95,7 +96,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "d2guessr.wsgi.application"
+WSGI_APPLICATION = "d2guessr.wsgi.app"
 
 
 # Database
