@@ -4,6 +4,7 @@ import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
 import { SingleCollectibleComponent } from './pages/single-collectible/single-collectible.component';
 import { ExoChallengeComponent } from './pages/exo-challenge/exo-challenge.component';
+import { AboutComponent } from './pages/about/about.component';
 
 export const routes: Routes = [
     {path: '', component:HomeComponent},
@@ -11,6 +12,7 @@ export const routes: Routes = [
     {path: 'collections', component:CollectionsComponent},
     {path: "collections/:id", component:SingleCollectibleComponent},
     {path: "exo-challenge", component:ExoChallengeComponent},
+    {path:"about", component:AboutComponent},
     {path: '**', redirectTo: "/404"},
     
 ];
