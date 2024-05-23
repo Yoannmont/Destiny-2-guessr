@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    
+    // background: rgb(21, 22, 26);
+    background-image:url(assets/img/bg_shape.svg), linear-gradient(180deg, rgba(21, 22, 26, 1) 0%, rgba(21, 22, 26, 1) 62%, rgba(70, 73, 81, 1) 100%);
+    background-repeat: no-repeat, no-repeat;
+    background-size: 100% 100%, 100% 100%;
+    background-position: top 20px left 0, top 0 left 0 ;
+    background-attachment: fixed;
+    color : white;
+    letter-spacing: 2px;
+    font-family: "Neue Haas Grotesk Display Pro";
+    font-weight: 400;
+    overflow: auto;
+}
+
+.layout{
+    min-height: calc(100svh - 300px);
+}
+
+
+
+@import "assets/styles/fonts.scss";
+@import "assets/styles/bar-items.scss";
+@import "assets/styles/animations.scss";
+@import "assets/styles/collectibles.scss";

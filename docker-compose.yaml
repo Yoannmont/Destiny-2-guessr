@@ -1,0 +1,43 @@
+services:
+  webapp:
+    build: /webapp/
+    ports:
+      - 4200:4200
+    command: ng serve --host 0.0.0.0 
+
+  database:
+    image: postgres:alpine3.19
+    volumes:
+      - ./database/_volume_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=d2guessr_password
+      - POSTGRES_USER=d2guessr_user
+      - POSTGRES_DB=d2guessr_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      
+    ports:
+      - 5432:5432
+
+  server:
+    build: /server/
+    command: python manage.py migrate
+    ports:
+      - 8000:8000
+    environment:
+      - POSTGRES_PASSWORD=d2guessr_password
+      - POSTGRES_USER=d2guessr_user
+      - POSTGRES_DB=d2guessr_db
+      - POSTGRES_PORT=5432
+      - DATABASE_ADDRESS=localhost
+    restart: always
+      
+
+  
+  
+  
+
+

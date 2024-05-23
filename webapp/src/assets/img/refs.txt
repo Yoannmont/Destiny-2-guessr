@@ -1,0 +1,3 @@
+exotic_engram.png TahoeAnime
+legendary_engram.png TahoeAnime
+rare_engram.png TahoeAnime

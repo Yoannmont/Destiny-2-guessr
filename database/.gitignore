@@ -1,0 +1,3 @@
+*.json
+*.sqlite3
+_volume_data/*

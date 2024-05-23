@@ -1,0 +1,145 @@
+<div class="container-fluid" [class.full-screen-sidebar]="this.utilsService.isSidebarVisible">
+    <div class="row my-3">
+        <div class="col-1">
+            <button class="btn toggleButton" type="button" aria-label="Toggle navigation" aria-controls="sidebar"
+                (click)="this.utilsService.toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+        <div class="col-11">
+            <h1 class="section-title" i18n>Exo Challenge</h1>
+        </div>
+    </div>
+    <div class="row align-items-center">
+        <div class="col-md-4 order-md-2 my-2">
+
+            <div class="textbox p-3 text-end ">
+                <div class="timer-wrapper  p-3 row text-center border-bottom">
+                    <span class="timer-title" i18n>Temps</span> <br />
+                    <span class="timer">{{ this.timer| async | date : "mm:ss.S"}}</span>
+                </div>
+                <span class="inputs-wrapper d-flex">
+                    <div class="inputs">
+                        <span *ngFor="let input of inputs">
+                            <div *ngIf="this.getCollectibleIdByName(input) then isCollectible else isNotCollectible">
+                            </div>
+                            <ng-template #isCollectible>
+                                <div class="row my-4 vertical-fadeIn-animation-reverse"
+                                    *ngIf="this.getCollectibleObjectByName(input) as collectible">
+                                    <div class="col-8">
+                                        <span
+                                            class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
+                                        <div class="d-inline-flex align-items-center">
+
+                                            <img [src]="this.utilsService.bungieUrl + (damageTypes | filter : collectible.defaultDamageType)[0].iconLink"
+                                                class="smallDamageType" />
+
+                                            <span class="categoryItalic"> &nbsp;{{(categories |
+                                                filter
+                                                : collectible.category)[0][localizeProperty("category")]}}</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="shining-wrapper d-block new-collectible-effect">
+                                            <img [src]="this.utilsService.bungieUrl + collectible.iconLink"
+                                                [alt]="collectible.name[0][localizeProperty('name')]"
+                                                class="collectible-icon"></span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template #isNotCollectible>
+                                <div class="row my-3">
+                                    <div class="col-8">{{input}}</div>
+                                    <div class="col-4"><i class="bi bi-x cross"></i></div>
+                                </div>
+                            </ng-template>
+                        </span>
+                    </div>
+                </span>
+                <form [formGroup]="inputGroup" (submit)="submitInput()" class="form-input text-end">
+                    <label for="userInput" i18n>Entrez votre réponse</label>
+                    <input type="text" name="userInput" i18n-placeholder placeholder="Nom de l'arme"
+                        class="form-control" formControlName="userInput" />
+                    <button type="submit" class="btn btn-secondary w-100" [disabled]="inputGroup.invalid"
+                        i18n>Valider</button>
+                </form>
+                <!-- <button class="w-100 btn btn-primary" (click)="this.utilsService.reloadPage()" i18n>Recommencer</button> -->
+
+            </div>
+        </div>
+        <div class="col-md-8 order-md-1 my-2">
+            <div class="weaponsbox p-3">
+                <div class="score border-bottom">
+                    <div class="text-start" i18n>Armes</div>
+                    <div class="text-end">{{this.points}} <small *ngIf="this.weapons"> / {{this.weapons.length}}
+                        </small></div>
+                </div>
+                <div class="row row-cols-auto mt-3 g-2">
+
+                    <div *ngFor="let collectible of weapons" class="col">
+                        <ng-template #popContent><span
+                                class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
+                            <div class="d-inline-flex align-items-center">
+
+                                <img [src]="this.utilsService.bungieUrl + (damageTypes | filter : collectible.defaultDamageType)[0].iconLink"
+                                    class="smallDamageType" />
+
+                                <span class="categoryItalic"> &nbsp;{{(categories |
+                                    filter
+                                    : collectible.category)[0][localizeProperty("category")]}}</span>
+                            </div>
+                        </ng-template>
+                        <span class="shining-wrapper d-block" [id]="collectible.id" [ngbPopover]="popContent"
+                            #p="ngbPopover" [autoClose]="'outside'" triggers="manual" popoverClass="bg-dark"
+                            (click)="alreadyRevealed(collectible.id) && p.toggle()">
+                            <img src="assets/img/no-weapon.png" class="collectible-icon">
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<button data-bs-toggle="modal" data-bs-target="#startModal" class="d-none"></button>
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="startModal"
+    aria-labelledby="startModalLabel" aria-hidden="false" >
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header ">
+                <h1 class="modal-title fs-5" id="startModalLabel">Exo Challenge</h1>
+                <!-- <button type="button" class="bg-dark btn btn-dark ms-auto" data-bs-dismiss="modal"  aria-label="Close"><i class="bi bi-x"></i></button> -->
+            </div>
+            <div class="modal-body">
+                Trouvez les noms de toutes les armes en un temps minimum. À vous de jouer, Gardien !
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="startTimer()" i18n>Commencer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button data-bs-toggle="modal" data-bs-target="#victoryModal" class="d-none"></button>
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="victoryModal"
+    aria-labelledby="victoryModalLabel" aria-hidden="false" >
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header ">
+                <h1 class="modal-title fs-5" id="victoryModalLabel">Exo Challenge réussi </h1>
+                <button type="button" class="bg-dark btn btn-dark ms-auto" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x"></i></button>
+            </div>
+            <div class="modal-body">
+                Bravo gardien ! Vous avez retrouvé les toutes les armes en {{this.timer | async | date : "mm:ss.S"}} !
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="this.utilsService.reloadPage()" i18n>Réessayer</button>
+            </div>
+        </div>
+    </div>
+</div>

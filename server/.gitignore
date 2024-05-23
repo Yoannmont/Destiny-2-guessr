@@ -1,0 +1,6 @@
+*/__pycache__
+
+migrations/__pycache__
+*.json
+*.sqlite3
+_volume_data/*

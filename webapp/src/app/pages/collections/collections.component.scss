@@ -1,0 +1,31 @@
+@import "../../../assets/styles/common-vars.scss";
+
+.collectible-card{
+    max-width: 450px;
+    height : auto;
+    border-radius: 15px;
+    transition: background-color $transition-duration;
+}
+
+.collectible-card:hover{
+    background-color: #475883;
+}
+
+.collectible-icon{
+    width: 80px;
+    height: auto;
+    border : 3px solid white;
+    position: relative;
+}
+
+.separation-border{
+    border-right :$separation-bar-width solid $separation-bar-color;
+}
+
+
+@media screen and (max-width:992px){
+    .separation-border{
+        border-top:$separation-bar-width solid $separation-bar-color;
+        border-right : none;
+    }
+}

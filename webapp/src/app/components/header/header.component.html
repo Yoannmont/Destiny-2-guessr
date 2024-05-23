@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container bg-transparent d-flex align-items-center">
+        <div class="dropdown-2">
+            <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" i18n>
+                Langue
+            </button> -->
+            <ul class="dropdown-menu">
+                <li *ngFor="let lang of langService.localeList">
+                <a class="dropdown-item" routerLink="/{{lang.code}}/"> 
+                    {{lang.label}}</a>
+                </li>
+            </ul>
+            
+        </div>
+            <a class="text-center mx-auto" routerLink="/">
+                <img src="assets/img/d2g-logo.png" alt="Destiny 2 Guessr" class="brand-logo" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+                style="color: white; border-color: white!important;">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="collapse navbar-collapse text-center mx-auto my-4 py-2" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <a class="navbar-item text-center mx-4 p-2" *ngFor="let item of this.utilsService.navbarContent" [routerLink]="item.link" routerLinkActive="active">
+                        <div class="navbar-link">{{item.title}}</div>
+                    </a>
+                </ul>
+            </div>
+        </div>
+</nav>

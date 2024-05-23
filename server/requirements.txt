@@ -1,0 +1,8 @@
+django==5.0.3
+django_rest_framework
+psycopg2
+requests
+pandas
+traitlets
+django-cors-headers
+gunicorn

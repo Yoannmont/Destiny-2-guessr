@@ -1,0 +1,11 @@
+.notfound-img{
+    max-width: calc(100vw - 30px);
+    height: auto;
+}
+
+@media screen and (max-width : 992px) and (min-width:768px){
+    .notfound-img{
+        max-width: 400px;
+        height: auto;
+    }
+}

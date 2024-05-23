@@ -1,0 +1,111 @@
+<div class="layout container-fluid my-2">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <h1 i18n class="section-title">Collections</h1>
+        </div>
+    </div>
+    <div class="row text-center">
+
+        <div class="col-lg-2 me-auto px-auto order-lg-2 py-2">
+            <h1 i18n class="subsection-title" i18n>Filtres</h1>
+
+            <div *ngFor="let filter of filters" class=""> 
+                {{filter.label}} 
+                <button (click)="deleteFilter(filter)" class="btn"> 
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+
+            <button class="btn btn-info mx-2" (click)="applyFilters()" i18n> Filtrer </button>
+            <button class="btn btn-danger mx-2" (click)="resetFilters()" i18n>Reset</button>
+
+            <div class="dropdown my-2">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false" i18n>
+                    Rareté
+                </button>
+                <ul class="dropdown-menu">
+                    <li *ngFor="let tier of tiers">
+                        <a class="dropdown-item pointer" (click)="addFilter('tier', tier.id, tier[localizeProperty('tier')])">
+                            {{tier[localizeProperty('tier')]}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="dropdown my-2">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false" i18n>
+                    Type d'arme
+                </button>
+                <ul class="dropdown-menu">
+                    <li *ngFor="let type of types">
+                        <a class="dropdown-item pointer" (click)="addFilter('type', type.id, type[localizeProperty('type')])">
+                            {{type[localizeProperty('type')]}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="dropdown my-2">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false" i18n>
+                    Catégorie
+                </button>
+                <ul class="dropdown-menu">
+                    <li *ngFor="let category of categories">
+                        <a class="dropdown-item pointer"
+                            (click)="addFilter('category', category.id, category[localizeProperty('category')])">
+                            {{category[localizeProperty('category')]}}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="dropdown my-2">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false" i18n>
+                    Élément
+                </button>
+                <ul class="dropdown-menu">
+                    <li *ngFor="let damageType of damageTypes">
+                        <a class="dropdown-item pointer"
+                            (click)="addFilter('defaultDamageType', damageType.id, damageType[localizeProperty('damageType')])">
+                            {{damageType[localizeProperty('damageType')]}}</a>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+        <div class="col-lg-8 ms-auto px-auto order-lg-1 py-2 separation-border ">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+
+                <div *ngFor="let collectible of filteredWeapons" class="col px-auto">
+                    <div class="collectible-card w-100 pointer vertical-fadeIn-animation-1 p-2"
+                        [routerLink]="collectible.id.toString()">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <span
+                                
+                                    class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
+                                <div class="d-inline-flex align-items-center">
+
+                                    <img [src]="this.utilsService.bungieUrl + (damageTypes | filter : collectible.defaultDamageType)[0].iconLink"
+                                        class="smallDamageType" />
+
+                                    <span class="categoryItalic"> &nbsp;{{(categories |
+                                        filter
+                                        : collectible.category)[0][localizeProperty("category")]}}</span>
+                                </div>
+
+                            </div>
+                            <div class="col-4">
+                                <span class="shining-wrapper d-block shine">
+                                    <img [src]="this.utilsService.bungieUrl + collectible.iconLink"
+                                        [alt]="collectible.name[0][localizeProperty('name')]"
+                                        class="collectible-icon"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

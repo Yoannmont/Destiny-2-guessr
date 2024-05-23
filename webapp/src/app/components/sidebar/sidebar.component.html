@@ -1,0 +1,33 @@
+<nav class="text-center py-3 sidebar-nav" [class.open]="this.utilsService.isSidebarVisible">
+
+    <a routerLink="/" class="sidebar-icon" aria-label="visit homepage" aria-current="page">
+        <img class="img-fluid" src="assets/img/mini-logo.png" />
+    </a>
+
+    <span class="blank-space"></span>
+    <div class="main-sidebarlinks">
+
+
+        <div class="navbar-nav">
+            <a *ngFor="let item of this.utilsService.navbarContent" class="navbar-item text-center my-2 py-3"
+                [routerLink]="item.link" routerLinkActive="active">
+                <div class="navbar-link">{{item.title}}</div>
+            </a>
+        </div>
+
+        <span class="blank-space"></span>
+
+        <span class="separator mt-auto">
+            <div class="navbar-nav">
+                <a class="footer-icon-link p-2" alt="GitHub" href="https://github.com/Yoannmont"> <i
+                        class="bi bi-github"></i></a>
+                <a class="footer-icon-link p-2" alt="LinkedIn"
+                    href="https://linkedin.com/in/yoann-monteiro-471321210/"><i class="bi bi-linkedin"></i></a>
+
+                <a class="about-link p-2" routerLink="about/" i18n>
+                    À propos
+                </a>
+            </div>
+        </span>
+    </div>
+</nav>

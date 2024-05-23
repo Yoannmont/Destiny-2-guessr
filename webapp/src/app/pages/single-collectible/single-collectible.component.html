@@ -1,0 +1,25 @@
+<div class="layout container-fluid">
+    <div class="container">
+        <div class="row align-items-center my-2">
+            <div class="flavorText">{{collectible.flavorText[0][localizeProperty('flavorText')]}}</div>
+
+            <span
+                class="{{(tiers| filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
+            <div class="d-inline-flex align-items-center">
+
+                <img [src]="this.utilsService.bungieUrl + (damageTypes| filter : collectible.defaultDamageType)[0].iconLink"
+                    class="smallDamageType" />
+
+                <span class="categoryItalic"> &nbsp;{{(categories|
+                    filter
+                    : collectible.category)[0][localizeProperty("category")]}}</span>
+                <span class="shining-wrapper d-block shine">
+                    <img [src]="this.utilsService.bungieUrl + collectible.iconLink"
+                        [alt]="collectible.name[0][localizeProperty('name')]" class="collectible-icon"></span>
+            </div>
+        </div>
+        <div class="row align-items-center my-2">
+            <img [src]="this.utilsService.bungieUrl + collectible.screenshotLink" [alt]="collectible.name[0].name_en" />
+        </div>
+    </div>
+</div>
