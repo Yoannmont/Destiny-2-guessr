@@ -68,10 +68,9 @@ export class CollectionsComponent implements OnInit, OnDestroy {
 
   applyFilters() {
     this.filteredWeapons = this.weapons.filter((weapon: any) => {
-      // Regrouper les filtres par propriété
       const groupedFilters = this.groupFiltersByProperty();
 
-      // Vérifier si l'arme correspond à au moins un des filtres pour chaque propriété
+      
       return Object.keys(groupedFilters).every((property: any) => {
         const filtersForProperty = groupedFilters[property];
         return filtersForProperty.some((filter: any) => {
@@ -107,7 +106,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
 
   getWeapons(): void {
     this.collectiblesCacheService
-      .getAllWeapons('')
+      .getAllWeapons(this.langService.currentLocaleID)
       .pipe(takeUntil(this.destroy))
       .subscribe((weapons: Weapon[]) => {
         this.weapons = weapons;

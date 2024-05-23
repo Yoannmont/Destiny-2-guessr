@@ -15,6 +15,9 @@ export class UtilsService {
   ];
 
   public bungieUrl = 'https://bungie.net';
+
+  public iconsPath = "/common/destiny2_content/icons/"
+  public screenshotPath = "/common/destiny2_content/screenshots/"
   constructor() {
     this.sidebarLayout = new BehaviorSubject<boolean>(false);
   }

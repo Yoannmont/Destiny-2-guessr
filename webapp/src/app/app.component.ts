@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { LoaderService } from './_services/loader.service';
 import { LoadingComponent } from './components/loading/loading.component';
 import { LangService } from './_services/lang.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +20,9 @@ import { LangService } from './_services/lang.service';
 })
 export class AppComponent{
   title = 'destiny-2-guessr';
+  isLoading! : Observable<boolean>;
 
-  constructor(public utilsService: UtilsService, public loaderService : LoaderService, private langService : LangService){
+  constructor(public utilsService: UtilsService, private langService : LangService){
   }
   
   ngOnInit(){

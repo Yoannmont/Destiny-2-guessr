@@ -5,17 +5,17 @@
 <span *ngIf="!(this.utilsService.sidebarLayout | async); then header else sidebar"></span>
 
 <ng-template #header>
-    <!-- <div *ngIf="this.loaderService.isLoading | async"><app-loading></app-loading></div> -->
+    <app-loading></app-loading>
         <app-header></app-header>
         <router-outlet></router-outlet>
         <app-footer></app-footer>
 </ng-template>
 <ng-template #sidebar>
-    <!-- <div *ngIf="this.loaderService.isLoading | async"><app-loading></app-loading></div> -->
+    
     <main class="content-wrapper" [class.shifted]="this.utilsService.isSidebarVisible">
         <app-sidebar></app-sidebar>
         <div class="router-outlet-wrapper" [class.shifted]="this.utilsService.isSidebarVisible">
-            
+            <app-loading></app-loading>
             <router-outlet></router-outlet>
         </div>
     </main>

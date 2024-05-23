@@ -22,6 +22,7 @@ import { LangService } from '../../_services/lang.service';
 import { FilterPipe } from '../../_pipes/filter.pipe';
 import { NgbActiveModal, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import { TimerService } from '../../_services/timer.service';
+import { LoaderService } from '../../_services/loader.service';
 
 @Component({
   selector: 'app-exo-challenge',
@@ -38,6 +39,8 @@ import { TimerService } from '../../_services/timer.service';
   ],
 })
 export class ExoChallengeComponent implements OnInit, OnDestroy {
+  isLoading : Observable<boolean>;
+
   inputs: Array<string> = [];
   inputGroup!: FormGroup;
 
@@ -60,12 +63,13 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
     private collectiblesCacheService: CollectiblesCacheService,
     private langService: LangService,
     private timerService: TimerService,
+    private loaderService : LoaderService,
   ) {
     this.utilsService.sidebarLayout.next(true);
     this.destroy = new Subject<boolean>();
     this.hasVictory = new Subject<boolean>();
-
     this.timer = this.timerService.getElapsed();
+    this.isLoading = this.loaderService.loading$;
     
   }
 
@@ -160,7 +164,7 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
 
   getWeapons(): void {
     this.collectiblesCacheService
-      .getAllWeapons('')
+      .getAllWeapons(this.langService.currentLocaleID)
       .pipe(takeUntil(this.destroy))
       .subscribe((weapons: Weapon[]) => {
         this.weapons = weapons;

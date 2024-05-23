@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class LangService {
   readonly localeList = [{code:'fr', label : "Français"},{code:'en', label:'English'}];
 
-  private _currentLocale = "fr";
+  private _currentLocale = $localize`fr`;
   constructor() { }
 
   localizeProperty(property : string): string{
