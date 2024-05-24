@@ -27,11 +27,10 @@
                                 <div class="row my-4 vertical-fadeIn-animation-reverse"
                                     *ngIf="this.getCollectibleObjectByName(input) as collectible">
                                     <div class="col-8">
-                                        <span
-                                            class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
+                                        <span class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
                                         <div class="d-inline-flex align-items-center">
 
-                                            <img [src]="this.utilsService.bungieUrl + this.utilsService.iconsPath + (damageTypes | filter : collectible.defaultDamageType)[0].iconLink"
+                                            <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : collectible.defaultDamageType)[0].iconLink)"
                                                 class="smallDamageType" />
 
                                             <span class="categoryItalic"> &nbsp;{{(categories |
@@ -42,7 +41,7 @@
                                     </div>
                                     <div class="col-4">
                                         <span class="shining-wrapper d-block new-collectible-effect">
-                                            <img [src]="this.utilsService.bungieUrl + this.utilsService.iconsPath + collectible.iconLink"
+                                            <img [src]="this.utilsService.createWeaponIconLink(collectible.iconLink)"
                                                 [alt]="collectible.name[0][localizeProperty('name')]"
                                                 class="collectible-icon"></span>
                                     </div>
@@ -82,7 +81,7 @@
                                 class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
                             <div class="d-inline-flex align-items-center">
 
-                                <img [src]="this.utilsService.bungieUrl + this.utilsService.iconsPath +  (damageTypes | filter : collectible.defaultDamageType)[0].iconLink"
+                                <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : collectible.defaultDamageType)[0].iconLink)"
                                     class="smallDamageType" />
 
                                 <span class="categoryItalic"> &nbsp;{{(categories |
@@ -90,9 +89,8 @@
                                     : collectible.category)[0][localizeProperty("category")]}}</span>
                             </div>
                         </ng-template>
-                        <span class="shining-wrapper d-block" [id]="collectible.id" [ngbPopover]="popContent"
-                            #p="ngbPopover" [autoClose]="'outside'" triggers="manual" popoverClass="bg-dark"
-                            (click)="alreadyRevealed(collectible.id) && p.toggle()">
+                        <span class="shining-wrapper d-block" [id]="collectible.id"
+                            (click)="alreadyRevealed(collectible.id)">
                             <img src="assets/img/no-weapon.png" class="collectible-icon">
                         </span>
                     </div>

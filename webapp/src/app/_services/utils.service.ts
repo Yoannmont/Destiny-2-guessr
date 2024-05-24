@@ -30,5 +30,17 @@ export class UtilsService {
     location.reload();
   }
 
+  createWeaponIconLink(iconCode : string | undefined) : string {
+    return this.bungieUrl + this.iconsPath + iconCode + '.jpg';
+  }
+
+  createWeaponScreenshotLink(screenshotCode : string) : string{
+    return this.bungieUrl + this.screenshotPath + screenshotCode + '.jpg';
+  }
+
+  createDamageTypeLink(iconCode : string) : string {
+    return this.bungieUrl + this.iconsPath + iconCode + '.png';
+  }
+
   
 }

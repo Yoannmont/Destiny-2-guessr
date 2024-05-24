@@ -7,19 +7,19 @@
                 class="{{(tiers| filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
             <div class="d-inline-flex align-items-center">
 
-                <img [src]="this.utilsService.bungieUrl + this.utilsService.iconsPath + (damageTypes| filter : collectible.defaultDamageType)[0].iconLink"
+                <img [src]="this.utilsService.createDamageTypeLink((damageTypes| filter : collectible.defaultDamageType)[0].iconLink)"
                     class="smallDamageType" />
 
                 <span class="categoryItalic"> &nbsp;{{(categories|
                     filter
                     : collectible.category)[0][localizeProperty("category")]}}</span>
                 <span class="shining-wrapper d-block shine">
-                    <img [src]="this.utilsService.bungieUrl + this.utilsService.iconsPath + collectible.iconLink"
+                    <img [src]="this.utilsService.createWeaponIconLink(collectible.iconLink)"
                         [alt]="collectible.name[0][localizeProperty('name')]" class="collectible-icon"></span>
             </div>
         </div>
         <div class="row align-items-center my-2">
-            <img [src]="this.utilsService.bungieUrl + this.utilsService.screenshotPath + collectible.screenshotLink" [alt]="collectible.name[0].name_en" />
+            <img [src]="this.utilsService.createWeaponScreenshotLink(collectible.screenshotLink)" [alt]="collectible.name[0].name_en" />
         </div>
     </div>
 </div>
