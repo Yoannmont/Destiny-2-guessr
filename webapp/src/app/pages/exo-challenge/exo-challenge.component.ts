@@ -20,9 +20,9 @@ import { CollectiblesCacheService } from '../../_services/collectibles-cache.ser
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { LangService } from '../../_services/lang.service';
 import { FilterPipe } from '../../_pipes/filter.pipe';
-import { NgbActiveModal, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import { TimerService } from '../../_services/timer.service';
 import { LoaderService } from '../../_services/loader.service';
+import { GamemodeService } from '../../_services/gamemode.service';
 
 @Component({
   selector: 'app-exo-challenge',
@@ -35,7 +35,6 @@ import { LoaderService } from '../../_services/loader.service';
     FormsModule,
     ReactiveFormsModule,
     FilterPipe,
-    NgbPopoverModule,
   ],
 })
 export class ExoChallengeComponent implements OnInit, OnDestroy {
@@ -45,6 +44,7 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
   inputGroup!: FormGroup;
 
   weapons!: Weapon[];
+  filteredWeapons! : Weapon[];
   tiers!: Tier[];
   categories!: Category[];
   types!: Type[];
@@ -64,6 +64,7 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
     private langService: LangService,
     private timerService: TimerService,
     private loaderService : LoaderService,
+    private gamemodeService : GamemodeService
   ) {
     this.utilsService.sidebarLayout.next(true);
     this.destroy = new Subject<boolean>();
@@ -80,6 +81,8 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
     this.getDamageTypes();
     this.getTypes();
 
+    
+
 
     this.inputGroup = this.formBuilder.group({
       userInput: ['', Validators.required],
@@ -88,7 +91,38 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
     this.openStartModal();
 
     
+
+    
   }
+
+  applyFilters() {
+    this.filteredWeapons = this.weapons.filter((weapon: any) => {
+      const groupedFilters = this.groupFiltersByProperty();
+
+      
+      return Object.keys(groupedFilters).every((property: any) => {
+        const filtersForProperty = groupedFilters[property];
+        return filtersForProperty.some((filter: any) => {
+          return (
+            weapon.hasOwnProperty(filter.property) &&
+            weapon[filter.property] === filter.value
+          );
+        });
+      });
+    });
+  }
+
+  groupFiltersByProperty(): Array<any> {
+    const groupedFilters: any = {};
+    this.gamemodeService.filters.forEach((filter: any) => {
+      if (!groupedFilters[filter.property]) {
+        groupedFilters[filter.property] = [];
+      }
+      groupedFilters[filter.property].push(filter);
+    });
+    return groupedFilters;
+  }
+
 
   openStartModal() : void {
     this.resetTimer();
@@ -139,7 +173,7 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
   }
 
   checkVictory(): void {
-    if (this.points === this.weapons.length) {
+    if (this.points === this.filteredWeapons.length) {
       this.openVictoryModal();
     }
   }
@@ -168,6 +202,8 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe((weapons: Weapon[]) => {
         this.weapons = weapons;
+        this.filteredWeapons = weapons;
+        this.applyFilters();
       });
   }
 
@@ -216,7 +252,7 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
   }
   getCollectibleIdByName(name: string): number | undefined {
     const validName = this._validateName(name);
-    const collectible = this.weapons.find(
+    const collectible = this.filteredWeapons.find(
       (weapon) =>
         weapon.name[0][this.localizeProperty('name')].toLowerCase() ===
         validName
@@ -226,12 +262,12 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
   }
 
   getCollectibleObjectById(id: number): Weapon | undefined {
-    return this.weapons.find((weapon) => weapon.id === id);
+    return this.filteredWeapons.find((weapon) => weapon.id === id);
   }
 
   getCollectibleObjectByName(name: string): Weapon | undefined {
     const validName = this._validateName(name);
-    const collectible = this.weapons.find(
+    const collectible = this.filteredWeapons.find(
       (weapon) =>
         weapon.name[0][this.localizeProperty('name')].toLowerCase() ===
         validName

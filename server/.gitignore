@@ -1,0 +1,24 @@
+.vercel
+*.log
+*.pyc
+__pycache__
+db.sqlite3
+media
+
+# Environments 
+.env 
+.venv 
+env/ 
+venv/ 
+ENV/ 
+env.bak/ 
+venv.bak/
+*/__pycache__
+
+migrations/__pycache__
+*_en.json
+*_fr.json
+
+Dockerfile
+docker-compose.yaml
+d2guessrlib/test.ipynb

@@ -1,0 +1,89 @@
+<div class="container-fluid" [class.full-screen-sidebar]="this.utilsService.isSidebarVisible">
+    <div class="row my-3">
+        <div class="col-1">
+            <button class="btn toggleButton" type="button" aria-label="Toggle navigation" aria-controls="sidebar"
+                (click)="this.utilsService.toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+        <div class="col-11">
+            <h1 class="section-title" i18n>Sélection du mode de jeu</h1>
+        </div>
+    </div>
+    <div class="row align-items-center mx-auto">
+        <div class="col-md-12">
+            <div class="textbox p-3 row align-items-center">
+                
+                <div class="col-md-6">
+                    <h1 i18n class="subsection-title" i18n>Filtres</h1>
+
+                    <div *ngFor="let filter of filters" class=""> 
+                        {{filter.label}} 
+                        <button (click)="deleteFilter(filter)" class="btn"> 
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
+        
+                    <button class="btn btn-danger mx-2" (click)="resetFilters()" i18n>Reset</button>
+        
+                    <div class="dropdown my-2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" i18n>
+                            Rareté
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li *ngFor="let tier of tiers">
+                                <a class="dropdown-item pointer" (click)="addFilter('tier', tier.id, tier[localizeProperty('tier')])">
+                                    {{tier[localizeProperty('tier')]}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dropdown my-2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" i18n>
+                            Type d'arme
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li *ngFor="let type of types">
+                                <a class="dropdown-item pointer" (click)="addFilter('type', type.id, type[localizeProperty('type')])">
+                                    {{type[localizeProperty('type')]}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dropdown my-2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" i18n>
+                            Catégorie
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li *ngFor="let category of categories">
+                                <a class="dropdown-item pointer"
+                                    (click)="addFilter('category', category.id, category[localizeProperty('category')])">
+                                    {{category[localizeProperty('category')]}}</a>
+                            </li>
+                        </ul>
+                    </div>
+        
+                    <div class="dropdown my-2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" i18n>
+                            Élément
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li *ngFor="let damageType of damageTypes">
+                                <a class="dropdown-item pointer"
+                                    (click)="addFilter('defaultDamageType', damageType.id, damageType[localizeProperty('damageType')])">
+                                    {{damageType[localizeProperty('damageType')]}}</a>
+                            </li>
+                        </ul>
+                    </div>
+        
+                    <button class="btn btn-primary" i18n (click)="saveAndLaunch('exo-challenge')">Jouer à l'Exo-Challenge</button>
+                </div>
+                <div class="col-md-6"><button class="btn btn-primary" i18n routerLink="mystery-weapon">Jouer à l'Arme Mystère</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

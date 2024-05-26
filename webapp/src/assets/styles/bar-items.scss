@@ -1,8 +1,8 @@
 @import "common-vars.scss";
 
 
-.pointer{
-    cursor : pointer;
+.pointer {
+    cursor: pointer;
 }
 
 .navbar-link {
@@ -22,17 +22,18 @@
 
 .navbar-item:hover {
     background-color: white !important;
+
     .navbar-link {
         color: black;
     }
 }
 
-.hero-phrase{
+.hero-phrase {
     font-size: 40px;
     font-weight: 300;
 }
 
-.hero-text{
+.hero-text {
     font-size: 24px;
     font-weight: 200;
 }
@@ -53,11 +54,12 @@
     background-color: white;
 }
 
-.section-title{
+.section-title {
     text-transform: uppercase;
 }
 
-.section-title, .subsection-title{
+.section-title,
+.subsection-title {
     font-family: Futura;
     font-weight: 500;
     font-size: 30px;
@@ -66,19 +68,20 @@
 
 
 
-.blank-space{
+.blank-space {
     display: block;
-    min-height : 7svh;
-    
+    min-height: 7svh;
+
 }
-.separator::before{
-    content:"";
+
+.separator::before {
+    content: "";
     background-color: gray;
-    width :165px;
-    height : 0.06rem;
+    width: 165px;
+    height: 0.06rem;
     display: block;
     position: relative;
-    left:calc(50% - 82.5px)
+    left: calc(50% - 82.5px)
 }
 
 .about-link {
@@ -100,20 +103,27 @@
 }
 
 
-@media screen and (max-width:768px){
-    .hero-phrase{
+@media screen and (max-width:768px) {
+    .hero-phrase {
         font-size: 25px;
     }
-    .hero-text{
+
+    .hero-text {
         font-size: 18px;
     }
 }
 
 
 @media screen and (min-width:992px) {
-    .full-screen-sidebar{
+    .full-screen-sidebar {
         position: relative;
         width: calc(100% - 220px);
-        margin-left : 0;
+        margin-left: 0;
     }
+
+    .toggleButton {
+        display: none;
+    }
+
+
 }

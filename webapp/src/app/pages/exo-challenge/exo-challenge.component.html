@@ -13,7 +13,7 @@
     <div class="row align-items-center">
         <div class="col-md-4 order-md-2 my-2">
 
-            <div class="textbox p-3 text-end ">
+            <div class="textbox p-3 text-end">
                 <div class="timer-wrapper  p-3 row text-center border-bottom">
                     <span class="timer-title" i18n>Temps</span> <br />
                     <span class="timer">{{ this.timer| async | date : "mm:ss.S"}}</span>
@@ -71,12 +71,12 @@
             <div class="weaponsbox p-3">
                 <div class="score border-bottom">
                     <div class="text-start" i18n>Armes</div>
-                    <div class="text-end">{{this.points}} <small *ngIf="this.weapons"> / {{this.weapons.length}}
+                    <div class="text-end">{{this.points}} <small *ngIf="this.filteredWeapons"> / {{this.filteredWeapons.length}}
                         </small></div>
                 </div>
                 <div class="row row-cols-auto mt-3 g-2">
 
-                    <div *ngFor="let collectible of weapons" class="col">
+                    <div *ngFor="let collectible of filteredWeapons" class="col">
                         <ng-template #popContent><span
                                 class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
                             <div class="d-inline-flex align-items-center">
@@ -84,9 +84,7 @@
                                 <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : collectible.defaultDamageType)[0].iconLink)"
                                     class="smallDamageType" />
 
-                                <span class="categoryItalic"> &nbsp;{{(categories |
-                                    filter
-                                    : collectible.category)[0][localizeProperty("category")]}}</span>
+                                <span class="categoryItalic"> &nbsp;{{(categories | filter: collectible.category)[0][localizeProperty("category")]}}</span>
                             </div>
                         </ng-template>
                         <span class="shining-wrapper d-block" [id]="collectible.id"

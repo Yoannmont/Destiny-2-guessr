@@ -5,13 +5,15 @@ import { CollectionsComponent } from './pages/collections/collections.component'
 import { SingleCollectibleComponent } from './pages/single-collectible/single-collectible.component';
 import { ExoChallengeComponent } from './pages/exo-challenge/exo-challenge.component';
 import { AboutComponent } from './pages/about/about.component';
+import { GamemodeComponent } from './components/gamemode/gamemode.component';
 
 export const routes: Routes = [
-    {path: '', component:HomeComponent},
+    {path: '', title:"Destiny 2 Guessr", component:HomeComponent},
     {path: '404', component:NotfoundComponent},
     {path: 'collections', component:CollectionsComponent},
     {path: "collections/:id", component:SingleCollectibleComponent},
-    {path: "exo-challenge", component:ExoChallengeComponent},
+    {path : "gamemode", component:GamemodeComponent},
+    {path: "gamemode/exo-challenge", title: "Exo-Challenge - Destiny 2 Guessr", component:ExoChallengeComponent},
     {path:"about", component:AboutComponent},
     {path: '**', redirectTo: "/404"},
     

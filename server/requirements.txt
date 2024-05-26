@@ -1,0 +1,8 @@
+django
+django_rest_framework
+psycopg2-binary
+requests
+pandas
+traitlets
+django-cors-headers
+gunicorn
