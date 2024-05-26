@@ -12,3 +12,27 @@
 .section-title{
     margin-left : 20px;
 }
+
+.btn-home{
+    font-size: $font-size-d;
+    font-weight: 300;
+    max-width : 250px;
+    height: auto;
+    border-radius: 25px;
+    color : #4b4b4b;
+    letter-spacing: 2.5px;
+    background-color: white;
+    transition: background-color $transition-duration color $transition-duration;
+}
+
+.btn-home:hover{
+    background-color: #4b4b4b;
+    color : white;
+}
+
+@media screen and (max-width:768px) {
+    .btn-home{
+        font-size: $font-size-m;
+        max-width: 150px;
+    }
+}

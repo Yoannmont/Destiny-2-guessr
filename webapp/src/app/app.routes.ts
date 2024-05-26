@@ -6,6 +6,7 @@ import { SingleCollectibleComponent } from './pages/single-collectible/single-co
 import { ExoChallengeComponent } from './pages/exo-challenge/exo-challenge.component';
 import { AboutComponent } from './pages/about/about.component';
 import { GamemodeComponent } from './components/gamemode/gamemode.component';
+import { MysteryWeaponComponent } from './pages/mystery-weapon/mystery-weapon.component';
 
 export const routes: Routes = [
     {path: '', title:"Destiny 2 Guessr", component:HomeComponent},
@@ -14,6 +15,7 @@ export const routes: Routes = [
     {path: "collections/:id", component:SingleCollectibleComponent},
     {path : "gamemode", component:GamemodeComponent},
     {path: "gamemode/exo-challenge", title: "Exo-Challenge - Destiny 2 Guessr", component:ExoChallengeComponent},
+    {path:"gamemode/mystery-weapon", title : $localize`Arme Mystère - Destiny 2 Guessr`, component:MysteryWeaponComponent},
     {path:"about", component:AboutComponent},
     {path: '**', redirectTo: "/404"},
     

@@ -1,45 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UtilsService } from '../../_services/utils.service';
-import {
-  Category,
-  DamageType,
-  Tier,
-  Type,
-  Weapon,
-} from '../../_classes/weapon';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CollectiblesCacheService } from '../../_services/collectibles-cache.service';
-import { Observable, Subject, takeUntil } from 'rxjs';
 import { LangService } from '../../_services/lang.service';
-import { FilterPipe } from '../../_pipes/filter.pipe';
-import { TimerService } from '../../_services/timer.service';
-import { LoaderService } from '../../_services/loader.service';
+import { Subject, Observable, takeUntil } from 'rxjs';
+import { Weapon, Tier, Category, DamageType, Type} from '../../_classes/weapon';
 import { GamemodeService } from '../../_services/gamemode.service';
+import { LoaderService } from '../../_services/loader.service';
+import { TimerService } from '../../_services/timer.service';
 
 @Component({
-  selector: 'app-exo-challenge',
+  selector: 'app-mystery-weapon',
   standalone: true,
-  templateUrl: './exo-challenge.component.html',
-  styleUrl: './exo-challenge.component.scss',
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FilterPipe,
-  ],
+  imports: [],
+  templateUrl: './mystery-weapon.component.html',
+  styleUrl: './mystery-weapon.component.scss'
 })
-export class ExoChallengeComponent implements OnInit, OnDestroy {
-  isLoading : Observable<boolean>;
-
+export class MysteryWeaponComponent implements OnInit{
   inputs: Array<string> = [];
   inputGroup!: FormGroup;
 
@@ -63,14 +40,10 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
     private collectiblesCacheService: CollectiblesCacheService,
     private langService: LangService,
     private timerService: TimerService,
-    private loaderService : LoaderService,
     private gamemodeService : GamemodeService
   ) {
     this.utilsService.sidebarLayout.next(true);
     this.destroy = new Subject<boolean>();
-    this.hasVictory = new Subject<boolean>();
-    this.timer = this.timerService.getElapsed();
-    this.isLoading = this.loaderService.loading$;
     
   }
 
@@ -90,35 +63,6 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
     
   }
 
-  applyFilters() {
-    this.filteredWeapons = this.weapons.filter((weapon: any) => {
-      const groupedFilters = this.groupFiltersByProperty();
-
-      
-      return Object.keys(groupedFilters).every((property: any) => {
-        const filtersForProperty = groupedFilters[property];
-        return filtersForProperty.some((filter: any) => {
-          return (
-            weapon.hasOwnProperty(filter.property) &&
-            weapon[filter.property] === filter.value
-          );
-        });
-      });
-    });
-  }
-
-  groupFiltersByProperty(): Array<any> {
-    const groupedFilters: any = {};
-    this.gamemodeService.filters.forEach((filter: any) => {
-      if (!groupedFilters[filter.property]) {
-        groupedFilters[filter.property] = [];
-      }
-      groupedFilters[filter.property].push(filter);
-    });
-    return groupedFilters;
-  }
-
-
   openStartModal() : void {
     this.resetTimer();
     const startModal = document.querySelector('[data-bs-target="#startModal"]') as HTMLElement;
@@ -126,10 +70,6 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
     
   }
 
-  openVictoryModal() : void {
-    this.stopTimer();
-    (document.querySelector('[data-bs-target="#victoryModal"]') as HTMLElement).click();
-  }
 
   localizeProperty(property: string): string {
     return this.langService.localizeProperty(property);
@@ -155,10 +95,8 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
     const collectibleIdOrUndefined = this.getCollectibleIdByName(userInput);
     if (collectibleIdOrUndefined) {
       if (!this.alreadyRevealed(collectibleIdOrUndefined)) {
-        this.revealImage(collectibleIdOrUndefined);
         this.points++;
         this.revealed.push(collectibleIdOrUndefined);
-        this.checkVictory();
       }
     }
   }
@@ -167,29 +105,7 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
     return this.revealed.includes(collectibleId);
   }
 
-  checkVictory(): void {
-    if (this.points === this.filteredWeapons.length) {
-      this.openVictoryModal();
-    }
-  }
 
-  startTimer(): void {
-    this.timerService.startTimer();
-  }
-  stopTimer(): void {
-    if (this.timerService.isRunning()) this.timerService.stopTimer();
-  }
-
-  revealImage(id: number): void {
-    let spanElement = document.getElementById(`${id}`);
-    let collectibleImage = spanElement?.childNodes.item(0) as HTMLImageElement;
-    const collectible = this.getCollectibleObjectById(id);
-    collectibleImage.src = this.utilsService.createWeaponIconLink(collectible?.iconLink);
-    collectibleImage.alt = collectible?.name[0][this.localizeProperty('name')]!;
-
-    spanElement?.classList.add('shine');
-    spanElement?.classList.add('vertical-fadeIn-animation-reverse');
-  }
 
   getWeapons(): void {
     this.collectiblesCacheService
@@ -197,8 +113,6 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe((weapons: Weapon[]) => {
         this.weapons = weapons;
-        this.filteredWeapons = weapons;
-        this.applyFilters();
       });
   }
 
@@ -270,4 +184,5 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
 
     return collectible;
   }
+
 }

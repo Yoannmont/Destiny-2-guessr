@@ -1,0 +1,40 @@
+@import "../../../assets/styles/common-vars.scss";
+
+.separation-border-left{
+    border-left : $separation-bar-width  solid white;
+    border-top: none;
+}
+
+.dropdown-menu{
+    overflow-y: auto;
+    max-height: 40svh;
+}
+
+.filters-section{
+    max-height: 400px;
+}
+
+.btn-home{
+    font-size: 25px;
+}
+
+.btn-parameters{
+    background-color: azure;
+    color:black;
+    transition : background-color $transition-duration color $transition-duration;
+}
+
+.btn-parameters:hover {
+    background-color: aqua;
+}
+
+.gamemode-desc{
+    font-size: 18px;
+}
+
+@media screen and (max-width:768px){
+    .separation-border-left{
+        border-top:$separation-bar-width solid white;
+        border-left : none;
+    }
+}

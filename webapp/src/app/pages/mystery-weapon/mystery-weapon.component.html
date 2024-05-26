@@ -1,0 +1,21 @@
+<div class="container-fluid" [class.full-screen-sidebar]="this.utilsService.isSidebarVisible">
+    <div class="row my-3">
+        <div class="col-1">
+            <button class="btn toggleButton" type="button" aria-label="Toggle navigation" aria-controls="sidebar"
+                (click)="this.utilsService.toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+        <div class="col-11">
+            <h1 class="section-title" i18n>Arme Mystère</h1>
+        </div>
+    </div>
+    <div class="row align-items-center">
+        <div class="col-md-12">
+
+            <div class="textbox p-3 text-center">
+                En travaux 🚧...
+            </div>
+        </div>
+    </div>
+</div>
