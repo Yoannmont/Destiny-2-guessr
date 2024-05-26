@@ -32,6 +32,15 @@
     font-size: 18px;
 }
 
+.filter-text{
+    font-weight: 400;
+}
+
+.filter-btn{
+    border : $separation-bar-width solid white;
+    border-radius: 15px;
+}
+
 @media screen and (max-width:768px){
     .separation-border-left{
         border-top:$separation-bar-width solid white;

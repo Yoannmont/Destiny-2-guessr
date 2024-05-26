@@ -8,7 +8,7 @@ import {
   Weapon,
 } from '../../_classes/weapon';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
@@ -23,6 +23,7 @@ import { FilterPipe } from '../../_pipes/filter.pipe';
 import { TimerService } from '../../_services/timer.service';
 import { LoaderService } from '../../_services/loader.service';
 import { GamemodeService } from '../../_services/gamemode.service';
+import { Filter } from '../../_classes/filter';
 
 @Component({
   selector: 'app-exo-challenge',
@@ -38,6 +39,9 @@ import { GamemodeService } from '../../_services/gamemode.service';
   ],
 })
 export class ExoChallengeComponent implements OnInit, OnDestroy {
+showPopover(arg0: number) {
+throw new Error('Method not implemented.');
+}
   isLoading : Observable<boolean>;
 
   inputs: Array<string> = [];
@@ -64,7 +68,8 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
     private langService: LangService,
     private timerService: TimerService,
     private loaderService : LoaderService,
-    private gamemodeService : GamemodeService
+    private gamemodeService : GamemodeService,
+    private router : Router
   ) {
     this.utilsService.sidebarLayout.next(true);
     this.destroy = new Subject<boolean>();
@@ -107,6 +112,10 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
     });
   }
 
+  navigateToGamemodeSelection() : void{
+    this.router.navigate(['/gamemode']);
+  }
+
   groupFiltersByProperty(): Array<any> {
     const groupedFilters: any = {};
     this.gamemodeService.filters.forEach((filter: any) => {
@@ -116,6 +125,10 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
       groupedFilters[filter.property].push(filter);
     });
     return groupedFilters;
+  }
+
+  getFilters() : Filter[] {
+    return this.gamemodeService.filters;
   }
 
 

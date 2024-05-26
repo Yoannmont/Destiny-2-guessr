@@ -27,7 +27,8 @@
                                 <div class="row my-4 vertical-fadeIn-animation-reverse"
                                     *ngIf="this.getCollectibleObjectByName(input) as collectible">
                                     <div class="col-8">
-                                        <span class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
+                                        <span
+                                            class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
                                         <div class="d-inline-flex align-items-center">
 
                                             <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : collectible.defaultDamageType)[0].iconLink)"
@@ -70,25 +71,42 @@
         <div class="col-md-8 order-md-1 my-2">
             <div class="weaponsbox p-3">
                 <div class="score border-bottom">
-                    <div class="text-start" i18n>Armes</div>
-                    <div class="text-end">{{this.points}} <small *ngIf="this.filteredWeapons"> / {{this.filteredWeapons.length}}
-                        </small></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-start" i18n>Armes</div>
+                        </div>
+                        <div class="col">
+                            <div class="row row-cols-4 filters-desc text-center">
+                                <div *ngFor="let filter of this.getFilters()" class="col">
+                                    {{filter.label}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="text-end">{{this.points}} <small *ngIf="this.filteredWeapons"> /
+                                    {{this.filteredWeapons.length}}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row row-cols-auto mt-3 g-2">
 
                     <div *ngFor="let collectible of filteredWeapons" class="col">
-                        <ng-template #popContent><span
+                        <ng-template #popContent>
+                            <span
                                 class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
                             <div class="d-inline-flex align-items-center">
 
                                 <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : collectible.defaultDamageType)[0].iconLink)"
                                     class="smallDamageType" />
 
-                                <span class="categoryItalic"> &nbsp;{{(categories | filter: collectible.category)[0][localizeProperty("category")]}}</span>
+                                <span class="categoryItalic"> &nbsp;{{(categories | filter:
+                                    collectible.category)[0][localizeProperty("category")]}}</span>
                             </div>
                         </ng-template>
                         <span class="shining-wrapper d-block" [id]="collectible.id"
-                            (click)="alreadyRevealed(collectible.id)">
+                            (click)="alreadyRevealed(collectible.id) && showPopover(collectible.id)">
                             <img src="assets/img/no-weapon.png" class="collectible-icon">
                         </span>
                     </div>
@@ -102,8 +120,8 @@
 
 
 <button data-bs-toggle="modal" data-bs-target="#startModal" class="d-none"></button>
-<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="startModal"
-    aria-labelledby="startModalLabel" aria-hidden="false" >
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="startModal" aria-labelledby="startModalLabel"
+    aria-hidden="false">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-dark">
             <div class="modal-header ">
@@ -114,7 +132,8 @@
                 Trouvez les noms de toutes les armes en un temps minimum. À vous de jouer, Gardien !
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="startTimer()"  [disabled]="this.isLoading | async" i18n>Commencer</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="startTimer()"
+                    [disabled]="this.isLoading | async" i18n>Commencer</button>
             </div>
         </div>
     </div>
@@ -122,19 +141,21 @@
 
 
 <button data-bs-toggle="modal" data-bs-target="#victoryModal" class="d-none"></button>
-<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="victoryModal"
-    aria-labelledby="victoryModalLabel" aria-hidden="false" >
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="victoryModal" aria-labelledby="victoryModalLabel"
+    aria-hidden="false">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-dark">
             <div class="modal-header ">
                 <h1 class="modal-title fs-5" id="victoryModalLabel">Exo Challenge réussi </h1>
-                <button type="button" class="bg-dark btn btn-dark ms-auto" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x"></i></button>
+                <button type="button" class="bg-dark btn btn-dark ms-auto" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="bi bi-x"></i></button>
             </div>
             <div class="modal-body">
                 Bravo gardien ! Vous avez retrouvé les toutes les armes en {{this.timer | async | date : "mm:ss.S"}} !
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="this.utilsService.reloadPage()" i18n>Réessayer</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="this.navigateToGamemodeSelection()" i18n>OK</button>
             </div>
         </div>
     </div>
