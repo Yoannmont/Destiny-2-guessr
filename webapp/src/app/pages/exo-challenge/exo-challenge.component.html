@@ -93,7 +93,7 @@
                 <div class="row row-cols-auto mt-3 g-2">
 
                     <div *ngFor="let collectible of filteredWeapons" class="col">
-                        <ng-template #popContent>
+                        <div class="weapon-tooltip bg-dark p-2 d-none" id="tooltip-{{collectible.id}}" *ngIf="this.alreadyRevealed(collectible.id)">
                             <span
                                 class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
                             <div class="d-inline-flex align-items-center">
@@ -104,9 +104,9 @@
                                 <span class="categoryItalic"> &nbsp;{{(categories | filter:
                                     collectible.category)[0][localizeProperty("category")]}}</span>
                             </div>
-                        </ng-template>
+                        </div>
                         <span class="shining-wrapper d-block" [id]="collectible.id"
-                            (click)="alreadyRevealed(collectible.id) && showPopover(collectible.id)">
+                            (click)="toggleTooltip($event, collectible.id)">
                             <img src="assets/img/no-weapon.png" class="collectible-icon">
                         </span>
                     </div>

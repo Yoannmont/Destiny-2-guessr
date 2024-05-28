@@ -12,7 +12,7 @@ export class UtilsService {
   public readonly navbarContent = [
     { title: $localize`Jouer`, link: 'gamemode/' },
     { title: $localize`Collections`, link: 'collections/' },
-    { title: $localize`A propos`, link: 'about/'}
+    { title: $localize`À propos`, link: 'about/'}
   ];
 
   public bungieUrl = 'https://bungie.net';

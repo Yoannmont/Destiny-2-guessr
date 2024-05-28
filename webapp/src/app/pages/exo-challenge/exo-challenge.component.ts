@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { UtilsService } from '../../_services/utils.service';
 import {
   Category,
@@ -39,16 +39,15 @@ import { Filter } from '../../_classes/filter';
   ],
 })
 export class ExoChallengeComponent implements OnInit, OnDestroy {
-showPopover(arg0: number) {
-throw new Error('Method not implemented.');
-}
-  isLoading : Observable<boolean>;
+  private visibleTooltip: HTMLElement | null = null;
+
+  isLoading: Observable<boolean>;
 
   inputs: Array<string> = [];
   inputGroup!: FormGroup;
 
   weapons!: Weapon[];
-  filteredWeapons! : Weapon[];
+  filteredWeapons!: Weapon[];
   tiers!: Tier[];
   categories!: Category[];
   types!: Type[];
@@ -67,16 +66,16 @@ throw new Error('Method not implemented.');
     private collectiblesCacheService: CollectiblesCacheService,
     private langService: LangService,
     private timerService: TimerService,
-    private loaderService : LoaderService,
-    private gamemodeService : GamemodeService,
-    private router : Router
+    private loaderService: LoaderService,
+    private gamemodeService: GamemodeService,
+    private router: Router,
+    private renderer : Renderer2,
   ) {
     this.utilsService.sidebarLayout.next(true);
     this.destroy = new Subject<boolean>();
     this.hasVictory = new Subject<boolean>();
     this.timer = this.timerService.getElapsed();
     this.isLoading = this.loaderService.loading$;
-    
   }
 
   ngOnInit(): void {
@@ -91,15 +90,12 @@ throw new Error('Method not implemented.');
     });
 
     this.openStartModal();
-
-    
   }
 
   applyFilters() {
     this.filteredWeapons = this.weapons.filter((weapon: any) => {
       const groupedFilters = this.groupFiltersByProperty();
 
-      
       return Object.keys(groupedFilters).every((property: any) => {
         const filtersForProperty = groupedFilters[property];
         return filtersForProperty.some((filter: any) => {
@@ -112,7 +108,7 @@ throw new Error('Method not implemented.');
     });
   }
 
-  navigateToGamemodeSelection() : void{
+  navigateToGamemodeSelection(): void {
     this.router.navigate(['/gamemode']);
   }
 
@@ -127,28 +123,30 @@ throw new Error('Method not implemented.');
     return groupedFilters;
   }
 
-  getFilters() : Filter[] {
+  getFilters(): Filter[] {
     return this.gamemodeService.filters;
   }
 
-
-  openStartModal() : void {
+  openStartModal(): void {
     this.resetTimer();
-    const startModal = document.querySelector('[data-bs-target="#startModal"]') as HTMLElement;
+    const startModal = document.querySelector(
+      '[data-bs-target="#startModal"]'
+    ) as HTMLElement;
     startModal.click();
-    
   }
 
-  openVictoryModal() : void {
+  openVictoryModal(): void {
     this.stopTimer();
-    (document.querySelector('[data-bs-target="#victoryModal"]') as HTMLElement).click();
+    (
+      document.querySelector('[data-bs-target="#victoryModal"]') as HTMLElement
+    ).click();
   }
 
   localizeProperty(property: string): string {
     return this.langService.localizeProperty(property);
   }
 
-  resetTimer() : void {
+  resetTimer(): void {
     this.timerService.stopTimer();
     this.timerService.resetTimer();
   }
@@ -197,11 +195,14 @@ throw new Error('Method not implemented.');
     let spanElement = document.getElementById(`${id}`);
     let collectibleImage = spanElement?.childNodes.item(0) as HTMLImageElement;
     const collectible = this.getCollectibleObjectById(id);
-    collectibleImage.src = this.utilsService.createWeaponIconLink(collectible?.iconLink);
+    collectibleImage.src = this.utilsService.createWeaponIconLink(
+      collectible?.iconLink
+    );
     collectibleImage.alt = collectible?.name[0][this.localizeProperty('name')]!;
 
     spanElement?.classList.add('shine');
     spanElement?.classList.add('vertical-fadeIn-animation-reverse');
+    spanElement?.classList.add('pointer');
   }
 
   getWeapons(): void {
@@ -256,7 +257,10 @@ throw new Error('Method not implemented.');
   }
 
   _validateName(name: string): string {
-    return name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    return name
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
   }
   getCollectibleIdByName(name: string): number | undefined {
     const validName = this._validateName(name);
@@ -283,4 +287,26 @@ throw new Error('Method not implemented.');
 
     return collectible;
   }
+
+  toggleTooltip(event: Event, collectibleId: number): void {
+    const toolTipObject = document.getElementById(`tooltip-${collectibleId}`);
+    console.log("Function triggered")
+    if (toolTipObject && this.alreadyRevealed(collectibleId)) {
+      if (toolTipObject.classList.contains('d-none')) {
+        if (this.visibleTooltip){
+          this.renderer.addClass(this.visibleTooltip, 'd-none');
+        }
+
+        this.renderer.removeClass(toolTipObject, 'd-none');
+        this.renderer.addClass(toolTipObject, 'fadeIn-animation');
+        this.visibleTooltip = toolTipObject;
+      }
+       else {
+        this.renderer.addClass(toolTipObject, 'd-none');
+        this.visibleTooltip = null;
+      }
+    }
+  }
+
+
 }
