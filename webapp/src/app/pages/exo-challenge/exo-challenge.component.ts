@@ -291,7 +291,6 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
 
   toggleTooltip(event: Event, collectibleId: number): void {
     const toolTipObject = document.getElementById(`tooltip-${collectibleId}`);
-    console.log("Function triggered")
     if (toolTipObject && this.alreadyRevealed(collectibleId)) {
       if (toolTipObject.classList.contains('d-none')) {
         if (this.visibleTooltip){
@@ -299,7 +298,6 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
         }
 
         this.renderer.removeClass(toolTipObject, 'd-none');
-        this.renderer.addClass(toolTipObject, 'fadeIn-animation');
         this.visibleTooltip = toolTipObject;
       }
        else {
