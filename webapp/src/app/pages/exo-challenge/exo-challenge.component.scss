@@ -6,21 +6,21 @@
     height : 85svh;
     border-radius: 25px;
     overflow-y: scroll;
+    position: relative;
 }
-
-
-
 
 .form-input{
     position: relative;
-    bottom:0;
 }
 
 .inputs-wrapper{
-    height : 65%;
+    height : 65svh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
+
 .inputs{
-    flex : 1 5 auto;
+    flex : 1 0 0;
 }
 
 

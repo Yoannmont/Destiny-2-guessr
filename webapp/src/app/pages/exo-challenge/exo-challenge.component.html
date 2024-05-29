@@ -13,8 +13,8 @@
     <div class="row align-items-center">
         <div class="col-md-4 order-md-2 my-2">
 
-            <div class="textbox p-3 text-end">
-                <div class="timer-wrapper  p-3 row text-center border-bottom">
+            <div class="textbox p-3 text-end d-flex flex-column">
+                <div class="timer-wrapper p-3 row text-center border-bottom">
                     <span class="timer-title" i18n>Temps</span> <br />
                     <span class="timer">{{ this.timer| async | date : "mm:ss.S"}}</span>
                 </div>
@@ -59,7 +59,7 @@
                 </span>
                 <form [formGroup]="inputGroup" (submit)="submitInput()" class="form-input text-end">
                     <label for="userInput" i18n>Entrez votre réponse</label>
-                    <input type="text" name="userInput" i18n-placeholder placeholder="Nom de l'arme"
+                    <input type="text" id="userInput" i18n-placeholder placeholder="Nom de l'arme"
                         class="form-control" formControlName="userInput" />
                     <button type="submit" class="btn btn-secondary w-100" [disabled]="inputGroup.invalid"
                         i18n>Valider</button>
@@ -71,7 +71,7 @@
         <div class="col-md-8 order-md-1 my-2">
             <div class="weaponsbox p-3">
                 <div class="score border-bottom">
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <div class="col">
                             <div class="text-start" i18n>Armes</div>
                         </div>
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row row-cols-auto mt-3 g-2">
+                <div class="row row-cols-auto mt-3 g-2 weapons-wrapper">
 
                     <div *ngFor="let collectible of filteredWeapons" class="col">
                         <div class="weapon-tooltip bg-dark p-2 d-none" id="tooltip-{{collectible.id}}" *ngIf="this.alreadyRevealed(collectible.id)">

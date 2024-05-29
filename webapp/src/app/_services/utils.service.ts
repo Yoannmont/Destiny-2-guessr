@@ -5,8 +5,9 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class UtilsService {
-  sidebarLayout!: BehaviorSubject<boolean>;
-  isSidebarVisible: boolean = true;
+  sidebarLayout: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isSidebarVisible: boolean = this.isScreenSizeLarge();
+
 
 
   public readonly navbarContent = [
@@ -21,10 +22,10 @@ export class UtilsService {
   public screenshotPath = "/common/destiny2_content/screenshots/"
 
 
-
-  constructor() {
-    this.sidebarLayout = new BehaviorSubject<boolean>(false);
+  isScreenSizeLarge() : boolean {
+    return window.matchMedia('(min-width : 992px').matches;
   }
+
 
   toggleSidebar(): void {
     this.isSidebarVisible = !this.isSidebarVisible;
