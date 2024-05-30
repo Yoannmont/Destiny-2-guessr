@@ -2,9 +2,13 @@
     <div class="container d-flex justify-content-between align-content-center align-items-baseline">
 
 
-        <!-- <a class="about-link p-2" routerLink="about/" i18n>
-            À propos
-        </a> -->
+        <!-- <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false" i18n> Langue </button>
+            <ul class="dropdown-menu">
+                <li *ngFor="let lang of availableLangs" (click)="changeLocale(lang.code)" class="pointer"> <a class="dropdown-item" [ngClass]="{'active' : lang.code === getCurrentLocaleID()}"> {{lang.label}}</a></li>
+            </ul>
+        </div> -->
 
         <span class="text-center footer-text p-2">GUESSR
 

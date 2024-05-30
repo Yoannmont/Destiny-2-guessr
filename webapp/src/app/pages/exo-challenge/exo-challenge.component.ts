@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { UtilsService } from '../../_services/utils.service';
 import {
   Category,
@@ -24,6 +24,7 @@ import { TimerService } from '../../_services/timer.service';
 import { LoaderService } from '../../_services/loader.service';
 import { GamemodeService } from '../../_services/gamemode.service';
 import { Filter } from '../../_classes/filter';
+import { CanComponentDeactivate } from '../../_classes/candeactivate';
 
 @Component({
   selector: 'app-exo-challenge',
@@ -38,8 +39,9 @@ import { Filter } from '../../_classes/filter';
     FilterPipe,
   ],
 })
-export class ExoChallengeComponent implements OnInit, OnDestroy {
+export class ExoChallengeComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   private visibleTooltip: HTMLElement | null = null;
+  
 
   isLoading: Observable<boolean>;
 
@@ -263,6 +265,8 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
       .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase();
   }
+
+
   getCollectibleIdByName(name: string): number | undefined {
     const validName = this._validateName(name);
     const collectible = this.filteredWeapons.find(
@@ -307,5 +311,8 @@ export class ExoChallengeComponent implements OnInit, OnDestroy {
     }
   }
 
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+      return confirm($localize`La mission n'est pas terminée Gardien. Êtes-vous sûr de vouloir quitter ?`);
+  }
 
 }

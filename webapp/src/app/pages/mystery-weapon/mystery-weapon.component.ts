@@ -8,6 +8,7 @@ import { Weapon, Tier, Category, DamageType, Type} from '../../_classes/weapon';
 import { GamemodeService } from '../../_services/gamemode.service';
 import { LoaderService } from '../../_services/loader.service';
 import { TimerService } from '../../_services/timer.service';
+import { CanComponentDeactivate } from '../../_classes/candeactivate';
 
 @Component({
   selector: 'app-mystery-weapon',
@@ -16,7 +17,7 @@ import { TimerService } from '../../_services/timer.service';
   templateUrl: './mystery-weapon.component.html',
   styleUrl: './mystery-weapon.component.scss'
 })
-export class MysteryWeaponComponent implements OnInit{
+export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate{
   inputs: Array<string> = [];
   inputGroup!: FormGroup;
 
@@ -184,5 +185,9 @@ export class MysteryWeaponComponent implements OnInit{
 
     return collectible;
   }
+
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    return confirm($localize`La mission n'est pas terminée Gardien. Êtes-vous sûr de vouloir quitter ?`);
+}
 
 }
