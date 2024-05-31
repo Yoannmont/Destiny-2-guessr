@@ -1,4 +1,10 @@
-import { Component, HostListener, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 import { UtilsService } from '../../_services/utils.service';
 import {
   Category,
@@ -39,9 +45,10 @@ import { CanComponentDeactivate } from '../../_classes/candeactivate';
     FilterPipe,
   ],
 })
-export class ExoChallengeComponent implements OnInit, OnDestroy, CanComponentDeactivate {
+export class ExoChallengeComponent
+  implements OnInit, OnDestroy, CanComponentDeactivate
+{
   private visibleTooltip: HTMLElement | null = null;
-  
 
   isLoading: Observable<boolean>;
 
@@ -71,7 +78,7 @@ export class ExoChallengeComponent implements OnInit, OnDestroy, CanComponentDea
     private loaderService: LoaderService,
     private gamemodeService: GamemodeService,
     private router: Router,
-    private renderer : Renderer2,
+    private renderer: Renderer2
   ) {
     this.utilsService.sidebarLayout.next(true);
     this.destroy = new Subject<boolean>();
@@ -266,7 +273,6 @@ export class ExoChallengeComponent implements OnInit, OnDestroy, CanComponentDea
       .toLowerCase();
   }
 
-
   getCollectibleIdByName(name: string): number | undefined {
     const validName = this._validateName(name);
     const collectible = this.filteredWeapons.find(
@@ -297,14 +303,13 @@ export class ExoChallengeComponent implements OnInit, OnDestroy, CanComponentDea
     const toolTipObject = document.getElementById(`tooltip-${collectibleId}`);
     if (toolTipObject && this.alreadyRevealed(collectibleId)) {
       if (toolTipObject.classList.contains('d-none')) {
-        if (this.visibleTooltip){
+        if (this.visibleTooltip) {
           this.renderer.addClass(this.visibleTooltip, 'd-none');
         }
 
         this.renderer.removeClass(toolTipObject, 'd-none');
         this.visibleTooltip = toolTipObject;
-      }
-       else {
+      } else {
         this.renderer.addClass(toolTipObject, 'd-none');
         this.visibleTooltip = null;
       }
@@ -312,7 +317,11 @@ export class ExoChallengeComponent implements OnInit, OnDestroy, CanComponentDea
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-      return confirm($localize`La mission n'est pas terminée Gardien. Êtes-vous sûr de vouloir quitter ?`);
+    if (this.points !== this.filteredWeapons.length) {
+      return confirm(
+        $localize`La mission n'est pas terminée Gardien. Êtes-vous sûr de vouloir quitter ?`
+      );
+    }
+    return true;
   }
-
 }

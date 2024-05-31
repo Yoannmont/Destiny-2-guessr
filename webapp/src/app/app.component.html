@@ -10,8 +10,10 @@
         <router-outlet></router-outlet>
         <app-footer></app-footer>
 </ng-template>
+
+
+
 <ng-template #sidebar>
-    
     <main class="content-wrapper" [class.shifted]="this.utilsService.isSidebarVisible">
         <app-sidebar></app-sidebar>
         <div class="router-outlet-wrapper" [class.shifted]="this.utilsService.isSidebarVisible">

@@ -12,9 +12,88 @@
     </div>
     <div class="row align-items-center">
         <div class="col-md-12">
+            <div class="textbox p-3 text-center  d-flex flex-column">
+                <div class="content-wrapper">
+                    <div class="timer-wrapper p-3 row text-center border-bottom">
+                        <span class="timer-title" i18n>Temps restant</span> <br />
+                        <span class="timer" i18n *ngIf="this.gameStarted">{{ this.countdown| async| date : "s"}} secondes</span>
+                    </div>
 
-            <div class="textbox p-3 text-center">
-                En travaux 🚧...
+                    <span class="currentWeapon" *ngIf="this.gameStarted">
+                        {{this.thresholds}}
+
+                        <div class="flavorText vertical-fadeIn-animation-reverse" *ngIf="this.thresholds[0] | async">
+                            {{currentWeapon.flavorText[0][localizeProperty('flavorText')]}}
+                        </div>
+
+                        <span
+                            class="{{(tiers| filter : currentWeapon.tier)[0].tier_en}}">{{currentWeapon.name[0][localizeProperty('name')]}}</span><br />
+                        <div class="d-inline-flex align-items-center">
+
+                            <img [src]="this.utilsService.createDamageTypeLink((damageTypes| filter : currentWeapon.defaultDamageType)[0].iconLink)"
+                                class="smallDamageType" />
+
+                            <span class="categoryItalic"> &nbsp;{{(categories|
+                                filter
+                                : currentWeapon.category)[0][localizeProperty("category")]}}</span>
+                            <span class="shining-wrapper d-block shine">
+                                <img [src]="this.utilsService.createWeaponIconLink(currentWeapon.iconLink)"
+                                    [alt]="currentWeapon.name[0][localizeProperty('name')]"
+                                    class="collectible-icon"></span>
+                        </div>
+                    </span>
+                    <form [formGroup]="inputGroup" (submit)="submitInput()" class="form-input text-end">
+                        <label for="userInput" i18n>Entrez votre réponse</label>
+                        <input type="text" id="userInput" i18n-placeholder placeholder="Nom de l'arme"
+                            class="form-control" formControlName="userInput" />
+                        <button type="submit" class="btn btn-secondary w-100" [disabled]="inputGroup.invalid"
+                            i18n>Valider</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button data-bs-toggle="modal" data-bs-target="#startModal" class="d-none"></button>
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="startModal" aria-labelledby="startModalLabel"
+    aria-hidden="false">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header ">
+                <h1 class="modal-title fs-5" id="startModalLabel" i18n>Arme Mystère</h1>
+            </div>
+            <div class="modal-body" i18n>
+                Trouvez le nom des armes dans le temps imparti. À vous de jouer, Gardien !
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="startCountdown()"
+                    [disabled]="this.isLoading | async" i18n>Commencer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button data-bs-toggle="modal" data-bs-target="#victoryModal" class="d-none"></button>
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="victoryModal" aria-labelledby="victoryModalLabel"
+    aria-hidden="false">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header ">
+                <h1 class="modal-title fs-5" id="victoryModalLabel">Arme Mystère terminé </h1>
+                <button type="button" class="bg-dark btn btn-dark ms-auto" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="bi bi-x"></i></button>
+            </div>
+            <div class="modal-body">
+                Vous avez perdu après {{this.points}} armes Gardien !
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="navigateToGamemodeSelection()" i18n>Abandonner</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="reloadPage()"
+                    i18n>Réessayer</button>
             </div>
         </div>
     </div>

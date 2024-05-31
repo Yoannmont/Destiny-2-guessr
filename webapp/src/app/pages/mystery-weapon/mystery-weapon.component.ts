@@ -1,28 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilsService } from '../../_services/utils.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CollectiblesCacheService } from '../../_services/collectibles-cache.service';
 import { LangService } from '../../_services/lang.service';
-import { Subject, Observable, takeUntil } from 'rxjs';
-import { Weapon, Tier, Category, DamageType, Type} from '../../_classes/weapon';
+import { Subject, Observable, takeUntil, map, tap, timeInterval } from 'rxjs';
+import {
+  Weapon,
+  Tier,
+  Category,
+  DamageType,
+  Type,
+} from '../../_classes/weapon';
 import { GamemodeService } from '../../_services/gamemode.service';
-import { LoaderService } from '../../_services/loader.service';
 import { TimerService } from '../../_services/timer.service';
 import { CanComponentDeactivate } from '../../_classes/candeactivate';
+import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+import { FilterPipe } from '../../_pipes/filter.pipe';
+import { CountdownService } from '../../_services/countdown.service';
+import { LoaderService } from '../../_services/loader.service';
 
 @Component({
   selector: 'app-mystery-weapon',
   standalone: true,
-  imports: [],
   templateUrl: './mystery-weapon.component.html',
-  styleUrl: './mystery-weapon.component.scss'
+  styleUrl: './mystery-weapon.component.scss',
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, FilterPipe],
 })
-export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate{
+export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate {
   inputs: Array<string> = [];
   inputGroup!: FormGroup;
 
+  isLoading: Observable<boolean>;
+
   weapons!: Weapon[];
-  filteredWeapons! : Weapon[];
+  filteredWeapons!: Weapon[];
   tiers!: Tier[];
   categories!: Category[];
   types!: Type[];
@@ -31,21 +48,28 @@ export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate{
   destroy: Subject<boolean>;
   points: number = 0;
   revealed: Array<number> = [];
-  timer!: Observable<number>;
+  countdown!: Observable<number>;
 
   hasVictory!: Subject<boolean>;
+
+  currentWeapon!: Weapon;
+
+  thresholds : Array<Observable<boolean>> = [];
+
+  gameStarted: boolean = false;
 
   constructor(
     public utilsService: UtilsService,
     private formBuilder: FormBuilder,
     private collectiblesCacheService: CollectiblesCacheService,
     private langService: LangService,
-    private timerService: TimerService,
-    private gamemodeService : GamemodeService
+    private countdownService: CountdownService,
+    private loaderService: LoaderService,
+    private router: Router
   ) {
     this.utilsService.sidebarLayout.next(true);
     this.destroy = new Subject<boolean>();
-    
+    this.isLoading = this.loaderService.loading$;
   }
 
   ngOnInit(): void {
@@ -61,24 +85,32 @@ export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate{
 
     this.openStartModal();
 
-    
+    this.thresholds[0] = this.revealHTMLElement('flavorText');
   }
 
-  openStartModal() : void {
-    this.resetTimer();
-    const startModal = document.querySelector('[data-bs-target="#startModal"]') as HTMLElement;
+  openStartModal(): void {
+    const startModal = document.querySelector(
+      '[data-bs-target="#startModal"]'
+    ) as HTMLElement;
     startModal.click();
-    
   }
 
+  startCountdown(): void {
+    this.countdownService.startCountdown(30);
+    this.countdown = this.countdownService.getCountdown();
+    this.gameStarted = true;
+  }
+
+  reloadPage(): void {
+    this.utilsService.reloadPage();
+  }
+
+  navigateToGamemodeSelection(): void {
+    this.router.navigate(['/gamemode']);
+  }
 
   localizeProperty(property: string): string {
     return this.langService.localizeProperty(property);
-  }
-
-  resetTimer() : void {
-    this.timerService.stopTimer();
-    this.timerService.resetTimer();
   }
 
   pushInput(): void {
@@ -106,14 +138,14 @@ export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate{
     return this.revealed.includes(collectibleId);
   }
 
-
-
   getWeapons(): void {
     this.collectiblesCacheService
       .getAllWeapons(this.langService.currentLocaleID)
       .pipe(takeUntil(this.destroy))
       .subscribe((weapons: Weapon[]) => {
         this.weapons = weapons;
+        this.filteredWeapons = weapons;
+        this.getRandomWeapon();
       });
   }
 
@@ -124,6 +156,13 @@ export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate{
       .subscribe((types: Type[]) => {
         this.types = types;
       });
+  }
+
+  getRandomWeapon(): void {
+    this.currentWeapon =
+      this.filteredWeapons[
+        Math.floor(Math.random() * this.filteredWeapons.length)
+      ];
   }
 
   getDamageTypes(): void {
@@ -158,7 +197,11 @@ export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate{
   }
 
   _validateName(name: string): string {
-    return name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    return name
+      .trim()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
   }
   getCollectibleIdByName(name: string): number | undefined {
     const validName = this._validateName(name);
@@ -186,8 +229,17 @@ export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate{
     return collectible;
   }
 
-  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-    return confirm($localize`La mission n'est pas terminée Gardien. Êtes-vous sûr de vouloir quitter ?`);
-}
+  revealHTMLElement(id: string): Observable<boolean> {
+    let timeThreshold = 100000;
+    if (id === 'flavorText'){
+      timeThreshold = 20000;
+    };
+    return this.countdown.pipe(map(remainingTime => remainingTime < timeThreshold));
+  }
 
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    return confirm(
+      $localize`La mission n'est pas terminée Gardien. Êtes-vous sûr de vouloir quitter ?`
+    );
+  }
 }

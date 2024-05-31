@@ -76,9 +76,9 @@
                         <div class="col">
                             <div class="text-start" i18n>Armes</div>
                         </div>
-                        <div class="col">
-                            <div class="row row-cols-4 filters-desc text-center">
-                                <div *ngFor="let filter of this.getFilters()" class="col">
+                        <div class="col align-self-center">
+                            <div class="row row-cols-4 filters-desc">
+                                <div *ngFor="let filter of this.getFilters()" class="col m-auto">
                                     {{filter.label}}
                                 </div>
                             </div>
@@ -126,10 +126,10 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-dark">
             <div class="modal-header ">
-                <h1 class="modal-title fs-5" id="startModalLabel">Exo Challenge</h1>
+                <h1 class="modal-title fs-5" id="startModalLabel" i18n>Exo Challenge</h1>
                 <!-- <button type="button" class="bg-dark btn btn-dark ms-auto" data-bs-dismiss="modal"  aria-label="Close"><i class="bi bi-x"></i></button> -->
             </div>
-            <div class="modal-body">
+            <div class="modal-body" i18n>
                 Trouvez les noms de toutes les armes en un temps minimum. À vous de jouer, Gardien !
             </div>
             <div class="modal-footer">
@@ -147,11 +147,11 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-dark">
             <div class="modal-header ">
-                <h1 class="modal-title fs-5" id="victoryModalLabel">Exo Challenge réussi </h1>
+                <h1 class="modal-title fs-5" id="victoryModalLabel" i18n>Exo Challenge réussi </h1>
                 <button type="button" class="bg-dark btn btn-dark ms-auto" data-bs-dismiss="modal" aria-label="Close"><i
                         class="bi bi-x"></i></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" i18n>
                 Bravo gardien ! Vous avez retrouvé les toutes les armes en {{this.timer | async | date : "mm:ss.S"}} !
             </div>
             <div class="modal-footer">
