@@ -14,6 +14,8 @@ import { FilterPipe } from '../../_pipes/filter.pipe';
 import { Filter } from '../../_classes/filter';
 import { LangService } from '../../_services/lang.service';
 import { CollectiblesCacheService } from '../../_services/collectibles-cache.service';
+import { Armor, Class, ObjectType } from '../../_classes/armor';
+import { Collectible } from '../../_classes/collectible';
 
 @Component({
   selector: 'app-collections',
@@ -24,7 +26,7 @@ import { CollectiblesCacheService } from '../../_services/collectibles-cache.ser
 })
 export class CollectionsComponent implements OnInit, OnDestroy {
   weapons!: Weapon[];
-  filteredWeapons: Weapon[] = [];
+  filteredCollectibles: Collectible[] = [];
 
   destroy: Subject<boolean>;
 
@@ -32,6 +34,9 @@ export class CollectionsComponent implements OnInit, OnDestroy {
   categories!: Category[];
   types!: Type[];
   damageTypes!: DamageType[];
+  objects!: ObjectType[];
+  classes!: Class[];
+  armors!: Armor[];
 
   filters: Array<Filter> = [];
 
@@ -42,15 +47,17 @@ export class CollectionsComponent implements OnInit, OnDestroy {
   ) {
     this.destroy = new Subject<boolean>();
     this.utilsService.sidebarLayout.next(false);
-    
   }
 
   ngOnInit(): void {
     this.getWeapons();
+    this.getArmors();
     this.getCategories();
     this.getTiers();
     this.getDamageTypes();
     this.getTypes();
+    this.getObjects();
+    this.getClasses();
   }
 
   localizeProperty(property: string): string {
@@ -67,20 +74,23 @@ export class CollectionsComponent implements OnInit, OnDestroy {
   }
 
   applyFilters() {
-    this.filteredWeapons = this.weapons.filter((weapon: any) => {
-      const groupedFilters = this.groupFiltersByProperty();
+    let collectibles: Collectible[] = this.weapons;
+    collectibles = collectibles.concat(this.armors);
+    this.filteredCollectibles = collectibles.filter(
+      (collectible: Collectible) => {
+        const groupedFilters = this.groupFiltersByProperty();
 
-      
-      return Object.keys(groupedFilters).every((property: any) => {
-        const filtersForProperty = groupedFilters[property];
-        return filtersForProperty.some((filter: any) => {
-          return (
-            weapon.hasOwnProperty(filter.property) &&
-            weapon[filter.property] === filter.value
-          );
+        return Object.keys(groupedFilters).every((property: any) => {
+          const filtersForProperty = groupedFilters[property];
+          return filtersForProperty.some((filter: any) => {
+            return (
+              collectible.hasOwnProperty(filter.property) &&
+              collectible[filter.property] === filter.value
+            );
+          });
         });
-      });
-    });
+      }
+    );
   }
 
   groupFiltersByProperty(): Array<any> {
@@ -95,7 +105,9 @@ export class CollectionsComponent implements OnInit, OnDestroy {
   }
 
   resetFilters(): void {
-    this.filteredWeapons = this.weapons;
+    this.filteredCollectibles = [];
+    this.filteredCollectibles = this.filteredCollectibles.concat(this.weapons);
+    this.filteredCollectibles = this.filteredCollectibles.concat(this.armors);
     this.filters = [];
   }
 
@@ -110,7 +122,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe((weapons: Weapon[]) => {
         this.weapons = weapons;
-        this.filteredWeapons = weapons;
+        this.filteredCollectibles = this.filteredCollectibles.concat(weapons);
       });
   }
 
@@ -148,6 +160,43 @@ export class CollectionsComponent implements OnInit, OnDestroy {
       .subscribe((categories: Category[]) => {
         this.categories = categories;
       });
+  }
+
+  getObjects(): void {
+    this.collectiblesCacheService
+      .getAllObjects()
+      .pipe(takeUntil(this.destroy))
+      .subscribe((objects: ObjectType[]) => {
+        this.objects = objects;
+      });
+  }
+
+  getClasses(): void {
+    this.collectiblesCacheService
+      .getAllClasses()
+      .pipe(takeUntil(this.destroy))
+      .subscribe((classes: Class[]) => {
+        this.classes = classes;
+      });
+  }
+
+  getArmors(): void {
+    this.collectiblesCacheService
+      .getAllArmors(this.langService.currentLocaleID)
+      .pipe(takeUntil(this.destroy))
+      .subscribe((armors: Armor[]) => {
+        this.armors = armors;
+        this.filteredCollectibles = this.filteredCollectibles.concat(armors);
+      });
+  }
+
+  getSingleCollectibleRoute(collectible : Collectible) : string{
+    if (collectible.objectType === 1){
+      return `weapons/${collectible.id}`;
+    }
+    else{
+      return `armor/${collectible.id}`;
+    }
   }
 
   ngOnDestroy(): void {

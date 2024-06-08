@@ -1,11 +1,9 @@
-from django.shortcuts import get_object_or_404, render
+
 from rest_framework import generics
-from traitlets import default
 from .paginations import WeaponPagination
-from datetime import datetime
 from django.http import HttpResponse
-from .models import Weapon, TierDefinition, TypeDefinition, CategoryDefinition, DamageTypeDefinition, WeaponDamageTypes, WeaponFlavorText, WeaponName
-from .serializers import TierDefinitionSerializer, TypeDefinitionSerializer, CategoryDefinitionSerializer, DamageTypeDefinitionSerializer, WeaponSerializer
+from .models import Weapon, TierDefinition, TypeDefinition, CategoryDefinition, DamageTypeDefinition, Armor, ObjectDefinition, ClassDefinition
+from .serializers import TierDefinitionSerializer, TypeDefinitionSerializer, CategoryDefinitionSerializer, DamageTypeDefinitionSerializer, WeaponSerializer, ObjectDefinitionSerializer, ClassDefinitionSerializer, ArmorSerializer
 
 class GetAllTiersView(generics.ListAPIView):
     queryset = TierDefinition.objects.all()
@@ -23,6 +21,13 @@ class GetAllCategoriesView(generics.ListAPIView):
     queryset = CategoryDefinition.objects.all()
     serializer_class = CategoryDefinitionSerializer
 
+class GetAllObjectsView(generics.ListAPIView):
+    queryset = ObjectDefinition.objects.all()
+    serializer_class = ObjectDefinitionSerializer
+
+class GetAllClassesView(generics.ListAPIView):
+    queryset = ClassDefinition.objects.all()
+    serializer_class = ClassDefinitionSerializer
 
 class GetWeaponsView(generics.ListAPIView):
     serializer_class = WeaponSerializer
@@ -30,7 +35,8 @@ class GetWeaponsView(generics.ListAPIView):
         'tier', 
         'defaultDamageType', 
         'type', 
-        'category'
+        'category',
+        'objectType'
     ).prefetch_related(
         '_flavorText',
         '_name'
@@ -44,15 +50,35 @@ class GetSingleWeaponView(generics.RetrieveAPIView):
         'tier', 
         'defaultDamageType', 
         'type', 
-        'category'
+        'category',
+        'objectType'
     ).prefetch_related(
         '_flavorText',
         '_name'
     )
     serializer_class = WeaponSerializer
 
+class GetArmorView(generics.ListAPIView):
+   queryset = Armor.objects.all().select_related(
+       'tier',
+       'objectType',
+       'classType',
+   ).prefetch_related(
+       '_flavorText',
+       '_name'
+   )
+   serializer_class = ArmorSerializer
 
-
+class GetSingleArmorView(generics.RetrieveAPIView):
+   queryset = Armor.objects.all().select_related(
+       'tier',
+       'objectType',
+       'classType',
+   ).prefetch_related(
+       '_flavorText',
+       '_name'
+   )
+   serializer_class = ArmorSerializer
 
 def index(request):
     html = f'''

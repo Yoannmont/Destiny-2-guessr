@@ -23,7 +23,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CollectiblesCacheService } from '../../_services/collectibles-cache.service';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { forkJoin, Observable, Subject, takeUntil } from 'rxjs';
 import { LangService } from '../../_services/lang.service';
 import { FilterPipe } from '../../_pipes/filter.pipe';
 import { TimerService } from '../../_services/timer.service';
@@ -31,6 +31,8 @@ import { LoaderService } from '../../_services/loader.service';
 import { GamemodeService } from '../../_services/gamemode.service';
 import { Filter } from '../../_classes/filter';
 import { CanComponentDeactivate } from '../../_classes/candeactivate';
+import { Armor, Class, ObjectType } from '../../_classes/armor';
+import { Collectible } from '../../_classes/collectible';
 
 @Component({
   selector: 'app-exo-challenge',
@@ -56,11 +58,14 @@ export class ExoChallengeComponent
   inputGroup!: FormGroup;
 
   weapons!: Weapon[];
-  filteredWeapons!: Weapon[];
+  filteredCollectibles: Collectible[] = [];
   tiers!: Tier[];
   categories!: Category[];
   types!: Type[];
   damageTypes!: DamageType[];
+  objects!: ObjectType[];
+  classes!: Class[];
+  armors!: Armor[];
 
   destroy: Subject<boolean>;
   points: number = 0;
@@ -88,11 +93,14 @@ export class ExoChallengeComponent
   }
 
   ngOnInit(): void {
-    this.getWeapons();
+    this.getCollectibles();
     this.getCategories();
     this.getTiers();
     this.getDamageTypes();
     this.getTypes();
+    this.getObjects();
+    this.getClasses();
+    
 
     this.inputGroup = this.formBuilder.group({
       userInput: ['', Validators.required],
@@ -100,21 +108,25 @@ export class ExoChallengeComponent
 
     this.openStartModal();
   }
+  
 
   applyFilters() {
-    this.filteredWeapons = this.weapons.filter((weapon: any) => {
-      const groupedFilters = this.groupFiltersByProperty();
 
-      return Object.keys(groupedFilters).every((property: any) => {
-        const filtersForProperty = groupedFilters[property];
-        return filtersForProperty.some((filter: any) => {
-          return (
-            weapon.hasOwnProperty(filter.property) &&
-            weapon[filter.property] === filter.value
-          );
+    this.filteredCollectibles = this.filteredCollectibles.filter(
+      (collectible: Collectible) => {
+        const groupedFilters = this.groupFiltersByProperty();
+
+        return Object.keys(groupedFilters).every((property: any) => {
+          const filtersForProperty = groupedFilters[property];
+          return filtersForProperty.some((filter: any) => {
+            return (
+              collectible.hasOwnProperty(filter.property) &&
+              collectible[filter.property] === filter.value
+            );
+          });
         });
-      });
-    });
+      }
+    );
   }
 
   navigateToGamemodeSelection(): void {
@@ -188,7 +200,7 @@ export class ExoChallengeComponent
   }
 
   checkVictory(): void {
-    if (this.points === this.filteredWeapons.length) {
+    if (this.points === this.filteredCollectibles.length) {
       this.openVictoryModal();
     }
   }
@@ -204,25 +216,27 @@ export class ExoChallengeComponent
     let spanElement = document.getElementById(`${id}`);
     let collectibleImage = spanElement?.childNodes.item(0) as HTMLImageElement;
     const collectible = this.getCollectibleObjectById(id);
-    collectibleImage.src = this.utilsService.createWeaponIconLink(
+    collectibleImage.src = this.utilsService.createIconLink(
       collectible?.iconLink
     );
-    collectibleImage.alt = collectible?.name[0][this.localizeProperty('name')]!;
+    collectibleImage.alt = <string>collectible?.name[0][this.localizeProperty('name')]!;
 
     spanElement?.classList.add('shine');
     spanElement?.classList.add('vertical-fadeIn-animation-reverse');
     spanElement?.classList.add('pointer');
   }
 
-  getWeapons(): void {
-    this.collectiblesCacheService
-      .getAllWeapons(this.langService.currentLocaleID)
-      .pipe(takeUntil(this.destroy))
-      .subscribe((weapons: Weapon[]) => {
-        this.weapons = weapons;
-        this.filteredWeapons = weapons;
-        this.applyFilters();
-      });
+  getCollectibles(): void {
+    forkJoin({
+      weapons: this.collectiblesCacheService.getAllWeapons(this.langService.currentLocaleID).pipe(takeUntil(this.destroy)),
+      armors: this.collectiblesCacheService.getAllArmors(this.langService.currentLocaleID).pipe(takeUntil(this.destroy))
+    }).subscribe(({ weapons, armors }) => {
+      this.weapons = weapons;
+      this.armors = armors;
+      console.log(armors)
+      this.filteredCollectibles = [...weapons, ...armors];
+      this.applyFilters();
+    });
   }
 
   getTypes(): void {
@@ -261,6 +275,25 @@ export class ExoChallengeComponent
       });
   }
 
+  getObjects(): void {
+    this.collectiblesCacheService
+      .getAllObjects()
+      .pipe(takeUntil(this.destroy))
+      .subscribe((objects: ObjectType[]) => {
+        this.objects = objects;
+      });
+  }
+
+  getClasses(): void {
+    this.collectiblesCacheService
+      .getAllClasses()
+      .pipe(takeUntil(this.destroy))
+      .subscribe((classes: Class[]) => {
+        this.classes = classes;
+      });
+  }
+
+
   ngOnDestroy(): void {
     this.destroy.next(true);
   }
@@ -275,24 +308,24 @@ export class ExoChallengeComponent
 
   getCollectibleIdByName(name: string): number | undefined {
     const validName = this._validateName(name);
-    const collectible = this.filteredWeapons.find(
-      (weapon) =>
-        this._validateName(weapon.name[0][this.localizeProperty('name')]) ===
+    const collectible = this.filteredCollectibles.find(
+      (_collectible) =>
+        this._validateName(<string>_collectible.name[0][this.localizeProperty('name')]) ===
         validName
     );
 
     return collectible?.id;
   }
 
-  getCollectibleObjectById(id: number): Weapon | undefined {
-    return this.filteredWeapons.find((weapon) => weapon.id === id);
+  getCollectibleObjectById(id: number): Collectible | undefined {
+    return this.filteredCollectibles.find((collectible) => collectible.id === id);
   }
 
-  getCollectibleObjectByName(name: string): Weapon | undefined {
+  getCollectibleObjectByName(name: string): Collectible | undefined {
     const validName = this._validateName(name);
-    const collectible = this.filteredWeapons.find(
-      (weapon) =>
-        this._validateName(weapon.name[0][this.localizeProperty('name')]) ===
+    const collectible = this.filteredCollectibles.find(
+      (_collectible) =>
+        this._validateName(<string>_collectible.name[0][this.localizeProperty('name')]) ===
         validName
     );
 
@@ -317,7 +350,7 @@ export class ExoChallengeComponent
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.points !== this.filteredWeapons.length) {
+    if (this.points !== this.filteredCollectibles.length) {
       return confirm(
         $localize`La mission n'est pas terminée Gardien. Êtes-vous sûr de vouloir quitter ?`
       );

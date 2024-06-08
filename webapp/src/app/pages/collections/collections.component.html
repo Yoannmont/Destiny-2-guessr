@@ -9,9 +9,9 @@
         <div class="col-lg-2 me-auto px-auto order-lg-2 py-2">
             <h1 i18n class="subsection-title" i18n>Filtres</h1>
 
-            <div *ngFor="let filter of filters" class=""> 
-                {{filter.label}} 
-                <button (click)="deleteFilter(filter)" class="btn"> 
+            <div *ngFor="let filter of filters" class="">
+                {{filter.label}}
+                <button (click)="deleteFilter(filter)" class="btn">
                     <i class="bi bi-x"></i>
                 </button>
             </div>
@@ -26,7 +26,8 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li *ngFor="let tier of tiers">
-                        <a class="dropdown-item pointer" (click)="addFilter('tier', tier.id, tier[localizeProperty('tier')])">
+                        <a class="dropdown-item pointer"
+                            (click)="addFilter('tier', tier.id, tier[localizeProperty('tier')])">
                             {{tier[localizeProperty('tier')]}}</a>
                     </li>
                 </ul>
@@ -38,7 +39,8 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li *ngFor="let type of types">
-                        <a class="dropdown-item pointer" (click)="addFilter('type', type.id, type[localizeProperty('type')])">
+                        <a class="dropdown-item pointer"
+                            (click)="addFilter('type', type.id, type[localizeProperty('type')])">
                             {{type[localizeProperty('type')]}}</a>
                     </li>
                 </ul>
@@ -71,33 +73,68 @@
                 </ul>
             </div>
 
+            <div class="dropdown my-2">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false" i18n>
+                    Classe
+                </button>
+                <ul class="dropdown-menu">
+                    <li *ngFor="let class of classes">
+                        <a class="dropdown-item pointer"
+                            (click)="addFilter('classType', class.id, class[localizeProperty('class')])">
+                            {{class[localizeProperty('class')]}}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="dropdown my-2">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false" i18n>
+                    Type d'objet
+                </button>
+                <ul class="dropdown-menu">
+                    <li *ngFor="let object of objects">
+                        <a class="dropdown-item pointer"
+                            (click)="addFilter('objectType', object.id, object[localizeProperty('objectType')])">
+                            {{object[localizeProperty('objectType')]}}</a>
+                    </li>
+                </ul>
+            </div>
 
         </div>
         <div class="col-lg-8 ms-auto px-auto order-lg-1 py-2 separation-border ">
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
 
-                <div *ngFor="let collectible of filteredWeapons" class="col px-auto">
-                    <div class="collectible-card w-100 pointer p-2"
-                        [routerLink]="collectible.id.toString()">
+                <div *ngFor="let collectible of filteredCollectibles" class="col px-auto">
+                    
+                    <div class="collectible-card w-100 pointer p-2" [routerLink]="getSingleCollectibleRoute(collectible)">
                         <div class="row align-items-center vertical-fadeIn-animation">
                             <div class="col-8">
                                 <span
-                                
                                     class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
                                 <div class="d-inline-flex align-items-center">
 
-                                    <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : collectible.defaultDamageType)[0].iconLink)"
-                                        class="smallDamageType" />
 
-                                    <span class="categoryItalic"> &nbsp;{{(categories |
-                                        filter
-                                        : collectible.category)[0][localizeProperty("category")]}}</span>
+                                    <span *ngIf="this.utilsService.isWeapon(collectible)">
+                                        <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : collectible.defaultDamageType)[0].iconLink)"
+                                            class="smallDamageType" />
+
+                                        <span class="categoryItalic"> &nbsp;{{(categories |
+                                            filter
+                                            : collectible.category)[0][localizeProperty("category")]}}</span>
+                                    </span>
+
+                                    <span *ngIf="this.utilsService.isArmor(collectible)">
+                                        <span class="categoryItalic"> &nbsp;{{(objects |
+                                            filter
+                                            : collectible.objectType)[0][localizeProperty("objectType")]}}</span>
+                                    </span>
                                 </div>
 
                             </div>
                             <div class="col-4">
                                 <span class="shining-wrapper d-block shine">
-                                    <img [src]="this.utilsService.createWeaponIconLink(collectible.iconLink)"
+                                    <img [src]="this.utilsService.createIconLink(collectible.iconLink)"
                                         [alt]="collectible.name[0][localizeProperty('name')]"
                                         class="collectible-icon"></span>
                             </div>

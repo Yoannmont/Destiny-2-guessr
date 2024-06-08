@@ -32,13 +32,35 @@ CORRECTION_TABLE = {
                           "Cryo-électriques": "Cryo-électrique",
                           "Solaires": "Solaire",
                           "Abyssaux": "Abyssal"}
+    },
+    "ClassDefinition" : {
+        "class_fr" : { "Arcanistes" : "Arcaniste",
+                      "Titans" : "Titan",
+                      "Chasseurs" : "Chasseur"}
+    },
+
+    "ObjectDefinition" : {
+        "objectType_en" : {"Helmets" : "Helmet",
+                           "Class Items" : "Class Item"},
+        "objectType_fr" : { "Armes" : "Arme",
+                           "Casques" : "Casque",
+                           "Armures de torse" : "Armure de torse",
+                           "Armures de jambes" : "Armure de jambes",
+                           "Armures de classe" : "Armure de classe"}
     }
+    
 }
 
+FFLS = [
+    "Lorentz Driver",
+    "Arbalest",
+    "Sleeper Simulant",
+    "The Queenbreaker"
+]
 
 
 def correct_tables(apps, schema_editor):
-    for modelName in ["TypeDefinition", "DamageTypeDefinition"]:
+    for modelName in ["TypeDefinition", "DamageTypeDefinition", "ClassDefinition", "ObjectDefinition"]:
         model = apps.get_model("d2guessrlib", modelName)
         for fieldName in CORRECTION_TABLE[modelName].keys():
             for oldValue, newValue in CORRECTION_TABLE[modelName][fieldName].items():
@@ -48,7 +70,15 @@ def correct_tables(apps, schema_editor):
 
 def shorten_links(apps, schema_editor):
     Weapon = apps.get_model("d2guessrlib", "Weapon")
+    Armor = apps.get_model("d2guessrlib", "Armor")
     DamageTypeDefinition = apps.get_model("d2guessrlib", "DamageTypeDefinition")
+
+    armor_objects = Armor.objects.all()
+    for armor in armor_objects:
+        armor.iconLink = armor.iconLink.replace('/common/destiny2_content/icons/', '')
+        armor.screenshotLink = armor.screenshotLink.replace('/common/destiny2_content/screenshots/', '')
+        armor.save()
+
     weapon_objects = Weapon.objects.all()
     for weapon in weapon_objects:
         weapon.iconLink = weapon.iconLink.replace('/common/destiny2_content/icons/', '')
@@ -61,6 +91,40 @@ def shorten_links(apps, schema_editor):
         dt.iconLink = dt.iconLink.replace('/common/destiny2_content/icons/', '')
         dt.save()
 
+def trim_img_extensions(apps, schema_editor):
+    Weapon = apps.get_model("d2guessrlib", "Weapon")
+    Armor = apps.get_model("d2guessrlib", "Armor")
+    DamageTypeDefinition = apps.get_model("d2guessrlib", "DamageTypeDefinition")
+    weapon_objects = Weapon.objects.all()
+    for weapon in weapon_objects:
+        weapon.iconLink = weapon.iconLink.replace('.jpg', '')
+        weapon.screenshotLink = weapon.screenshotLink.replace('.jpg', '')
+        weapon.save()
+
+    armor_objects = Armor.objects.all()
+    for armor in armor_objects:
+        armor.iconLink = armor.iconLink.replace('.jpg', '')
+        armor.screenshotLink = armor.screenshotLink.replace('.jpg', '')
+        armor.save()
+
+    damageTypes_objects = DamageTypeDefinition.objects.all()
+
+    for dt in damageTypes_objects:
+        dt.iconLink = dt.iconLink.replace('.png', '')
+        dt.save()
+
+
+
+def correct_linear_fusion_rifles(apps, schema_editor):
+    WeaponName = apps.get_model("d2guessrlib", "WeaponName")
+    TypeDefinition = apps.get_model("d2guessrlib", "TypeDefinition")
+    FFL_type = TypeDefinition.objects.filter(type_en__icontains="Linear Fusion Rifle")[0]
+    for weapon_name in FFLS:
+        _weapon_name_obj = WeaponName.objects.filter(name_en__icontains=weapon_name)
+        weapon = _weapon_name_obj[0].weapon
+        weapon.type = FFL_type
+        weapon.save()
+
 
 class Migration(migrations.Migration):
     dependencies = [
@@ -70,5 +134,8 @@ class Migration(migrations.Migration):
     operations = [
         UnaccentExtension(),
         migrations.RunPython(correct_tables),
-        migrations.RunPython(shorten_links)
+        migrations.RunPython(shorten_links),
+        migrations.RunPython(trim_img_extensions),
+        migrations.RunPython(correct_linear_fusion_rifles)
+
     ]

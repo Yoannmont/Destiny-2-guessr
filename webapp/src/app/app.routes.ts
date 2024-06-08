@@ -13,7 +13,7 @@ export const routes: Routes = [
     {path: '', title:"Destiny 2 Guessr", component:HomeComponent},
     {path: '404', component:NotfoundComponent},
     {path: 'collections', component:CollectionsComponent},
-    {path: "collections/:id", component:SingleCollectibleComponent},
+    {path: "collections/:collectible/:id", component:SingleCollectibleComponent},
     {path : "gamemode", component:GamemodeComponent},
     {path: "gamemode/exo-challenge", title:  $localize`Exo-Challenge - Destiny 2 Guessr`, component:ExoChallengeComponent, canDeactivate: [BeforeLeavingGamemodeGuard]},
     {path:"gamemode/mystery-weapon", title : $localize`Arme Mystère - Destiny 2 Guessr`, component:MysteryWeaponComponent, canDeactivate: [BeforeLeavingGamemodeGuard]},

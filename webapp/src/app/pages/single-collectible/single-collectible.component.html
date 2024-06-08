@@ -7,19 +7,29 @@
                 class="{{(tiers| filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
             <div class="d-inline-flex align-items-center">
 
-                <img [src]="this.utilsService.createDamageTypeLink((damageTypes| filter : collectible.defaultDamageType)[0].iconLink)"
-                    class="smallDamageType" />
-
-                <span class="categoryItalic"> &nbsp;{{(categories|
-                    filter
-                    : collectible.category)[0][localizeProperty("category")]}}</span>
                 <span class="shining-wrapper d-block shine">
-                    <img [src]="this.utilsService.createWeaponIconLink(collectible.iconLink)"
-                        [alt]="collectible.name[0][localizeProperty('name')]" class="collectible-icon"></span>
+                    <img [src]="this.utilsService.createIconLink(collectible.iconLink)"
+                        [alt]="collectible.name[0][localizeProperty('name')]"
+                        class="collectible-icon"></span>
+
+                <span *ngIf="this.utilsService.isWeapon(collectible)">
+                    <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : collectible.defaultDamageType)[0].iconLink)"
+                        class="smallDamageType" />
+
+                    <span class="categoryItalic"> &nbsp;{{(categories |
+                        filter
+                        : collectible.category)[0][localizeProperty("category")]}}</span>
+                </span>
+
+                <span *ngIf="this.utilsService.isArmor(collectible)">
+                    <span class="categoryItalic"> &nbsp;{{(objects |
+                        filter
+                        : collectible.objectType)[0][localizeProperty("objectType")]}}</span>
+                </span>
             </div>
         </div>
         <div class="row align-items-center my-2">
-            <img [src]="this.utilsService.createWeaponScreenshotLink(collectible.screenshotLink)" [alt]="collectible.name[0].name_en" />
+            <img [src]="this.utilsService.createScreenshotLink(collectible.screenshotLink)" [alt]="collectible.name[0].name_en" />
         </div>
     </div>
 </div>

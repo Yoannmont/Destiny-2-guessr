@@ -1,3 +1,8 @@
 {
-    "Weapon" : 1
+  "Weapon": 1,
+  "Helmet": 45,
+  "Gauntlets": 46,
+  "Chest Armor": 47,
+  "Leg Armor": 48,
+  "Class Item": 49
 }

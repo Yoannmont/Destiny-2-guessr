@@ -32,6 +32,46 @@ def populate_category_defintion(apps, schema_editor):
     for i in range(len(category_table)):
         CategoryDefinition.objects.create(**category_table.iloc[i])
 
+def populate_object_definition(apps, schema_editor):
+    ObjectDefinition = apps.get_model("d2guessrlib", "ObjectDefinition")
+    object_table = get_object()
+    for i in range(len(object_table)):
+        ObjectDefinition.objects.create(**object_table.iloc[i])
+
+def populate_class_definition(apps, schema_editor):
+    ClassDefinition = apps.get_model("d2guessrlib", "ClassDefinition")
+    class_table = get_class()
+    for i in range(len(class_table)):
+        ClassDefinition.objects.create(**class_table.iloc[i])
+
+def populate_armor(apps, schema_editor):
+    Armor = apps.get_model("d2guessrlib", "Armor")
+
+    TierDefintion = apps.get_model("d2guessrlib", "TierDefinition")
+    ObjectDefinition = apps.get_model("d2guessrlib", "ObjectDefinition")
+    ClassDefintion = apps.get_model("d2guessrlib", "ClassDefinition")
+
+    ArmorName = apps.get_model("d2guessrlib", "ArmorName")
+    ArmorFlavorText = apps.get_model("d2guessrlib", "ArmorFlavorText")
+
+    armor_table = get_armor()
+
+    for i in range(len(armor_table)):
+        armor_data = armor_table.iloc[i]
+        tier = TierDefintion.objects.get(hash=armor_data.tierTypeHash)
+       
+        object = ObjectDefinition.objects.get(hash=armor_data.objectHash)
+        class_ = ClassDefintion.objects.get(hash=armor_data.classHash)
+
+        Armor.objects.create(tier=tier, classType=class_, objectType=object, 
+                              iconLink=armor_data.iconLink, screenshotLink=armor_data.screenshotLink, hash=armor_data.hash)
+
+        created_armor_object = Armor.objects.get(hash=armor_data.hash)
+        ArmorName.objects.create(armor=created_armor_object,
+                                  name_en=armor_data.armorName_en, name_fr=armor_data.armorName_fr)
+        ArmorFlavorText.objects.create(
+            armor=created_armor_object, flavorText_en=armor_data.flavorText_en, flavorText_fr=armor_data.flavorText_fr)
+
 
 def populate_weapon(apps, schema_editor):
     Weapon = apps.get_model("d2guessrlib", "Weapon")
@@ -40,6 +80,7 @@ def populate_weapon(apps, schema_editor):
     DamageTypeDefintion = apps.get_model("d2guessrlib", "DamageTypeDefinition")
     TypeDefintion = apps.get_model("d2guessrlib", "TypeDefinition")
     CategoryDefintion = apps.get_model("d2guessrlib", "CategoryDefinition")
+    ObjectDefinition = apps.get_model("d2guessrlib", "ObjectDefinition")
 
     WeaponName = apps.get_model("d2guessrlib", "WeaponName")
     WeaponDamageTypes = apps.get_model("d2guessrlib", "WeaponDamageTypes")
@@ -55,8 +96,10 @@ def populate_weapon(apps, schema_editor):
         type = TypeDefintion.objects.get(hash=weapon_data.typeHash)
         category = CategoryDefintion.objects.get(hash=weapon_data.categoryHash)
 
+        objectType = ObjectDefinition.objects.get(hash=weapon_data.objectHash)
+
         Weapon.objects.create(tier=tier, defaultDamageType=defaultDamageType, type=type, category=category,
-                              iconLink=weapon_data.iconLink, screenshotLink=weapon_data.screenshotLink, hash=weapon_data.hash)
+                              iconLink=weapon_data.iconLink, screenshotLink=weapon_data.screenshotLink, hash=weapon_data.hash, objectType=objectType)
 
         created_weapon_object = Weapon.objects.get(hash=weapon_data.hash)
         WeaponName.objects.create(weapon=created_weapon_object,
@@ -70,6 +113,8 @@ def populate_weapon(apps, schema_editor):
                 hash=damageTypeList[j])
             WeaponDamageTypes.objects.create(
                 weapon=created_weapon_object, damageType=damageType)
+            
+        
 
 
 class Migration(migrations.Migration):
@@ -82,6 +127,10 @@ class Migration(migrations.Migration):
         migrations.RunPython(populate_damage_type_defintion),
         migrations.RunPython(populate_type_defintion),
         migrations.RunPython(populate_category_defintion),
-        migrations.RunPython(populate_weapon)
+        migrations.RunPython(populate_object_definition),
+        migrations.RunPython(populate_weapon),
+        
+        migrations.RunPython(populate_class_definition),
+        migrations.RunPython(populate_armor)
     ]
 

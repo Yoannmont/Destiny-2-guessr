@@ -31,18 +31,26 @@
                                             class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
                                         <div class="d-inline-flex align-items-center">
 
-                                            <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : collectible.defaultDamageType)[0].iconLink)"
-                                                class="smallDamageType" />
-
-                                            <span class="categoryItalic"> &nbsp;{{(categories |
-                                                filter
-                                                : collectible.category)[0][localizeProperty("category")]}}</span>
+                                            <span *ngIf="this.utilsService.isWeapon(collectible)">
+                                                <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : collectible.defaultDamageType)[0].iconLink)"
+                                                    class="smallDamageType" />
+        
+                                                <span class="categoryItalic"> &nbsp;{{(categories |
+                                                    filter
+                                                    : collectible.category)[0][localizeProperty("category")]}}</span>
+                                            </span>
+        
+                                            <span *ngIf="this.utilsService.isArmor(collectible)">
+                                                <span class="categoryItalic"> &nbsp;{{(objects |
+                                                    filter
+                                                    : collectible.objectType)[0][localizeProperty("objectType")]}}</span>
+                                            </span>
                                         </div>
 
                                     </div>
                                     <div class="col-4">
                                         <span class="shining-wrapper d-block new-collectible-effect">
-                                            <img [src]="this.utilsService.createWeaponIconLink(collectible.iconLink)"
+                                            <img [src]="this.utilsService.createIconLink(collectible.iconLink)"
                                                 [alt]="collectible.name[0][localizeProperty('name')]"
                                                 class="collectible-icon"></span>
                                     </div>
@@ -74,7 +82,7 @@
                 <div class="score border-bottom">
                     <div class="row justify-content-center">
                         <div class="col">
-                            <div class="text-start" i18n>Armes</div>
+                            <div class="text-start" i18n>Objets</div>
                         </div>
                         <div class="col align-self-center">
                             <div class="row row-cols-4 filters-desc">
@@ -84,8 +92,8 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="text-end">{{this.points}} <small *ngIf="this.filteredWeapons"> /
-                                    {{this.filteredWeapons.length}}
+                            <div class="text-end">{{this.points}} <small *ngIf="this.filteredCollectibles"> /
+                                    {{this.filteredCollectibles.length}}
                                 </small>
                             </div>
                         </div>
@@ -93,17 +101,27 @@
                 </div>
                 <div class="row row-cols-auto mt-3 g-2 weapons-wrapper">
 
-                    <div *ngFor="let collectible of filteredWeapons" class="col">
+                    <div *ngFor="let collectible of filteredCollectibles" class="col">
                         <div class="weapon-tooltip bg-dark p-2 d-none" id="tooltip-{{collectible.id}}" *ngIf="this.alreadyRevealed(collectible.id)">
                             <span
                                 class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
                             <div class="d-inline-flex align-items-center">
 
-                                <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : collectible.defaultDamageType)[0].iconLink)"
-                                    class="smallDamageType" />
 
-                                <span class="categoryItalic"> &nbsp;{{(categories | filter:
-                                    collectible.category)[0][localizeProperty("category")]}}</span>
+                                <span *ngIf="this.utilsService.isWeapon(collectible)">
+                                    <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : collectible.defaultDamageType)[0].iconLink)"
+                                        class="smallDamageType" />
+
+                                    <span class="categoryItalic"> &nbsp;{{(categories |
+                                        filter
+                                        : collectible.category)[0][localizeProperty("category")]}}</span>
+                                </span>
+
+                                <span *ngIf="this.utilsService.isArmor(collectible)">
+                                    <span class="categoryItalic"> &nbsp;{{(objects |
+                                        filter
+                                        : collectible.objectType)[0][localizeProperty("objectType")]}}</span>
+                                </span>
                             </div>
                         </div>
                         <span class="shining-wrapper d-block" [id]="collectible.id"
@@ -130,7 +148,7 @@
                 <!-- <button type="button" class="bg-dark btn btn-dark ms-auto" data-bs-dismiss="modal"  aria-label="Close"><i class="bi bi-x"></i></button> -->
             </div>
             <div class="modal-body" i18n>
-                Trouvez les noms de toutes les armes en un temps minimum. À vous de jouer, Gardien !
+                Trouvez les noms de toutes les armes et armures en un temps minimum. À vous de jouer, Gardien !
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="startTimer()"
@@ -152,7 +170,7 @@
                         class="bi bi-x"></i></button>
             </div>
             <div class="modal-body" i18n>
-                Bravo gardien ! Vous avez retrouvé les toutes les armes en {{this.timer | async | date : "mm:ss.S"}} !
+                Bravo gardien ! Vous avez retrouvé les toutes les armes et armures en {{this.timer | async | date : "mm:ss.S"}} !
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal"

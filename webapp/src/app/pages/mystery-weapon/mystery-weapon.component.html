@@ -16,30 +16,35 @@
                 <div class="content-wrapper">
                     <div class="timer-wrapper p-3 row text-center border-bottom">
                         <span class="timer-title" i18n>Temps restant</span> <br />
-                        <span class="timer" i18n *ngIf="this.gameStarted">{{ this.countdown| async| date : "s"}} secondes</span>
+                        <span class="timer" i18n *ngIf="this.gameStarted">{{ this.countdown| async| date : "s"}}
+                            secondes</span>
                     </div>
 
-                    <span class="currentWeapon" *ngIf="this.gameStarted">
-                        {{this.thresholds}}
+                    <span class="currentCollectible" *ngIf="this.gameStarted">
 
-                        <div class="flavorText vertical-fadeIn-animation-reverse" *ngIf="this.thresholds[0] | async">
-                            {{currentWeapon.flavorText[0][localizeProperty('flavorText')]}}
+
+                        <div class="flavorText vertical-fadeIn-animation-reverse"
+                            *ngIf="this.revealHTMLElement('flavorText')| async">
+                            {{currentCollectible.flavorText[0][localizeProperty('flavorText')]}}
                         </div>
 
                         <span
-                            class="{{(tiers| filter : currentWeapon.tier)[0].tier_en}}">{{currentWeapon.name[0][localizeProperty('name')]}}</span><br />
+                            class="{{(tiers| filter : currentCollectible.tier)[0].tier_en}}">{{currentCollectible.name[0][localizeProperty('name')]}}</span><br />
                         <div class="d-inline-flex align-items-center">
+                            <span *ngIf="this.utilsService.isWeapon(currentCollectible)">
+                                <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : currentCollectible.defaultDamageType)[0].iconLink)"
+                                    class="smallDamageType" />
 
-                            <img [src]="this.utilsService.createDamageTypeLink((damageTypes| filter : currentWeapon.defaultDamageType)[0].iconLink)"
-                                class="smallDamageType" />
+                                <span class="categoryItalic"> &nbsp;{{(categories |
+                                    filter
+                                    : currentCollectible.category)[0][localizeProperty("category")]}}</span>
+                            </span>
 
-                            <span class="categoryItalic"> &nbsp;{{(categories|
-                                filter
-                                : currentWeapon.category)[0][localizeProperty("category")]}}</span>
-                            <span class="shining-wrapper d-block shine">
-                                <img [src]="this.utilsService.createWeaponIconLink(currentWeapon.iconLink)"
-                                    [alt]="currentWeapon.name[0][localizeProperty('name')]"
-                                    class="collectible-icon"></span>
+                            <span *ngIf="this.utilsService.isArmor(currentCollectible)">
+                                <span class="categoryItalic"> &nbsp;{{(objects |
+                                    filter
+                                    : currentCollectible.objectType)[0][localizeProperty("objectType")]}}</span>
+                            </span>
                         </div>
                     </span>
                     <form [formGroup]="inputGroup" (submit)="submitInput()" class="form-input text-end">
@@ -62,13 +67,13 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-dark">
             <div class="modal-header ">
-                <h1 class="modal-title fs-5" id="startModalLabel" i18n>Arme Mystère</h1>
+                <h1 class="modal-title fs-5" id="startModalLabel" i18n>Objet Mystère</h1>
             </div>
             <div class="modal-body" i18n>
-                Trouvez le nom des armes dans le temps imparti. À vous de jouer, Gardien !
+                Trouvez le nom des armes et armures dans le temps imparti. À vous de jouer, Gardien !
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="startCountdown()"
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="this.startCountdown()"
                     [disabled]="this.isLoading | async" i18n>Commencer</button>
             </div>
         </div>
@@ -82,12 +87,12 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-dark">
             <div class="modal-header ">
-                <h1 class="modal-title fs-5" id="victoryModalLabel">Arme Mystère terminé </h1>
+                <h1 class="modal-title fs-5" id="victoryModalLabel"> Objet Mystère terminé </h1>
                 <button type="button" class="bg-dark btn btn-dark ms-auto" data-bs-dismiss="modal" aria-label="Close"><i
                         class="bi bi-x"></i></button>
             </div>
-            <div class="modal-body">
-                Vous avez perdu après {{this.points}} armes Gardien !
+            <div class="modal-body" i18n>
+                Vous avez perdu après {{this.points}} objets Gardien !
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal"

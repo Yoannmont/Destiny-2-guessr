@@ -1,3 +1,5 @@
+import { Collectible } from "./collectible";
+
 export interface DamageType {
     id : number;
     hash : string;
@@ -29,27 +31,10 @@ export interface Type{
     [index : string] : number|string;
 }
 
-export interface FlavorText{
-    flavorText_en : string;
-    flavorText_fr : string;
-    [index : string] : string;
-}
-
-export interface CollectibleName{
-    name_en : string;
-    name_fr : string;
-    [index : string] : string;
-}
-export interface Weapon{
-    id : number;
+export interface Weapon extends Collectible{
     category:  number ;
-    defaultDamageType : number ;
-    damageTypes : Array<DamageType>;
-    flavorText :  Array<FlavorText>;
-    hash : string;
-    iconLink : string;
-    name : Array<CollectibleName>;
-    screenshotLink: string;
+    defaultDamageType : number;
+    damageTypes : DamageType[];
     tier:  number;
     type :   number;
 }

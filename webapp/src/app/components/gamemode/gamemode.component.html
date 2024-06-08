@@ -23,78 +23,107 @@
                         avancés </button>
 
                     <span *ngIf="this.activateAdvancedSettings">
-                        <h1 i18n class="subsection-title my-3" i18n>Personnaliser les armes</h1>
+                        <h1 i18n class="subsection-title my-3" i18n>Personnaliser les objets</h1>
                         <div class="row row-cols-3 filters-section  my-3 g-3">
-                        <div *ngFor="let filter of filters" class="col">
-                            <span class=" text-center p-3 filter-text">
-                            {{filter.label}}
-                            <button (click)="deleteFilter(filter)" class="btn">
-                                <i class="bi bi-x"></i>
-                            </button>
-                        </span>
+                            <div *ngFor="let filter of filters" class="col">
+                                <span class=" text-center p-3 filter-text">
+                                    {{filter.label}}
+                                    <button (click)="deleteFilter(filter)" class="btn">
+                                        <i class="bi bi-x"></i>
+                                    </button>
+                                </span>
+                            </div>
                         </div>
-                    </div>
 
                         <button class="btn btn-danger mx-2" (click)="resetFilters()" i18n>Reset</button>
+                        <div class="d-flex">
+                            <div class="dropdown m-2 ">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false" i18n>
+                                    Rareté
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li *ngFor="let tier of tiers">
+                                        <a class="dropdown-item pointer"
+                                            (click)="addFilter('tier', tier.id, tier[localizeProperty('tier')])">
+                                            {{tier[localizeProperty('tier')]}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="dropdown m-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false" i18n>
+                                    Type d'arme
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li *ngFor="let type of types">
+                                        <a class="dropdown-item pointer"
+                                            (click)="addFilter('type', type.id, type[localizeProperty('type')])">
+                                            {{type[localizeProperty('type')]}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="dropdown m-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false" i18n>
+                                    Catégorie
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li *ngFor="let category of categories">
+                                        <a class="dropdown-item pointer"
+                                            (click)="addFilter('category', category.id, category[localizeProperty('category')])">
+                                            {{category[localizeProperty('category')]}}</a>
+                                    </li>
+                                </ul>
+                            </div>
 
-                        <div class="dropdown my-2">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false" i18n>
-                                Rareté
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li *ngFor="let tier of tiers">
-                                    <a class="dropdown-item pointer"
-                                        (click)="addFilter('tier', tier.id, tier[localizeProperty('tier')])">
-                                        {{tier[localizeProperty('tier')]}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="dropdown my-2">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false" i18n>
-                                Type d'arme
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li *ngFor="let type of types">
-                                    <a class="dropdown-item pointer"
-                                        (click)="addFilter('type', type.id, type[localizeProperty('type')])">
-                                        {{type[localizeProperty('type')]}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="dropdown my-2">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false" i18n>
-                                Catégorie
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li *ngFor="let category of categories">
-                                    <a class="dropdown-item pointer"
-                                        (click)="addFilter('category', category.id, category[localizeProperty('category')])">
-                                        {{category[localizeProperty('category')]}}</a>
-                                </li>
-                            </ul>
-                        </div>
+                            <div class="dropdown m-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false" i18n>
+                                    Élément
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li *ngFor="let damageType of damageTypes">
+                                        <a class="dropdown-item pointer"
+                                            (click)="addFilter('defaultDamageType', damageType.id, damageType[localizeProperty('damageType')])">
+                                            {{damageType[localizeProperty('damageType')]}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="dropdown m-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false" i18n>
+                                    Classe
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li *ngFor="let class of classes">
+                                        <a class="dropdown-item pointer"
+                                            (click)="addFilter('classType', class.id, class[localizeProperty('class')])">
+                                            {{class[localizeProperty('class')]}}</a>
+                                    </li>
+                                </ul>
+                            </div>
 
-                        <div class="dropdown my-2">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false" i18n>
-                                Élément
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li *ngFor="let damageType of damageTypes">
-                                    <a class="dropdown-item pointer"
-                                        (click)="addFilter('defaultDamageType', damageType.id, damageType[localizeProperty('damageType')])">
-                                        {{damageType[localizeProperty('damageType')]}}</a>
-                                </li>
-                            </ul>
+                            <div class="dropdown m-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false" i18n>
+                                    Type d'objet
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li *ngFor="let object of objects">
+                                        <a class="dropdown-item pointer"
+                                            (click)="addFilter('objectType', object.id, object[localizeProperty('objectType')])">
+                                            {{object[localizeProperty('objectType')]}}</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </span>
 
+
                     <button class="btn btn-home p-3 mx-auto my-2" i18n (click)="saveAndLaunch('exo-challenge')">Jouer à
                         l'Exo-Challenge</button>
-                        <button data-bs-toggle="modal" data-bs-target="#Error" class="d-none"></button>
+                    <button data-bs-toggle="modal" data-bs-target="#Error" class="d-none"></button>
                     <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="Error"
                         aria-labelledby="ErrorLabel" aria-hidden="false">
                         <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -103,7 +132,7 @@
                                     <h1 class="modal-title fs-5" id="ErrorLabel">Erreur de personnalisation</h1>
                                 </div>
                                 <div class="modal-body">
-                                    Aucune arme ne correspond à cette personnalisation. Veuillez changer les filtres.
+                                    Aucun objet ne correspond à cette personnalisation. Veuillez changer les filtres.
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
@@ -116,10 +145,11 @@
 
                 </div>
                 <div class="col-md-6 py-2  separation-border-left">
-                    <h1 i18n class="title mt-3"> Arme Mystère</h1>
+                    <h1 i18n class="title mt-3"> Objet Mystère</h1>
                     <p class="gamemode-desc" i18n> En temps limité, devinez le nom des armes présentées grâce à leur
                         description. </p>
-                    <button class="btn btn-home p-3 mx-auto my-2" i18n routerLink="mystery-weapon" [disabled]="true">Jouer à l'Arme
+                    <button class="btn btn-home p-3 mx-auto my-2" i18n routerLink="mystery-weapon"
+                        [disabled]="true">Jouer à l'Objet
                         Mystère</button>
                 </div>
             </div>

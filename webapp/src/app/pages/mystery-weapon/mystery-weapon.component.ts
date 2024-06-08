@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { CollectiblesCacheService } from '../../_services/collectibles-cache.service';
 import { LangService } from '../../_services/lang.service';
-import { Subject, Observable, takeUntil, map, tap, timeInterval } from 'rxjs';
+import { Subject, Observable, takeUntil, map } from 'rxjs';
 import {
   Weapon,
   Tier,
@@ -16,14 +16,14 @@ import {
   DamageType,
   Type,
 } from '../../_classes/weapon';
-import { GamemodeService } from '../../_services/gamemode.service';
-import { TimerService } from '../../_services/timer.service';
 import { CanComponentDeactivate } from '../../_classes/candeactivate';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FilterPipe } from '../../_pipes/filter.pipe';
 import { CountdownService } from '../../_services/countdown.service';
 import { LoaderService } from '../../_services/loader.service';
+import { ObjectType, Class, Armor } from '../../_classes/armor';
+import { Collectible } from '../../_classes/collectible';
 
 @Component({
   selector: 'app-mystery-weapon',
@@ -39,11 +39,14 @@ export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate {
   isLoading: Observable<boolean>;
 
   weapons!: Weapon[];
-  filteredWeapons!: Weapon[];
+  filteredCollectibles!: Collectible[];
   tiers!: Tier[];
   categories!: Category[];
   types!: Type[];
   damageTypes!: DamageType[];
+  objects!: ObjectType[];
+  classes!: Class[];
+  armors!: Armor[];
 
   destroy: Subject<boolean>;
   points: number = 0;
@@ -52,9 +55,9 @@ export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate {
 
   hasVictory!: Subject<boolean>;
 
-  currentWeapon!: Weapon;
+  currentCollectible!: Collectible;
 
-  thresholds : Array<Observable<boolean>> = [];
+  thresholds: Array<Observable<boolean>> = [];
 
   gameStarted: boolean = false;
 
@@ -74,10 +77,13 @@ export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate {
 
   ngOnInit(): void {
     this.getWeapons();
+    this.getArmors();
     this.getCategories();
     this.getTiers();
     this.getDamageTypes();
     this.getTypes();
+    this.getObjects();
+    this.getClasses();
 
     this.inputGroup = this.formBuilder.group({
       userInput: ['', Validators.required],
@@ -144,8 +150,8 @@ export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate {
       .pipe(takeUntil(this.destroy))
       .subscribe((weapons: Weapon[]) => {
         this.weapons = weapons;
-        this.filteredWeapons = weapons;
-        this.getRandomWeapon();
+        this.filteredCollectibles = this.filteredCollectibles.concat(weapons);
+        this.getRandomCollectible();
       });
   }
 
@@ -158,10 +164,10 @@ export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate {
       });
   }
 
-  getRandomWeapon(): void {
-    this.currentWeapon =
-      this.filteredWeapons[
-        Math.floor(Math.random() * this.filteredWeapons.length)
+  getRandomCollectible(): void {
+    this.currentCollectible =
+      this.filteredCollectibles[
+        Math.floor(Math.random() * this.filteredCollectibles.length)
       ];
   }
 
@@ -192,6 +198,34 @@ export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate {
       });
   }
 
+  getObjects(): void {
+    this.collectiblesCacheService
+      .getAllObjects()
+      .pipe(takeUntil(this.destroy))
+      .subscribe((objects: ObjectType[]) => {
+        this.objects = objects;
+      });
+  }
+
+  getClasses(): void {
+    this.collectiblesCacheService
+      .getAllClasses()
+      .pipe(takeUntil(this.destroy))
+      .subscribe((classes: Class[]) => {
+        this.classes = classes;
+      });
+  }
+
+  getArmors(): void {
+    this.collectiblesCacheService
+      .getAllArmors(this.langService.currentLocaleID)
+      .pipe(takeUntil(this.destroy))
+      .subscribe((armors: Armor[]) => {
+        this.armors = armors;
+        this.filteredCollectibles = this.filteredCollectibles.concat(armors);
+      });
+  }
+
   ngOnDestroy(): void {
     this.destroy.next(true);
   }
@@ -205,24 +239,24 @@ export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate {
   }
   getCollectibleIdByName(name: string): number | undefined {
     const validName = this._validateName(name);
-    const collectible = this.filteredWeapons.find(
-      (weapon) =>
-        this._validateName(weapon.name[0][this.localizeProperty('name')]) ===
+    const collectible = this.filteredCollectibles.find(
+      (_collectible) =>
+        this._validateName(<string>_collectible.name[0][this.localizeProperty('name')]) ===
         validName
     );
 
     return collectible?.id;
   }
 
-  getCollectibleObjectById(id: number): Weapon | undefined {
-    return this.filteredWeapons.find((weapon) => weapon.id === id);
+  getCollectibleObjectById(id: number): Collectible | undefined {
+    return this.filteredCollectibles.find((collectible) => collectible.id === id);
   }
 
-  getCollectibleObjectByName(name: string): Weapon | undefined {
+  getCollectibleObjectByName(name: string): Collectible | undefined {
     const validName = this._validateName(name);
-    const collectible = this.filteredWeapons.find(
-      (weapon) =>
-        this._validateName(weapon.name[0][this.localizeProperty('name')]) ===
+    const collectible = this.filteredCollectibles.find(
+      (_collectible) =>
+        this._validateName(<string>_collectible.name[0][this.localizeProperty('name')]) ===
         validName
     );
 
@@ -231,10 +265,16 @@ export class MysteryWeaponComponent implements OnInit, CanComponentDeactivate {
 
   revealHTMLElement(id: string): Observable<boolean> {
     let timeThreshold = 100000;
-    if (id === 'flavorText'){
-      timeThreshold = 20000;
-    };
-    return this.countdown.pipe(map(remainingTime => remainingTime < timeThreshold));
+    if (id === 'flavorText') {
+      timeThreshold = 25000;
+    }
+    const booleanObservable = this.countdown.pipe(
+      map(remainingTime => remainingTime < timeThreshold)
+    );
+    booleanObservable.subscribe((val) => {
+      console.log(val);
+    });
+    return booleanObservable;
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {

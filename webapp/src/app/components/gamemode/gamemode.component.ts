@@ -14,6 +14,8 @@ import {
 import { CollectiblesCacheService } from '../../_services/collectibles-cache.service';
 import { Subject, takeUntil } from 'rxjs';
 import { LangService } from '../../_services/lang.service';
+import { ObjectType, Class, Armor } from '../../_classes/armor';
+import { Collectible } from '../../_classes/collectible';
 
 @Component({
   selector: 'app-gamemode',
@@ -29,8 +31,11 @@ export class GamemodeComponent implements OnInit {
   categories!: Category[];
   types!: Type[];
   damageTypes!: DamageType[];
-  filteredWeapons!: Weapon[];
+  filteredCollectibles!: Collectible[];
   weapons!: Weapon[];
+  objects!: ObjectType[];
+  classes!: Class[];
+  armors!: Armor[];
 
   destroy: Subject<boolean>;
   activateAdvancedSettings: boolean = false;
@@ -48,10 +53,13 @@ export class GamemodeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getWeapons();
+    this.getArmors();
     this.getCategories();
     this.getTiers();
     this.getDamageTypes();
     this.getTypes();
+    this.getObjects();
+    this.getClasses();
   }
 
   localizeProperty(property: string): string {
@@ -59,19 +67,23 @@ export class GamemodeComponent implements OnInit {
   }
 
   applyFilters() {
-    this.filteredWeapons = this.weapons.filter((weapon: any) => {
-      const groupedFilters = this.groupFiltersByProperty();
+    let collectibles: Collectible[] = this.weapons;
+    collectibles = collectibles.concat(this.armors);
+    this.filteredCollectibles = collectibles.filter(
+      (collectible: Collectible) => {
+        const groupedFilters = this.groupFiltersByProperty();
 
-      return Object.keys(groupedFilters).every((property: any) => {
-        const filtersForProperty = groupedFilters[property];
-        return filtersForProperty.some((filter: any) => {
-          return (
-            weapon.hasOwnProperty(filter.property) &&
-            weapon[filter.property] === filter.value
-          );
+        return Object.keys(groupedFilters).every((property: any) => {
+          const filtersForProperty = groupedFilters[property];
+          return filtersForProperty.some((filter: any) => {
+            return (
+              collectible.hasOwnProperty(filter.property) &&
+              collectible[filter.property] === filter.value
+            );
+          });
         });
-      });
-    });
+      }
+    );
   }
 
   groupFiltersByProperty(): Array<any> {
@@ -129,7 +141,7 @@ export class GamemodeComponent implements OnInit {
       .pipe(takeUntil(this.destroy))
       .subscribe((weapons: Weapon[]) => {
         this.weapons = weapons;
-        this.filteredWeapons = weapons;
+        this.filteredCollectibles = weapons;
       });
   }
 
@@ -169,6 +181,34 @@ export class GamemodeComponent implements OnInit {
       });
   }
 
+  getObjects(): void {
+    this.collectiblesCacheService
+      .getAllObjects()
+      .pipe(takeUntil(this.destroy))
+      .subscribe((objects: ObjectType[]) => {
+        this.objects = objects;
+      });
+  }
+
+  getClasses(): void {
+    this.collectiblesCacheService
+      .getAllClasses()
+      .pipe(takeUntil(this.destroy))
+      .subscribe((classes: Class[]) => {
+        this.classes = classes;
+      });
+  }
+
+  getArmors(): void {
+    this.collectiblesCacheService
+      .getAllArmors(this.langService.currentLocaleID)
+      .pipe(takeUntil(this.destroy))
+      .subscribe((armors: Armor[]) => {
+        this.armors = armors;
+        this.filteredCollectibles = this.filteredCollectibles.concat(armors);
+      });
+  }
+
   showAdvancedParameters(): void {
     if (this.activateAdvancedSettings) {
       this.resetFilters();
@@ -178,7 +218,7 @@ export class GamemodeComponent implements OnInit {
 
   checkAdvancedParameters(): boolean {
     this.applyFilters();
-    if (this.filteredWeapons.length === 0) {
+    if (this.filteredCollectibles.length === 0) {
       return false;
     }
     return true;
