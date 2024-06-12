@@ -1,5 +1,5 @@
 [build]
-  base = webapp/
+  base = "webapp/"
   command = "npm run build"
   publish = "webapp/dist/d2g-webapp/browser"
 
