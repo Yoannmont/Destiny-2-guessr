@@ -7,12 +7,12 @@
       "i18n": {
         "sourceLocale": {
           "code": "fr",
-          "baseHref": "fr/"
+          "baseHref": "fr"
         },
         "locales": {
           "en": {
             "translation": "src/locale/messages.en.xlf",
-            "baseHref": "en/"
+            "baseHref": "en"
           }
         }
       },
@@ -32,7 +32,7 @@
             "localize": true,
             "outputPath": "dist/d2g-webapp",
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "browser": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -94,10 +94,10 @@
               "buildTarget": "d2g-webapp:build:development"
             },
             "fr": {
-              "browserTarget": "d2g-webapp:build:fr"
+              "buildTarget": "d2g-webapp:build:fr"
             },
             "en": {
-              "browserTarget": "d2g-webapp:build:en"
+              "buildTarget": "d2g-webapp:build:en"
             }
           },
           "defaultConfiguration": "development"
