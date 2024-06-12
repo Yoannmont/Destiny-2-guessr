@@ -1,7 +1,7 @@
 [build]
   base = "webapp/"
   command = "ng build --configuration=fr"
-  publish = "dist/d2g-webapp/browser"
+  publish = "dist/d2g-webapp"
 
 [[redirects]]
   from = "/fr/*"
