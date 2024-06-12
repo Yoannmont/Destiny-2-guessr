@@ -1,7 +1,7 @@
 [build]
   base = "webapp/"
-  command = "npm run build"
-  publish = "webapp/dist/d2g-webapp/browser"
+  command = "npm run publish"
+  publish = "dist/d2g-webapp/browser"
 
 [[redirects]]
   from = "/fr/*"
