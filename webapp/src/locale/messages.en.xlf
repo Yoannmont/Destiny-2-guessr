@@ -1,238 +1,426 @@
-<?xml version="1.0" encoding="UTF-8"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-<file datatype="plaintext" original="ng2.template" source-language="fr" target-language="en">
-<body>
-<trans-unit datatype="html" id="1026846705857013000">
-<source xml:space="preserve">Nom de l&apos;arme</source>
-<target xml:space="preserve">Name of the weapon</target>
-</trans-unit>
-<trans-unit datatype="html" id="1446578836728028301">
-<source xml:space="preserve">Entrez votre réponse</source>
-<target xml:space="preserve">Enter your answer</target>
-</trans-unit>
-<trans-unit datatype="html" id="1467566692562963830">
-<source xml:space="preserve">Réessayer</source>
-<target xml:space="preserve">Retry</target>
-</trans-unit>
-<trans-unit datatype="html" id="159116427623732952">
-<source xml:space="preserve">La page recherchée n&apos;existe pas.</source>
-<target xml:space="preserve">The page you are looking for does not exist.</target>
-</trans-unit>
-<trans-unit datatype="html" id="1953013685417393077">
-<source xml:space="preserve">Arme mystère</source>
-<target xml:space="preserve">Mystery weapon</target>
-</trans-unit>
-<trans-unit datatype="html" id="2479725204823819686">
-<source xml:space="preserve">Armes</source>
-<target xml:space="preserve">Weapons</target>
-</trans-unit>
-<trans-unit datatype="html" id="2713111888071198842">
-<source xml:space="preserve"> Jouer</source>
-<target xml:space="preserve">Play</target>
-</trans-unit>
-<trans-unit datatype="html" id="3132727940796561539">
-<source xml:space="preserve">Recommencer</source>
-<target xml:space="preserve">Start over</target>
-</trans-unit>
-<trans-unit datatype="html" id="4003387801369922138">
-<source xml:space="preserve">Valider</source>
-<target xml:space="preserve">Confirm</target>
-</trans-unit>
-<trans-unit datatype="html" id="4079557636174543046">
-<source xml:space="preserve">Reformez notre arsenal exotique, Gardien !</source>
-<target xml:space="preserve">Rebuild our exotic arsenal, Guardian!</target>
-</trans-unit>
-<trans-unit datatype="html" id="5013207086592438568">
-<source xml:space="preserve">Commencer</source>
-<target xml:space="preserve">Start</target>
-</trans-unit>
-<trans-unit datatype="html" id="5398907870980838814">
-<source xml:space="preserve"> Catégorie </source>
-<target xml:space="preserve">Category</target>
-</trans-unit>
-<trans-unit datatype="html" id="5491081266313732174">
-<source xml:space="preserve">Filtres</source>
-<target xml:space="preserve">Filters</target>
-</trans-unit>
-<trans-unit datatype="html" id="5604867390069644853">
-<source xml:space="preserve"> Rareté </source>
-<target xml:space="preserve">Tier</target>
-</trans-unit>
-<trans-unit datatype="html" id="5967377922369481812">
-<source xml:space="preserve">Plongez dans l&apos;univers de Destiny 2 et testez vos connaissances en retrouvant les noms des armes exotiques.</source>
-<target xml:space="preserve">Immerse yourself in the world of Destiny 2 and test your knowledge by finding the names of exotic weapons.</target>
-</trans-unit>
-<trans-unit datatype="html" id="5968366500418000730">
-<source xml:space="preserve">Collections</source>
-<target xml:space="preserve">Collections</target>
-</trans-unit>
-<trans-unit datatype="html" id="622204728291682608">
-<source xml:space="preserve">CHARGEMENT EN COURS</source>
-<target xml:space="preserve">Loading in progress</target>
-</trans-unit>
-<trans-unit datatype="html" id="6707800253753466795">
-<source xml:space="preserve"> Collections</source>
-<target xml:space="preserve">Collections</target>
-</trans-unit>
-<trans-unit datatype="html" id="7244733076457962946">
-<source xml:space="preserve"> Élément </source>
-<target xml:space="preserve">Damage type</target>
-</trans-unit>
-<trans-unit datatype="html" id="7354243492822491710">
-<source xml:space="preserve"> À propos </source>
-<target xml:space="preserve"> About </target>
-</trans-unit>
-<trans-unit datatype="html" id="7631405440758027758">
-<source xml:space="preserve">Temps</source>
-<target xml:space="preserve">Time</target>
-</trans-unit>
-<trans-unit datatype="html" id="7808756054397155068">
-<source xml:space="preserve">Reset</source>
-<target xml:space="preserve">Reset</target>
-</trans-unit>
-<trans-unit datatype="html" id="8016351056137072588">
-<source xml:space="preserve">Rien à voir par ici...</source>
-<target xml:space="preserve">Nothing to see here...</target>
-</trans-unit>
-<trans-unit datatype="html" id="8419196829315806764">
-<source xml:space="preserve"> Filtrer </source>
-<target xml:space="preserve">Filter</target>
-</trans-unit>
-<trans-unit datatype="html" id="8653992382629937297">
-<source xml:space="preserve"> Type d&apos;arme </source>
-<target xml:space="preserve"> Weapon type </target>
-</trans-unit>
-<trans-unit datatype="html" id="9043952365725675246">
-<source xml:space="preserve">Exo Challenge</source>
-<target xml:space="preserve">Exo Challenge</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.alert.close">
-<source xml:space="preserve">Close</source>
-<target xml:space="preserve">Close</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.carousel.next">
-<source xml:space="preserve">Next</source>
-<target xml:space="preserve">Next</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.carousel.previous">
-<source xml:space="preserve">Previous</source>
-<target xml:space="preserve">Previous</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.carousel.slide-number">
-<source xml:space="preserve"> Slide <x equiv-text="vate _wrap$ = n" id="INTERPOLATION"/> of <x equiv-text="s._config.wrap)" id="INTERPOLATION_1"/> </source>
-<target xml:space="preserve"> Slide <x equiv-text="vate _wrap$ = n" id="INTERPOLATION"/> of <x equiv-text="s._config.wrap)" id="INTERPOLATION_1"/> </target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.datepicker.next-month">
-<source xml:space="preserve">Next month</source>
-<target xml:space="preserve">Next month</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.datepicker.previous-month">
-<source xml:space="preserve">Previous month</source>
-<target xml:space="preserve">Previous month</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.datepicker.select-month">
-<source xml:space="preserve">Select month</source>
-<target xml:space="preserve">Select month</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.datepicker.select-year">
-<source xml:space="preserve">Select year</source>
-<target xml:space="preserve">Select year</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.first">
-<source xml:space="preserve">««</source>
-<target xml:space="preserve">««</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.first-aria">
-<source xml:space="preserve">First</source>
-<target xml:space="preserve">First</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.last">
-<source xml:space="preserve">»»</source>
-<target xml:space="preserve">»»</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.last-aria">
-<source xml:space="preserve">Last</source>
-<target xml:space="preserve">Last</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.next">
-<source xml:space="preserve">»</source>
-<target xml:space="preserve">»</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.next-aria">
-<source xml:space="preserve">Next</source>
-<target xml:space="preserve">Next</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.previous">
-<source xml:space="preserve">«</source>
-<target xml:space="preserve">«</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.previous-aria">
-<source xml:space="preserve">Previous</source>
-<target xml:space="preserve">Previous</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.progressbar.value">
-<source xml:space="preserve">
-<x equiv-text="*   * @since" id="INTERPOLATION"/></source>
-<target xml:space="preserve">
-<x equiv-text="*   * @since" id="INTERPOLATION"/></target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.HH">
-<source xml:space="preserve">HH</source>
-<target xml:space="preserve">HH</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.MM">
-<source xml:space="preserve">MM</source>
-<target xml:space="preserve">MM</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.PM">
-<source xml:space="preserve">
-<x id="INTERPOLATION"/></source>
-<target xml:space="preserve">
-<x id="INTERPOLATION"/></target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.SS">
-<source xml:space="preserve">SS</source>
-<target xml:space="preserve">SS</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.decrement-hours">
-<source xml:space="preserve">Decrement hours</source>
-<target xml:space="preserve">Decrement hours</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.decrement-minutes">
-<source xml:space="preserve">Decrement minutes</source>
-<target xml:space="preserve">Decrement minutes</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.decrement-seconds">
-<source xml:space="preserve">Decrement seconds</source>
-<target xml:space="preserve">Decrement seconds</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.hours">
-<source xml:space="preserve">Hours</source>
-<target xml:space="preserve">Hours</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.increment-hours">
-<source xml:space="preserve">Increment hours</source>
-<target xml:space="preserve">Increment hours</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.increment-minutes">
-<source xml:space="preserve">Increment minutes</source>
-<target xml:space="preserve">Increment minutes</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.increment-seconds">
-<source xml:space="preserve">Increment seconds</source>
-<target xml:space="preserve">Increment seconds</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.minutes">
-<source xml:space="preserve">Minutes</source>
-<target xml:space="preserve">Minutes</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.seconds">
-<source xml:space="preserve">Seconds</source>
-<target xml:space="preserve">Seconds</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.toast.close-aria">
-<source xml:space="preserve">Close</source>
-<target xml:space="preserve">Close</target>
-</trans-unit>
-</body>
-</file>
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="fr" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="992697974060633191" datatype="html">
+        <source>fr</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_services/lang.service.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8942544937304152508" datatype="html">
+        <source>Jouer</source>
+        <target>Play</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_services/utils.service.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5968366500418000730" datatype="html">
+        <source>Collections</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_services/utils.service.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/collections/collections.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7131503233535545455" datatype="html">
+        <source>À propos</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_services/utils.service.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7930327423987694267" datatype="html">
+        <source>Exo-Challenge - Destiny 2 Guessr</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5202601909039901741" datatype="html">
+        <source>Arme Mystère - Destiny 2 Guessr</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1188536749443901158" datatype="html">
+        <source>Sélection du mode de jeu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8973260381118549350" datatype="html">
+        <source> Exo Challenge</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">18,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7734130373075717005" datatype="html">
+        <source> Trouvez le nom des objets de l&apos;arsenal en un minimum de temps.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">20,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4515094156785803561" datatype="html">
+        <source>Paramètres avancés </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8587729949083296129" datatype="html">
+        <source>Personnaliser les objets</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7808756054397155068" datatype="html">
+        <source>Reset</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/collections/collections.component.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5604867390069644853" datatype="html">
+        <source> Rareté </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/collections/collections.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8653992382629937297" datatype="html">
+        <source> Type d&apos;arme </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/collections/collections.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5398907870980838814" datatype="html">
+        <source> Catégorie </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/collections/collections.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7244733076457962946" datatype="html">
+        <source> Élément </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/collections/collections.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8224276635213925136" datatype="html">
+        <source> Classe </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/collections/collections.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4069500397864894917" datatype="html">
+        <source> Type d&apos;objet </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/collections/collections.component.html</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7535464246057566769" datatype="html">
+        <source>Jouer à l&apos;Exo-Challenge</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">125</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8998179362936748717" datatype="html">
+        <source>OK</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">139,140</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/exo-challenge/exo-challenge.component.html</context>
+          <context context-type="linenumber">183,184</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8449218485342499881" datatype="html">
+        <source> Objet Mystère</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">148,149</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8368178966561058245" datatype="html">
+        <source> En temps limité, devinez le nom des objets présentés grâce à leur description. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">149,150</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8330381584374979087" datatype="html">
+        <source>Jouer à l&apos;Objet Mystère</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gamemode/gamemode.component.html</context>
+          <context context-type="linenumber">152,153</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7600781173736941832" datatype="html">
+        <source>Chargement en cours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/loading/loading.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5491081266313732174" datatype="html">
+        <source>Filtres</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/collections/collections.component.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8419196829315806764" datatype="html">
+        <source> Filtrer </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/collections/collections.component.html</context>
+          <context context-type="linenumber">19,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9043952365725675246" datatype="html">
+        <source>Exo Challenge</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/exo-challenge/exo-challenge.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/exo-challenge/exo-challenge.component.html</context>
+          <context context-type="linenumber">152,153</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7631405440758027758" datatype="html">
+        <source>Temps</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/exo-challenge/exo-challenge.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1446578836728028301" datatype="html">
+        <source>Entrez votre réponse</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/exo-challenge/exo-challenge.component.html</context>
+          <context context-type="linenumber">70,71</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="linenumber">51,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1026846705857013000" datatype="html">
+        <source>Nom de l&apos;arme</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/exo-challenge/exo-challenge.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="linenumber">52,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4003387801369922138" datatype="html">
+        <source>Valider</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/exo-challenge/exo-challenge.component.html</context>
+          <context context-type="linenumber">74,75</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="linenumber">55,56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1087900872515566478" datatype="html">
+        <source>Objets</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/exo-challenge/exo-challenge.component.html</context>
+          <context context-type="linenumber">86,87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5502031485165544765" datatype="html">
+        <source> Trouvez les noms de toutes les armes et armures en un temps minimum. À vous de jouer, Gardien ! </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/exo-challenge/exo-challenge.component.html</context>
+          <context context-type="linenumber">156</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5013207086592438568" datatype="html">
+        <source>Commencer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/exo-challenge/exo-challenge.component.html</context>
+          <context context-type="linenumber">160,161</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="linenumber">77,78</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4401064957660419659" datatype="html">
+        <source>Exo Challenge réussi </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/exo-challenge/exo-challenge.component.html</context>
+          <context context-type="linenumber">173,174</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2188518491625070130" datatype="html">
+        <source> Bravo gardien ! Vous avez retrouvé les toutes les armes et armures en <x id="INTERPOLATION" equiv-text="{{this.timer | async | date :
+                &quot;mm:ss.S&quot;}}"/> ! </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/exo-challenge/exo-challenge.component.html</context>
+          <context context-type="linenumber">178,180</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6452619769236126966" datatype="html">
+        <source>La mission n&apos;est pas terminée Gardien. Êtes-vous sûr de vouloir quitter ?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/exo-challenge/exo-challenge.component.ts</context>
+          <context context-type="linenumber">379</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.ts</context>
+          <context context-type="linenumber">282</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4079557636174543046" datatype="html">
+        <source>Reformez notre arsenal exotique, Gardien !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/home/home.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1841807441021525719" datatype="html">
+        <source>Plongez dans l&apos;univers de Destiny 2 et testez vos connaissances en retrouvant les noms des objets exotiques.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/home/home.component.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2713111888071198842" datatype="html">
+        <source> Jouer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/home/home.component.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6707800253753466795" datatype="html">
+        <source> Collections</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/home/home.component.html</context>
+          <context context-type="linenumber">21,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4648465153160866078" datatype="html">
+        <source>Arme Mystère</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3782220081378128732" datatype="html">
+        <source>Temps restant</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6114755528643596059" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ this.countdown| async| date : &quot;s&quot;}}"/> secondes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="linenumber">19,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="533194069818443443" datatype="html">
+        <source>Objet Mystère</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="linenumber">70,71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="516958296235356455" datatype="html">
+        <source> Trouvez le nom des armes et armures dans le temps imparti. À vous de jouer, Gardien ! </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5619702019388641055" datatype="html">
+        <source> Vous avez perdu après <x id="INTERPOLATION" equiv-text="{{this.points}}"/> objets Gardien ! </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="linenumber">95,96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2301331841798252546" datatype="html">
+        <source>Abandonner</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="linenumber">99,100</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1467566692562963830" datatype="html">
+        <source>Réessayer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="linenumber">101,102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8016351056137072588" datatype="html">
+        <source>Rien à voir par ici...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/notfound/notfound.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="159116427623732952" datatype="html">
+        <source>La page recherchée n&apos;existe pas.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/notfound/notfound.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>

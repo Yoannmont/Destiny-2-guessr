@@ -1,0 +1,14 @@
+[build]
+  base : webapp/
+  command = "npm run build"
+  publish = "webapp/dist/d2g-webapp/browser"
+
+[[redirects]]
+  from = "/fr/*"
+  to = "/fr/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/*"
+  to = "/en/index.html"
+  status = 200

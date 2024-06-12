@@ -69,7 +69,7 @@ export class ExoChallengeComponent
 
   destroy: Subject<boolean>;
   points: number = 0;
-  revealed: Array<number> = [];
+  revealed: Array<any> = [];
   timer!: Observable<number>;
 
   hasVictory!: Subject<boolean>;
@@ -100,7 +100,6 @@ export class ExoChallengeComponent
     this.getTypes();
     this.getObjects();
     this.getClasses();
-    
 
     this.inputGroup = this.formBuilder.group({
       userInput: ['', Validators.required],
@@ -108,10 +107,8 @@ export class ExoChallengeComponent
 
     this.openStartModal();
   }
-  
 
   applyFilters() {
-
     this.filteredCollectibles = this.filteredCollectibles.filter(
       (collectible: Collectible) => {
         const groupedFilters = this.groupFiltersByProperty();
@@ -127,6 +124,13 @@ export class ExoChallengeComponent
         });
       }
     );
+  }
+
+  ArmorOrWeapon(collectible: Collectible | undefined): string | undefined {
+    if (collectible){
+      return collectible.objectType === 1 ? "weapon" : "armor"
+    }
+    return undefined;
   }
 
   navigateToGamemodeSelection(): void {
@@ -182,21 +186,22 @@ export class ExoChallengeComponent
   submitInput(): void {
     const userInput = this.inputGroup.controls['userInput'].value;
     this.pushInput();
+    console.log(this.inputs)
     this.inputGroup.reset();
 
-    const collectibleIdOrUndefined = this.getCollectibleIdByName(userInput);
-    if (collectibleIdOrUndefined) {
-      if (!this.alreadyRevealed(collectibleIdOrUndefined)) {
-        this.revealImage(collectibleIdOrUndefined);
+    const {id, armorOrWeapon} = this.getCollectibleIdByName(userInput);
+    if (armorOrWeapon && id ) {
+      if (!this.alreadyRevealed(armorOrWeapon, id)) {
+        this.revealImage(armorOrWeapon, id);
         this.points++;
-        this.revealed.push(collectibleIdOrUndefined);
+        this.revealed.push({id : id, armorOrWeapon : armorOrWeapon});
         this.checkVictory();
       }
     }
   }
 
-  alreadyRevealed(collectibleId: number): boolean {
-    return this.revealed.includes(collectibleId);
+  alreadyRevealed(armorOrWeapon : string, collectibleId: number): boolean {
+    return this.revealed.filter((item) => item.id === collectibleId && item.armorOrWeapon === armorOrWeapon).length != 0;
   }
 
   checkVictory(): void {
@@ -212,14 +217,19 @@ export class ExoChallengeComponent
     if (this.timerService.isRunning()) this.timerService.stopTimer();
   }
 
-  revealImage(id: number): void {
-    let spanElement = document.getElementById(`${id}`);
+  revealImage(armorOrWeapon: string, id: number): void {
+    const collectible = this.getCollectibleObjectById(armorOrWeapon, id);
+    let spanElement = document.getElementById(
+      `${this.ArmorOrWeapon(collectible!)}-${id}`
+    );
+
     let collectibleImage = spanElement?.childNodes.item(0) as HTMLImageElement;
-    const collectible = this.getCollectibleObjectById(id);
     collectibleImage.src = this.utilsService.createIconLink(
       collectible?.iconLink
     );
-    collectibleImage.alt = <string>collectible?.name[0][this.localizeProperty('name')]!;
+    collectibleImage.alt = <string>(
+      collectible?.name[0][this.localizeProperty('name')]!
+    );
 
     spanElement?.classList.add('shine');
     spanElement?.classList.add('vertical-fadeIn-animation-reverse');
@@ -228,12 +238,15 @@ export class ExoChallengeComponent
 
   getCollectibles(): void {
     forkJoin({
-      weapons: this.collectiblesCacheService.getAllWeapons(this.langService.currentLocaleID).pipe(takeUntil(this.destroy)),
-      armors: this.collectiblesCacheService.getAllArmors(this.langService.currentLocaleID).pipe(takeUntil(this.destroy))
+      weapons: this.collectiblesCacheService
+        .getAllWeapons(this.langService.currentLocaleID)
+        .pipe(takeUntil(this.destroy)),
+      armors: this.collectiblesCacheService
+        .getAllArmors(this.langService.currentLocaleID)
+        .pipe(takeUntil(this.destroy)),
     }).subscribe(({ weapons, armors }) => {
       this.weapons = weapons;
       this.armors = armors;
-      console.log(armors)
       this.filteredCollectibles = [...weapons, ...armors];
       this.applyFilters();
     });
@@ -293,7 +306,6 @@ export class ExoChallengeComponent
       });
   }
 
-
   ngOnDestroy(): void {
     this.destroy.next(true);
   }
@@ -306,35 +318,47 @@ export class ExoChallengeComponent
       .toLowerCase();
   }
 
-  getCollectibleIdByName(name: string): number | undefined {
+  getCollectibleIdByName(name: string) {
     const validName = this._validateName(name);
     const collectible = this.filteredCollectibles.find(
       (_collectible) =>
-        this._validateName(<string>_collectible.name[0][this.localizeProperty('name')]) ===
-        validName
+        this._validateName(
+          <string>_collectible.name[0][this.localizeProperty('name')]
+        ) === validName
     );
 
-    return collectible?.id;
+    return {
+      id: collectible?.id,
+      armorOrWeapon: this.ArmorOrWeapon(collectible),
+    };
   }
 
-  getCollectibleObjectById(id: number): Collectible | undefined {
-    return this.filteredCollectibles.find((collectible) => collectible.id === id);
+  getCollectibleObjectById(
+    armorOrWeapon: string,
+    id: number
+  ): Collectible | undefined {
+    return this.filteredCollectibles.find(
+      (collectible) =>
+        collectible.id === id &&
+        this.ArmorOrWeapon(collectible) === armorOrWeapon
+    );
   }
 
   getCollectibleObjectByName(name: string): Collectible | undefined {
     const validName = this._validateName(name);
     const collectible = this.filteredCollectibles.find(
       (_collectible) =>
-        this._validateName(<string>_collectible.name[0][this.localizeProperty('name')]) ===
-        validName
+        this._validateName(
+          <string>_collectible.name[0][this.localizeProperty('name')]
+        ) === validName
     );
 
     return collectible;
   }
 
-  toggleTooltip(event: Event, collectibleId: number): void {
-    const toolTipObject = document.getElementById(`tooltip-${collectibleId}`);
-    if (toolTipObject && this.alreadyRevealed(collectibleId)) {
+  toggleTooltip(event: Event,  armorOrWeapon: string, collectibleId: number,): void {
+    const toolTipObject = document.getElementById(`tooltip-${armorOrWeapon}-${collectibleId}`);
+    if (toolTipObject && this.alreadyRevealed(armorOrWeapon, collectibleId)) {
       if (toolTipObject.classList.contains('d-none')) {
         if (this.visibleTooltip) {
           this.renderer.addClass(this.visibleTooltip, 'd-none');

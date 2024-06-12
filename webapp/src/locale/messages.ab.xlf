@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+<file datatype="plaintext" original="ng2.template" source-language="fr" target-language="en">
+<body>
+<trans-unit datatype="html" id="1026846705857013000">
+<source xml:space="preserve">Nom de l&apos;arme</source>
+<target xml:space="preserve">Name of the weapon</target>
+</trans-unit>
+<trans-unit datatype="html" id="1446578836728028301">
+<source xml:space="preserve">Entrez votre réponse</source>
+<target xml:space="preserve">Enter your answer</target>
+</trans-unit>
+<trans-unit datatype="html" id="1467566692562963830">
+<source xml:space="preserve">Réessayer</source>
+<target xml:space="preserve">Retry</target>
+</trans-unit>
+<trans-unit datatype="html" id="159116427623732952">
+<source xml:space="preserve">La page recherchée n&apos;existe pas.</source>
+<target xml:space="preserve">The page you are looking for does not exist.</target>
+</trans-unit>
+<trans-unit datatype="html" id="1953013685417393077">
+<source xml:space="preserve">Arme mystère</source>
+<target xml:space="preserve">Mystery weapon</target>
+</trans-unit>
+<trans-unit datatype="html" id="2479725204823819686">
+<source xml:space="preserve">Armes</source>
+<target xml:space="preserve">Weapons</target>
+</trans-unit>
+<trans-unit datatype="html" id="2713111888071198842">
+<source xml:space="preserve"> Jouer</source>
+<target xml:space="preserve">Play</target>
+</trans-unit>
+<trans-unit datatype="html" id="3132727940796561539">
+<source xml:space="preserve">Recommencer</source>
+<target xml:space="preserve">Start over</target>
+</trans-unit>
+<trans-unit datatype="html" id="4003387801369922138">
+<source xml:space="preserve">Valider</source>
+<target xml:space="preserve">Confirm</target>
+</trans-unit>
+<trans-unit datatype="html" id="4079557636174543046">
+<source xml:space="preserve">Reformez notre arsenal exotique, Gardien !</source>
+<target xml:space="preserve">Rebuild our exotic arsenal, Guardian!</target>
+</trans-unit>
+<trans-unit datatype="html" id="5013207086592438568">
+<source xml:space="preserve">Commencer</source>
+<target xml:space="preserve">Start</target>
+</trans-unit>
+<trans-unit datatype="html" id="5398907870980838814">
+<source xml:space="preserve"> Catégorie </source>
+<target xml:space="preserve">Category</target>
+</trans-unit>
+<trans-unit datatype="html" id="5491081266313732174">
+<source xml:space="preserve">Filtres</source>
+<target xml:space="preserve">Filters</target>
+</trans-unit>
+<trans-unit datatype="html" id="5604867390069644853">
+<source xml:space="preserve"> Rareté </source>
+<target xml:space="preserve">Tier</target>
+</trans-unit>
+<trans-unit datatype="html" id="5967377922369481812">
+<source xml:space="preserve">Plongez dans l&apos;univers de Destiny 2 et testez vos connaissances en retrouvant les noms des armes exotiques.</source>
+<target xml:space="preserve">Immerse yourself in the world of Destiny 2 and test your knowledge by finding the names of exotic weapons.</target>
+</trans-unit>
+<trans-unit datatype="html" id="5968366500418000730">
+<source xml:space="preserve">Collections</source>
+<target xml:space="preserve">Collections</target>
+</trans-unit>
+<trans-unit datatype="html" id="622204728291682608">
+<source xml:space="preserve">CHARGEMENT EN COURS</source>
+<target xml:space="preserve">Loading in progress</target>
+</trans-unit>
+<trans-unit datatype="html" id="6707800253753466795">
+<source xml:space="preserve"> Collections</source>
+<target xml:space="preserve">Collections</target>
+</trans-unit>
+<trans-unit datatype="html" id="7244733076457962946">
+<source xml:space="preserve"> Élément </source>
+<target xml:space="preserve">Damage type</target>
+</trans-unit>
+<trans-unit datatype="html" id="7354243492822491710">
+<source xml:space="preserve"> À propos </source>
+<target xml:space="preserve"> About </target>
+</trans-unit>
+<trans-unit datatype="html" id="7631405440758027758">
+<source xml:space="preserve">Temps</source>
+<target xml:space="preserve">Time</target>
+</trans-unit>
+<trans-unit datatype="html" id="7808756054397155068">
+<source xml:space="preserve">Reset</source>
+<target xml:space="preserve">Reset</target>
+</trans-unit>
+<trans-unit datatype="html" id="8016351056137072588">
+<source xml:space="preserve">Rien à voir par ici...</source>
+<target xml:space="preserve">Nothing to see here...</target>
+</trans-unit>
+<trans-unit datatype="html" id="8419196829315806764">
+<source xml:space="preserve"> Filtrer </source>
+<target xml:space="preserve">Filter</target>
+</trans-unit>
+<trans-unit datatype="html" id="8653992382629937297">
+<source xml:space="preserve"> Type d&apos;arme </source>
+<target xml:space="preserve"> Weapon type </target>
+</trans-unit>
+<trans-unit datatype="html" id="9043952365725675246">
+<source xml:space="preserve">Exo Challenge</source>
+<target xml:space="preserve">Exo Challenge</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.alert.close">
+<source xml:space="preserve">Close</source>
+<target xml:space="preserve">Close</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.carousel.next">
+<source xml:space="preserve">Next</source>
+<target xml:space="preserve">Next</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.carousel.previous">
+<source xml:space="preserve">Previous</source>
+<target xml:space="preserve">Previous</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.carousel.slide-number">
+<source xml:space="preserve"> Slide <x equiv-text="vate _wrap$ = n" id="INTERPOLATION"/> of <x equiv-text="s._config.wrap)" id="INTERPOLATION_1"/> </source>
+<target xml:space="preserve"> Slide <x equiv-text="vate _wrap$ = n" id="INTERPOLATION"/> of <x equiv-text="s._config.wrap)" id="INTERPOLATION_1"/> </target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.datepicker.next-month">
+<source xml:space="preserve">Next month</source>
+<target xml:space="preserve">Next month</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.datepicker.previous-month">
+<source xml:space="preserve">Previous month</source>
+<target xml:space="preserve">Previous month</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.datepicker.select-month">
+<source xml:space="preserve">Select month</source>
+<target xml:space="preserve">Select month</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.datepicker.select-year">
+<source xml:space="preserve">Select year</source>
+<target xml:space="preserve">Select year</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.pagination.first">
+<source xml:space="preserve">««</source>
+<target xml:space="preserve">««</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.pagination.first-aria">
+<source xml:space="preserve">First</source>
+<target xml:space="preserve">First</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.pagination.last">
+<source xml:space="preserve">»»</source>
+<target xml:space="preserve">»»</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.pagination.last-aria">
+<source xml:space="preserve">Last</source>
+<target xml:space="preserve">Last</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.pagination.next">
+<source xml:space="preserve">»</source>
+<target xml:space="preserve">»</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.pagination.next-aria">
+<source xml:space="preserve">Next</source>
+<target xml:space="preserve">Next</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.pagination.previous">
+<source xml:space="preserve">«</source>
+<target xml:space="preserve">«</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.pagination.previous-aria">
+<source xml:space="preserve">Previous</source>
+<target xml:space="preserve">Previous</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.progressbar.value">
+<source xml:space="preserve">
+<x equiv-text="*   * @since" id="INTERPOLATION"/></source>
+<target xml:space="preserve">
+<x equiv-text="*   * @since" id="INTERPOLATION"/></target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.timepicker.HH">
+<source xml:space="preserve">HH</source>
+<target xml:space="preserve">HH</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.timepicker.MM">
+<source xml:space="preserve">MM</source>
+<target xml:space="preserve">MM</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.timepicker.PM">
+<source xml:space="preserve">
+<x id="INTERPOLATION"/></source>
+<target xml:space="preserve">
+<x id="INTERPOLATION"/></target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.timepicker.SS">
+<source xml:space="preserve">SS</source>
+<target xml:space="preserve">SS</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.timepicker.decrement-hours">
+<source xml:space="preserve">Decrement hours</source>
+<target xml:space="preserve">Decrement hours</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.timepicker.decrement-minutes">
+<source xml:space="preserve">Decrement minutes</source>
+<target xml:space="preserve">Decrement minutes</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.timepicker.decrement-seconds">
+<source xml:space="preserve">Decrement seconds</source>
+<target xml:space="preserve">Decrement seconds</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.timepicker.hours">
+<source xml:space="preserve">Hours</source>
+<target xml:space="preserve">Hours</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.timepicker.increment-hours">
+<source xml:space="preserve">Increment hours</source>
+<target xml:space="preserve">Increment hours</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.timepicker.increment-minutes">
+<source xml:space="preserve">Increment minutes</source>
+<target xml:space="preserve">Increment minutes</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.timepicker.increment-seconds">
+<source xml:space="preserve">Increment seconds</source>
+<target xml:space="preserve">Increment seconds</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.timepicker.minutes">
+<source xml:space="preserve">Minutes</source>
+<target xml:space="preserve">Minutes</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.timepicker.seconds">
+<source xml:space="preserve">Seconds</source>
+<target xml:space="preserve">Seconds</target>
+</trans-unit>
+<trans-unit datatype="html" id="ngb.toast.close-aria">
+<source xml:space="preserve">Close</source>
+<target xml:space="preserve">Close</target>
+</trans-unit>
+</body>
+</file>
+</xliff>

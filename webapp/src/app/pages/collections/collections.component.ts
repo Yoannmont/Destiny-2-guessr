@@ -192,7 +192,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
 
   getSingleCollectibleRoute(collectible : Collectible) : string{
     if (collectible.objectType === 1){
-      return `weapons/${collectible.id}`;
+      return `weapon/${collectible.id}`;
     }
     else{
       return `armor/${collectible.id}`;

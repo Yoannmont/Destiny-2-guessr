@@ -64,7 +64,8 @@ export class SingleCollectibleComponent implements OnInit, OnDestroy {
         .subscribe((collectible: Weapon) => {
           this.collectible = collectible;
         });
-    } else {
+    } 
+    if (collectibleType === 'armor') {
       this.collectiblesCacheService
         .getSingleArmor(collectibleId)
         .pipe(takeUntil(this.destroy))

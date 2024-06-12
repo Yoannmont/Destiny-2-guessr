@@ -21,7 +21,7 @@
                 <span class="inputs-wrapper d-flex">
                     <div class="inputs">
                         <span *ngFor="let input of inputs">
-                            <div *ngIf="this.getCollectibleIdByName(input) then isCollectible else isNotCollectible">
+                            <div *ngIf="!!this.getCollectibleIdByName(input).id then isCollectible else isNotCollectible">
                             </div>
                             <ng-template #isCollectible>
                                 <div class="row my-4 vertical-fadeIn-animation-reverse"
@@ -34,16 +34,17 @@
                                             <span *ngIf="this.utilsService.isWeapon(collectible)">
                                                 <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : collectible.defaultDamageType)[0].iconLink)"
                                                     class="smallDamageType" />
-        
+
                                                 <span class="categoryItalic"> &nbsp;{{(categories |
                                                     filter
                                                     : collectible.category)[0][localizeProperty("category")]}}</span>
                                             </span>
-        
+
                                             <span *ngIf="this.utilsService.isArmor(collectible)">
                                                 <span class="categoryItalic"> &nbsp;{{(objects |
                                                     filter
-                                                    : collectible.objectType)[0][localizeProperty("objectType")]}}</span>
+                                                    :
+                                                    collectible.objectType)[0][localizeProperty("objectType")]}}</span>
                                             </span>
                                         </div>
 
@@ -67,8 +68,8 @@
                 </span>
                 <form [formGroup]="inputGroup" (submit)="submitInput()" class="form-input text-end">
                     <label for="userInput" i18n>Entrez votre réponse</label>
-                    <input type="text" id="userInput" i18n-placeholder placeholder="Nom de l'arme"
-                        class="form-control" formControlName="userInput" />
+                    <input type="text" id="userInput" i18n-placeholder placeholder="Nom de l'arme" class="form-control"
+                        formControlName="userInput" />
                     <button type="submit" class="btn btn-secondary w-100" [disabled]="inputGroup.invalid"
                         i18n>Valider</button>
                 </form>
@@ -78,7 +79,7 @@
         </div>
         <div class="col-md-8 order-md-1 my-2">
             <div class="weaponsbox p-3">
-                
+
                 <div class="score border-bottom">
                     <div class="row justify-content-center">
                         <div class="col">
@@ -101,11 +102,13 @@
                 </div>
                 <div class="row row-cols-auto mt-3 g-2 weapons-wrapper">
 
-                    <div *ngFor="let collectible of filteredCollectibles" class="col">
-                        <div class="weapon-tooltip bg-dark p-2 d-none" id="tooltip-{{collectible.id}}" *ngIf="this.alreadyRevealed(collectible.id)">
+                    <div *ngFor="let collectible of filteredCollectibles">
+                        <div class="collectible-tooltip bg-dark p-2 d-none"
+                            id="tooltip-{{ArmorOrWeapon(collectible)}}-{{collectible.id}}"
+                            *ngIf="this.alreadyRevealed(ArmorOrWeapon(collectible)!, collectible.id)">
                             <span
                                 class="{{(tiers  | filter : collectible.tier)[0].tier_en}}">{{collectible.name[0][localizeProperty('name')]}}</span><br />
-                            <div class="d-inline-flex align-items-center">
+                            <div class=" align-items-center">
 
 
                                 <span *ngIf="this.utilsService.isWeapon(collectible)">
@@ -124,10 +127,12 @@
                                 </span>
                             </div>
                         </div>
-                        <span class="shining-wrapper d-block" [id]="collectible.id"
-                            (click)="toggleTooltip($event, collectible.id)">
-                            <img src="assets/img/no-weapon.png" class="collectible-icon">
-                        </span>
+                        <div class="col">
+                            <span class="shining-wrapper d-block" id="{{ArmorOrWeapon(collectible)}}-{{collectible.id}}"
+                                >
+                                <img src="assets/img/no-weapon.png" class="collectible-icon">
+                            </span>
+                        </div>
                     </div>
                 </div>
 
@@ -170,7 +175,8 @@
                         class="bi bi-x"></i></button>
             </div>
             <div class="modal-body" i18n>
-                Bravo gardien ! Vous avez retrouvé les toutes les armes et armures en {{this.timer | async | date : "mm:ss.S"}} !
+                Bravo gardien ! Vous avez retrouvé les toutes les armes et armures en {{this.timer | async | date :
+                "mm:ss.S"}} !
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal"

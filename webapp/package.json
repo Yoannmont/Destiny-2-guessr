@@ -7,8 +7,10 @@
     "test": "ng test",
     "start": "ng serve --configuration production",
     "start:dev": "ng serve --configuration development",
+ 
+    "build:dev": "ng build --configuration development",
     "build": "ng build --configuration production",
-    "build:dev": "ng build --configuration development"
+    "publish" : "ng build --configuration production --localize"
   },
   "private": true,
   "dependencies": {
