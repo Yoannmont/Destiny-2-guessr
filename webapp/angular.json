@@ -6,12 +6,13 @@
     "d2g-webapp": {
       "i18n": {
         "sourceLocale": {
-          "code": "fr"
+          "code": "fr",
+          "baseHref": "fr/"
         },
         "locales": {
           "en": {
             "translation": "src/locale/messages.en.xlf",
-            "baseHref": "en"
+            "baseHref": "en/"
           }
         }
       },
@@ -27,16 +28,15 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
-
           "options": {
             "localize": true,
             "outputPath": "dist/d2g-webapp",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [ "src/favicon.ico", "src/assets"],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss",
@@ -72,6 +72,14 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "fr": {
+              "localize": ["fr"],
+              "outputPath": "dist/d2g-webapp/fr"
+            },
+            "en": {
+              "localize": ["en"],
+              "outputPath": "dist/d2g-webapp/en"
             }
           },
           "defaultConfiguration": "production"
@@ -84,6 +92,12 @@
             },
             "development": {
               "buildTarget": "d2g-webapp:build:development"
+            },
+            "fr": {
+              "browserTarget": "d2g-webapp:build:fr"
+            },
+            "en": {
+              "browserTarget": "d2g-webapp:build:en"
             }
           },
           "defaultConfiguration": "development"

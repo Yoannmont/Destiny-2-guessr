@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import {  Router, RouterModule } from '@angular/router';
 import { LangService } from '../../_services/lang.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class FooterComponent {
 
 
   changeLocale(code : string) : void{
-    this.router.navigate([code, "home"])
+    this.router.navigate([code])
     this.langService.currentLocaleID = code;
 
   }
