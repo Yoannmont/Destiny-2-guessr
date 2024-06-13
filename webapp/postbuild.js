@@ -28,7 +28,7 @@ console.log('Paths modified successfully.');
 
 
 const rootPath = path.join(__dirname, 'dist', 'd2g-webapp', 'browser');
-const sourcePaths = ['fr/assets', 'fr/media', 'fr/favicon'];
+const sourcePaths = ['fr/assets'];
 
     sourcePaths.forEach(sourcePath => {
         const sourceDir = path.join(rootPath, sourcePath);

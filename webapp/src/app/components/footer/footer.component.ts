@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {  Router, RouterModule } from '@angular/router';
 import { LangService } from '../../_services/lang.service';
+import { environment } from '../../../environments/environment';
+
 
 @Component({
   selector: 'app-footer',
@@ -16,9 +18,8 @@ export class FooterComponent {
 
 
   changeLocale(code : string) : void{
-    this.router.navigate([code])
+    this.router.navigateByUrl(`${environment.WEBSITE_BASE_URL}/${code}`)
     this.langService.currentLocaleID = code;
-
   }
 
   getCurrentLocaleID() : string{
