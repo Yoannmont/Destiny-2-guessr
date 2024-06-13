@@ -6,9 +6,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UtilsService } from './_services/utils.service';
 import { CommonModule } from '@angular/common';
-import { LoaderService } from './_services/loader.service';
 import { LoadingComponent } from './components/loading/loading.component';
-import { LangService } from './_services/lang.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -22,11 +20,10 @@ export class AppComponent{
   title = 'destiny-2-guessr';
   isLoading! : Observable<boolean>;
 
-  constructor(public utilsService: UtilsService, private langService : LangService){
+  constructor(public utilsService: UtilsService){
   }
   
   ngOnInit(){
-    this.langService.currentLocaleID = 'fr';
   }
 
 }
