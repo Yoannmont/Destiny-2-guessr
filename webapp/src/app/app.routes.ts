@@ -18,6 +18,6 @@ export const routes: Routes = [
     {path: "gamemode/exo-challenge", title:  $localize`Exo-Challenge - Destiny 2 Guessr`, component:ExoChallengeComponent, canDeactivate: [BeforeLeavingGamemodeGuard]},
     {path:"gamemode/mystery-weapon", title : $localize`Arme Mystère - Destiny 2 Guessr`, component:MysteryWeaponComponent, canDeactivate: [BeforeLeavingGamemodeGuard]},
     {path:"about", component:AboutComponent},
-    // {path: '**', redirectTo: "/404"},
+    {path: '**', redirectTo: "/404"},
     
 ];

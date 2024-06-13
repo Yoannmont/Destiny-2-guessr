@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -6,8 +7,17 @@ import { Injectable } from '@angular/core';
 export class LangService {
   readonly localeList = [{code:'fr', label : "Français"},{code:'en', label:'English'}];
 
-  private _currentLocale = $localize`fr`;
-  constructor() { }
+  private _currentLocale!: string;
+  constructor(private router : Router) { 
+    this._currentLocale = 'fr'
+    this.initLocale()
+  }
+
+
+  initLocale() : void{
+    const currentLocale = this.router.url.split('/')[0];
+    this.currentLocaleID = currentLocale;
+  }
 
   localizeProperty(property : string): string{
     return `${property}_${this._currentLocale}`;

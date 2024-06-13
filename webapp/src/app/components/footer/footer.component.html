@@ -6,12 +6,12 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false" i18n> Langue </button>
             <ul class="dropdown-menu">
-                <li *ngFor="let lang of availableLangs" (click)="changeLocale(lang.code)" class="pointer"> <a class="dropdown-item" [ngClass]="{'active' : lang.code === getCurrentLocaleID()}"> {{lang.label}}</a></li>
+                <li *ngFor="let lang of availableLangs" class="pointer"> <a class="dropdown-item" [href]="changeLocale(lang.code)" [ngClass]="{'active' : lang.code === getCurrentLocaleID()}"> {{lang.label}}</a></li>
             </ul>
         </div>
 
         <span class="text-center footer-text p-2">GUESSR
-
+            {{getCurrentLocaleID()}}
         </span>
         <span>
             <a class="footer-icon-link p-2" alt="GitHub" href="https://github.com/Yoannmont"> <i

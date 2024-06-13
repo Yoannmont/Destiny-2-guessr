@@ -17,20 +17,9 @@ export class FooterComponent {
   constructor (private langService : LangService, private router: Router){};
 
 
-  changeLocale(code : string) : void{
-    const currentUrl = this.router.url;
-    let destinationUrl: string;
-
-    if (currentUrl.startsWith('/en')) {
-      destinationUrl = `/${code}${currentUrl.substring(3)}`;
-    } else if (currentUrl.startsWith('/fr')) {
-      destinationUrl = `/${code}${currentUrl.substring(3)}`;
-    } else {
-      destinationUrl = `/${code}`;
-    }
-
-    this.router.navigateByUrl(destinationUrl);
-    this.langService.currentLocaleID = code;
+  changeLocale(code : string) : string{
+    const href = `${environment.WEBSITE_BASE_URL}/${code}`
+    return href;
   }
 
   getCurrentLocaleID() : string{
