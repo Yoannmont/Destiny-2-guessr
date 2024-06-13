@@ -15,6 +15,7 @@ export class LangService {
 
   initLocale() : void{
     this._currentLocale = this.document.documentElement.lang;
+    console.log(this._currentLocale);
   }
 
   localizeProperty(property : string): string{
