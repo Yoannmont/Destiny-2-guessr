@@ -30,6 +30,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "localize": true,
+            "baseHref": "",
             "outputPath": "dist/d2g-webapp",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -51,7 +52,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "850kb",
                   "maximumError": "1mb"
                 },
                 {
@@ -72,32 +73,19 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
-            },
-            "fr": {
-              "localize": ["fr"],
-              "outputPath": "dist/d2g-webapp/fr"
-            },
-            "en": {
-              "localize": ["en"],
-              "outputPath": "dist/d2g-webapp/en"
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          
           "configurations": {
             "production": {
               "buildTarget": "d2g-webapp:build:production"
             },
             "development": {
               "buildTarget": "d2g-webapp:build:development"
-            },
-            "fr": {
-              "buildTarget": "d2g-webapp:build:fr"
-            },
-            "en": {
-              "buildTarget": "d2g-webapp:build:en"
             }
           },
           "defaultConfiguration": "development"
