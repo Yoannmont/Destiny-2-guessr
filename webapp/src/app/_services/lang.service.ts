@@ -9,13 +9,13 @@ export class LangService {
 
   private _currentLocale!: string;
   constructor(private router : Router) { 
-    this._currentLocale = 'fr'
     this.initLocale()
   }
 
 
   initLocale() : void{
     const currentLocale = this.router.url.split('/')[0];
+    console.log(this.currentLocaleID)
     this.currentLocaleID = currentLocale;
   }
 
