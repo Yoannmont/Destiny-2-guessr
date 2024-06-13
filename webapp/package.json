@@ -10,7 +10,7 @@
     "build:dev": "ng build --configuration development",
     "build": "ng build --configuration production",
 
-    "postbuild" : "node modify-paths.js",
+    "postbuild" : "node postbuild.js",
     "publish" : "ng build --configuration production --localize && npm run postbuild"
   },
   "private": false,

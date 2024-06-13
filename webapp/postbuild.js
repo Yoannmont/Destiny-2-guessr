@@ -21,6 +21,23 @@ langs.forEach(lang => {
     });
 
     fs.writeFileSync(filePath, content, 'utf8');
+    
 });
 
 console.log('Paths modified successfully.');
+
+
+const rootPath = path.join(__dirname, 'dist', 'd2g-webapp', 'browser');
+const sourcePaths = ['fr/assets', 'fr/media', 'fr/favicon'];
+
+    sourcePaths.forEach(sourcePath => {
+        const sourceDir = path.join(rootPath, sourcePath);
+        const targetDir = path.join(rootPath, path.basename(sourcePath));
+
+        try {
+            fs.renameSync(sourceDir, targetDir);
+            console.log(`Moved ${sourcePath} to ${targetDir}`);
+        } catch (err) {
+            console.error(`Error moving ${sourcePath} to ${targetDir}: ${err}`);
+        }
+    });
