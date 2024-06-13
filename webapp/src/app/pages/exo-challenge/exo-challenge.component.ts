@@ -186,7 +186,6 @@ export class ExoChallengeComponent
   submitInput(): void {
     const userInput = this.inputGroup.controls['userInput'].value;
     this.pushInput();
-    console.log(this.inputs)
     this.inputGroup.reset();
 
     const {id, armorOrWeapon} = this.getCollectibleIdByName(userInput);
