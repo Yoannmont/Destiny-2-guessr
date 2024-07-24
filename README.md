@@ -52,7 +52,7 @@ Database parameters are set as environment variables :
 
 ## Developed with 
 
-- **Django**: Python backend for image pre-processing API and model inference.
+- **Django**: Python backend for API.
 - **PostgreSQL** : Database management system.
 - **Angular CLI 17.3**: Front-end framework for user interface development.
 - **Docker**: Application containerization.
