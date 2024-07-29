@@ -6,7 +6,7 @@
 
 Destiny 2 Guessr web application with games and quizz about Destiny 2 developed with Django, PostgreSQL, PyTorch and Docker.
 
-Currently deployed at  [destiny2guessr.netlify.app/en](destiny2guessr.netlify.app/en)
+Currently deployed at  [https://destiny2guessr.netlify.app/en](destiny2guessr.netlify.app/en)
 
 ![d2g_preview](assets/Destiny_2_Guessr_preview.png)
 ![AngularVision](assets/exo_challenge.png)  
