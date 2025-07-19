@@ -1,8 +1,11 @@
+ls -al
+pwd
+
 echo installing dependencies
-pip install -r requirements.lock
+pip install -r server/requirements.lock
 
 echo activating env
-source env/bin/activate
+source server/env/bin/activate
 
 echo collecting staticfiles
 python manage.py collectstatic --no-input --clear
