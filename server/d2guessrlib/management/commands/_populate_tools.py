@@ -50,7 +50,7 @@ def load_table(cursor, table_name, hashset=None, extra_query=""):
     except sqlite3.OperationalError as exc:
         raise Exception(f"Error when processing query: {repr(exc)}, {hashset}")
     rows = cursor.fetchall()
-    return [json.loads(r[0]) for r in rows]
+    return (json.loads(r[0]) for r in rows)
 
 
 def create_or_update_object_translations(
@@ -357,7 +357,7 @@ def create_or_update_items(english_cursor, localized_cursors=None, exotic_only=F
 
     EXTRA_QUERY_ALL_ITEMS = """
         json_extract(json, '$.itemType') IN (2, 3)
-        AND json_extract(json, '$.inventory.tierTypeHash') > 1
+        AND json_extract(json, '$.inventory.tierType') > 1
         GROUP BY json_extract(json, '$.displayProperties.name')
     """
 
@@ -382,16 +382,13 @@ def create_or_update_items(english_cursor, localized_cursors=None, exotic_only=F
         try:
             item = Item.objects.get(id_bungie=hash_id)
             logger.debug("Found %s(%s)", item, hash_id)
-            translation = item.translations.first().name
+            item.translations.first().name
 
             continue
         except Item.DoesNotExist:
             pass
-        except Exception:
-            logger.critical(
-                "exception %s",
-                item,
-            )
+        except Exception as e:
+            logger.critical("exception %s : %r", item, e)
 
         display = item_def.get("displayProperties", {})
         api_name = display.get("name")
@@ -499,7 +496,9 @@ def create_or_update_items(english_cursor, localized_cursors=None, exotic_only=F
         localized_item_defs = {
             lang_code: {
                 row["hash"]: row
-                for row in load_table(cursor, "DestinyInventoryItemDefinition", extra_query=extra_query)
+                for row in load_table(
+                    cursor, "DestinyInventoryItemDefinition", extra_query=extra_query, hashset=(hash_id,)
+                )
             }
             for lang_code, cursor in localized_cursors.items()
         }

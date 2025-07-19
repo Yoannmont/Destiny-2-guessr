@@ -147,7 +147,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     if (this.page > 1) {
       this.page--;
       this.utilsService.goToTop();
-      this.getItems();
+      this.reloadItems();
     }
   }
 
@@ -180,28 +180,40 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     this.searchTerm = '';
     this.fromAccount = false;
     this.filterSortService.sortOption = this.sortOption = 'translations__name';
-    this.getItems();
+    this.reloadItems();
+  }
+
+  reloadItems(): void {
+    if (this.fromAccount) {
+      this.getAccountItems();
+    } else {
+      this.getItems();
+    }
   }
 
   applyFilters() {
     this.page = 1;
     this.item_filters = this.filterSortService.groupFiltersByProperty();
-    this.getItems();
+    this.reloadItems();
   }
 
   applySorting(): void {
     this.page = 1;
     this.sortOption = this.filterSortService.sortOption;
-    this.getItems();
+    this.reloadItems();
   }
 
-  getAccountItems(): void {
+  getAccountItems(page: number = this.page): void {
     if (!this.fromAccount) {
       if (this.authService.currentAccount) {
         this.authService
-          .getAccountItems(
+          .getAccountItemsFromPage(
+            page,
             this.langService.currentLocaleID,
-            this.authService.currentAccount.membershipId
+            this.authService.currentAccount.membershipId,
+            this.item_filters,
+            this.sortOption,
+            this.searchTerm
           )
           .subscribe((response: any) => {
             this.itemCount = response.count;
@@ -221,15 +233,16 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     page: number = this.page,
     item_filters: ItemFilter = this.item_filters,
     ordering: ItemOrdering = this.sortOption,
-    searchTerm: string = ''
+    searchTerm: string = this.searchTerm
   ): void {
+    const term = this.utilsService.validateName(searchTerm);
     this.itemsCacheService
       .getItemsFromPage(
         page,
         this.langService.currentLocaleID,
         item_filters,
         ordering,
-        searchTerm
+        term
       )
       .pipe(
         takeUntil(this.destroy),
@@ -310,7 +323,11 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     }
     this.page = 1;
 
-    this.getItems(this.page, this.item_filters, this.sortOption, term);
+    if (this.fromAccount) {
+      this.getItems(this.page, this.item_filters, this.sortOption, term);
+    } else {
+      this.getAccountItems(this.page);
+    }
   }
 
   ngOnDestroy(): void {
