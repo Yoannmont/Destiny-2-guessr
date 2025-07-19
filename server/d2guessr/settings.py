@@ -14,6 +14,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+import dj_database_url
 from configurations import Configuration, values
 from dotenv import load_dotenv
 
@@ -71,6 +72,7 @@ class Dev(Configuration):
         "drf_yasg",
         "rest_framework_simplejwt.token_blacklist",
         "ip_filter",
+        "whitenoise.runserver_nostatic",
     ]
 
     MIDDLEWARE = [
@@ -84,6 +86,7 @@ class Dev(Configuration):
         "django.contrib.messages.middleware.MessageMiddleware",
         "django.middleware.clickjacking.XFrameOptionsMiddleware",
         "d2guessr.middleware.restrict_admin_ip.RestrictAdminIPMiddleware",
+        "whitenoise.middleware.WhiteNoiseMiddleware",
     ]
 
     # Logging
@@ -195,7 +198,7 @@ class Dev(Configuration):
     # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
     STATIC_URL = "static/"
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles", "static")
     MEDIA_URLS = "/media/"
     MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
@@ -452,3 +455,11 @@ class Preview(Dev):
     DEBUG = False
     CORS_ALLOW_ALL_ORIGINS = False
     WSGI_APPLICATION = "d2guessr.wsgi.app"
+    # DATABASE_URL = values.DatabaseURLValue(environ_prefix=NAME)
+    # DATABASES = {
+    #     "default": dj_database_url.parse(
+    #         str(DATABASE_URL),
+    #         conn_max_age=600,
+    #         conn_health_checks=True,
+    #     )
+    # }
