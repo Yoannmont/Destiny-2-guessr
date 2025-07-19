@@ -15,3 +15,4 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d2guessr.settings")
 os.environ.setdefault("DJANGO_CONFIGURATION", "Dev")
 
 application = get_wsgi_application()
+app = application

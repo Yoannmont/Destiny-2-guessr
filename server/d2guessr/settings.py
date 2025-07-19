@@ -50,11 +50,7 @@ class Dev(Configuration):
 
     @property
     def ALLOWED_HOSTS(self):
-        return [
-            "localhost",
-            str(self.HOST_IP),
-            str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://"),
-        ]
+        return ["localhost", str(self.HOST_IP), str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://"), ".vercel.app"]
 
     # Application definition
 
@@ -455,3 +451,4 @@ class Preview(Dev):
     NAME = "PREVIEW"
     DEBUG = False
     CORS_ALLOW_ALL_ORIGINS = False
+    WSGI_APPLICATION = "d2guessr.wsgi.app"
