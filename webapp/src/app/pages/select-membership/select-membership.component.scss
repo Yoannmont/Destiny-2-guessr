@@ -1,0 +1,19 @@
+@use "../../../assets/styles" as *;
+
+.membership-card {
+    color: white;
+    transition: background-color $transition-duration;
+    border-radius: 10px;
+    word-wrap: break-word;
+    display: inline-block;
+
+    &:hover {
+        background-color: $blue-color;
+
+    }
+
+}
+
+.platform-icon {
+    max-width: 65px;
+}

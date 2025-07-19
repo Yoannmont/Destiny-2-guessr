@@ -1,0 +1,10 @@
+.vscode/
+database/
+*.content
+
+
+manifest_version.txt
+.coverage*
+rsync-excluded.txt
+
+server/*/migrations

@@ -1,0 +1,39 @@
+@use "../../../assets/styles" as *;
+
+
+footer {
+    height: 100px;
+}
+
+.footer-text {
+    font-family: Futura;
+    font-weight: 500;
+    font-size: $font-size-d;
+    letter-spacing: 10px;
+}
+
+
+
+
+.container {
+
+    border-top: $separation-bar-width solid $separation-bar-color;
+
+}
+
+
+
+
+
+@media screen and (max-width:768px) {
+    .footer-text {
+        font-size: $font-size-m;
+    }
+
+    .footer-icon-link,
+    .about-link {
+        font-size: $small-font-size-m;
+    }
+
+
+}

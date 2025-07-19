@@ -1,0 +1,311 @@
+.pointer {
+    cursor: pointer;
+}
+
+.navbar-link {
+    font-size: 20px;
+    font-family: Futura;
+    font-weight: 500;
+    transition: color 100ms;
+    text-transform: uppercase;
+}
+
+.navbar-item {
+    text-decoration: none;
+    color: white;
+    transition: background-color 100ms;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: white !important;
+
+        .navbar-link {
+            color: black;
+        }
+    }
+
+}
+
+.form-input {
+    font-weight: 300;
+    position: relative;
+}
+
+
+.score small {
+    font-weight: 300;
+    font-size: 18px;
+}
+
+.score {
+    font-size: 28px;
+}
+
+.inputs {
+    flex: 1 0 0;
+}
+
+.timer-title {
+    font-weight: 300;
+    font-size: 22px;
+
+}
+
+.timer {
+    font-weight: 300;
+    font-size: 30px;
+    letter-spacing: 3px;
+}
+
+
+.itemsbox {
+    background: linear-gradient(180deg, rgba(30, 37, 55, 1) 0%, rgba(71, 88, 131, 1) 75%, rgba(86, 106, 157, 1) 100%), linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%);
+    height: calc(100svh - 45px - 32px - 50px);
+    border-radius: 25px;
+    z-index: 1;
+    overflow-y: scroll;
+    border: 2px solid white;
+}
+
+
+.inputs-wrapper {
+    height: calc(100svh - 250px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+.hero-phrase {
+    font-size: 40px;
+    font-weight: 300;
+}
+
+.hero-text {
+    font-size: 24px;
+    font-weight: 200;
+}
+
+.footer-icon-link {
+    text-decoration: none;
+    font-size: 21px;
+    color: white;
+    border-radius: 3px;
+    transition: background-color 200ms, color 200ms;
+}
+
+.footer-icon-link:hover,
+.footer-icon-link:focus {
+    color: black;
+
+    background-color: white;
+}
+
+
+.section-title {
+    text-transform: uppercase;
+    font-size: 30px;
+    letter-spacing: 3px;
+    font-weight: 500;
+    font-family: Futura;
+
+}
+
+.subsection-title {
+    font-size: 18px;
+    font-weight: 200;
+}
+
+
+
+
+
+.blank-space {
+    display: block;
+    min-height: 7svh;
+
+}
+
+.separator::before {
+    content: "";
+    background-color: gray;
+    width: 165px;
+    height: 0.06rem;
+    display: block;
+    position: relative;
+    left: calc(50% - 82.5px)
+}
+
+.about-link {
+    font-family: Futura;
+    text-transform: uppercase;
+    font-size: 21px;
+    font-weight: 400;
+    text-decoration: none;
+    color: white;
+    transition: background-color 200ms, color 200ms;
+    border-radius: 10px;
+}
+
+.about-link:hover,
+.about-link:focus {
+    background-color: white;
+    color: black;
+
+}
+
+.dropdown-menu {
+    background-color: #eff1fd;
+}
+
+.separation-border {
+    border-right: 0.06rem solid #6b6b6b;
+}
+
+.filter-option {
+    border-radius: 12px;
+    border: 0.11rem solid white;
+    font-size: 13px;
+    margin: 0.375rem auto;
+
+    &:hover {
+        background-color: #475584;
+        color: white;
+        border-color: rgba(0, 0, 0, 0);
+        transition: background-color 100ms border-color 100ms;
+    }
+}
+
+.filter-delete {
+    border: none;
+    color: black;
+    padding: 0.375rem 0.25rem;
+}
+
+.filter-title {
+    font-size: 25px;
+    font-family: Futura;
+}
+
+
+.filter-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: 320px;
+    height: 100%;
+    background-color: #221f1f;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    transition: right 100ms ease;
+    z-index: 1050;
+
+    &.open {
+        right: 0;
+    }
+}
+
+
+.btn-filter {
+    background-color: transparent;
+    color: white;
+    word-wrap: break-word;
+    display: inline-block;
+    transition: background-color 100ms color 100ms;
+
+    &:hover {
+        background-color: white;
+        color: black;
+    }
+}
+
+.btn-grey {
+    background-color: #6c757d;
+    color: white;
+
+    &:hover {
+        color: #6c757d;
+        background-color: white;
+    }
+}
+
+.btn-red {
+    background-color: rgb(139, 0, 0);
+    color: white;
+
+    &:hover {
+        background-color: white;
+        color: rgb(139, 0, 0)
+    }
+}
+
+.btn-blue {
+    background-color: rgb(5, 42, 163);
+    color: white;
+
+    &:hover {
+        color: rgb(5, 42, 163);
+        background-color: white;
+    }
+}
+
+input.form-control {
+    font-family: "Neue Haas Grotesk Display Pro";
+    font-size: inherit !important;
+    color: black;
+    font-weight: 300;
+}
+
+@media screen and (max-width:768px) {
+    .hero-phrase {
+        font-size: 25px;
+    }
+
+    .hero-text {
+        font-size: 18px;
+    }
+}
+
+
+@media screen and (min-width:992px) {
+    .full-screen-sidebar {
+        position: relative;
+        width: calc(100% - 220px);
+        margin-left: 0;
+    }
+
+    .toggleButton {
+        display: none;
+    }
+
+
+}
+
+@media screen and (max-width:992px) {
+    .separation-border {
+        border-top: 0.06rem solid #6b6b6b;
+        border-right: none;
+    }
+}
+
+@media screen and (max-width:1200px) {
+    .item-icon {
+        max-width: 60px;
+    }
+
+    .new-item-effect::before {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media screen and (max-width:992px) {
+    .item-icon {
+        max-width: 55px;
+    }
+
+    .new-item-effect::before {
+        width: 55px;
+        height: 55px;
+    }
+}

@@ -1,0 +1,59 @@
+@use "../../../assets/styles" as *;
+
+.separation-border-left {
+    border-left: $separation-bar-width solid white;
+    border-top: none;
+}
+
+.dropdown-menu {
+    overflow-y: auto;
+    max-height: 40svh;
+}
+
+.filters-section {
+    max-height: 400px;
+}
+
+
+.btn-parameters {
+    background-color: azure;
+    color: black;
+    transition: background-color $transition-duration color $transition-duration;
+}
+
+.btn-parameters:hover {
+    background-color: royalblue;
+    color: white;
+}
+
+.gamemode-desc {
+    font-size: 18px;
+}
+
+.filter-text {
+    font-weight: 400;
+}
+
+.filter-btn {
+    border: $separation-bar-width solid white;
+    border-radius: 10px;
+}
+
+.icon-wrapper {
+    height: 85%;
+    width: 85%;
+}
+
+.selected {
+    background-color: forestgreen;
+    border-radius: 5px;
+
+    transition: background-color $transition-duration;
+}
+
+@media screen and (max-width:768px) {
+    .separation-border-left {
+        border-top: $separation-bar-width solid white;
+        border-left: none;
+    }
+}

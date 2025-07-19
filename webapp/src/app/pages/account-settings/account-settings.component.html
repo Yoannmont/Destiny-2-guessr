@@ -1,0 +1,40 @@
+<div class="layout container-fluid my-1">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <div class="section-title text-center mb-4">
+                <h2 i18n>Paramètres du compte</h2>
+            </div>
+
+            <div class="card bg-dark-gradient white-border text-light mb-4 vertical-fadeIn-animation rounded-4">
+                <div class="card-body p-5">
+                    <div class="row mb-3 ">
+                        <div class="col-12 col-md-6 mb-2">
+                            <h5 class="mb-1" i18n>Nom du compte</h5>
+                            <p class="fs-5">{{ currentAccount?.displayName }}</p>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <h5 class="mb-1" i18n>ID du compte</h5>
+                            <p class="fs-5">{{ currentAccount?.membershipId }}</p>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <h5 class="mb-1" i18n>Plateforme</h5>
+                            <p class="fs-5">{{ getPlatformName(currentAccount?.membershipType) }}</p>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <h5 class="mb-1" i18n>Dernière actualisation Bungie</h5>
+                            <p class="fs-5">
+                                {{ currentAccount?.lastAuthDate | date: 'dd/MM/yyyy HH:mm:ss' }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="text-end">
+                        <button class="btn btn-outline-danger px-4 py-2" (click)="disconnectAccount()" i18n>
+                            Supprimer mon compte
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

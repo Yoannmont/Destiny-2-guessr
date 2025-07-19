@@ -1,0 +1,29 @@
+@use "../../../assets/styles" as *;
+
+.brand-logo {
+    max-height: 115px;
+}
+
+
+nav {
+    min-height: 200px;
+}
+
+.navbar-collapse {
+    flex-grow: 0;
+}
+
+
+
+@media screen and (max-width: 992px) {
+    .brand-logo {
+        max-height: 85px;
+    }
+
+    .collapse,
+    .collapsing {
+        border-top: $separation-bar-width solid $separation-bar-color;
+        border-bottom: $separation-bar-width solid $separation-bar-color;
+    }
+
+}

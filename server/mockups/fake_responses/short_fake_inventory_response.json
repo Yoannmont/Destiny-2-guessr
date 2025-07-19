@@ -1,0 +1,99 @@
+{
+    "Response": {
+        "responseMintedTimestamp": "2025-01-01T00:00:00.000Z",
+        "secondaryComponentsMintedTimestamp": "0001-01-01T00:00:00Z",
+        "profileInventory": {
+            "data": {
+                "items": [
+                    {
+                        "itemHash": 1,
+                        "quantity": 1,
+                        "bindStatus": 0,
+                        "location": 2,
+                        "bucketHash": 1469714392,
+                        "transferStatus": 0,
+                        "lockable": false,
+                        "state": 0,
+                        "dismantlePermission": 0,
+                        "isWrapper": false,
+                        "tooltipNotificationIndexes": []
+                    },
+                    {
+                        "itemHash": 4,
+                        "quantity": 1,
+                        "bindStatus": 0,
+                        "location": 2,
+                        "bucketHash": 1469714392,
+                        "transferStatus": 0,
+                        "lockable": false,
+                        "state": 0,
+                        "dismantlePermission": 0,
+                        "isWrapper": false,
+                        "tooltipNotificationIndexes": []
+                    }
+                ]
+            }
+        },
+        "characterInventories": {
+            "data": {
+                "4444444": {
+                    "items": [
+                        {
+                            "itemHash": 2,
+                            "itemInstanceId": "2",
+                            "quantity": 1,
+                            "bindStatus": 0,
+                            "location": 1,
+                            "bucketHash": 1498876634,
+                            "transferStatus": 0,
+                            "lockable": true,
+                            "state": 1,
+                            "dismantlePermission": 1,
+                            "isWrapper": false,
+                            "tooltipNotificationIndexes": [],
+                            "versionNumber": 0
+                        },
+                        {
+                            "itemHash": 6,
+                            "quantity": 1,
+                            "bindStatus": 0,
+                            "location": 2,
+                            "bucketHash": 1469714392,
+                            "transferStatus": 0,
+                            "lockable": false,
+                            "state": 0,
+                            "dismantlePermission": 0,
+                            "isWrapper": false,
+                            "tooltipNotificationIndexes": []
+                        }
+                    ]
+                }
+            }
+        },
+        "characterEquipment": {
+            "data": {
+                "4444444": {
+                    "items": [
+                        {
+                            "itemHash": 3,
+                            "itemInstanceId": "3",
+                            "quantity": 1,
+                            "bindStatus": 0,
+                            "location": 1,
+                            "bucketHash": 1498876634,
+                            "transferStatus": 1,
+                            "lockable": true,
+                            "state": 0,
+                            "dismantlePermission": 2,
+                            "isWrapper": false,
+                            "tooltipNotificationIndexes": [
+                                1
+                            ],
+                            "versionNumber": 0
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

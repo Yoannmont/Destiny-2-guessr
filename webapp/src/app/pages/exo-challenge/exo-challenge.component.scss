@@ -1,0 +1,56 @@
+.cross {
+    color: red;
+    font-size: 24px;
+}
+
+
+.modal-body {
+    font-weight: 300;
+    color: white;
+
+
+}
+
+.modal-title {
+    font-weight: 300;
+    color: white
+}
+
+.modal {
+    color: white;
+
+
+}
+
+.bi-x {
+    height: 1em;
+    width: 1em;
+}
+
+.filters-desc {
+    font-size: 12px;
+}
+
+.item-tooltip {
+    position: absolute;
+    transform: translateY(-100%);
+    z-index: 1250;
+    border-radius: 5px;
+}
+
+.item-icon {
+    max-width: 65px;
+}
+
+.Exotique {
+    font-size: 17px !important;
+}
+
+@media screen and (max-width:768px) {
+
+    .Exotique {
+        font-size: 14px;
+    }
+
+
+}

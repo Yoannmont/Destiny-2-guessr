@@ -1,0 +1,14 @@
+services:
+  webapp:
+    build: ./webapp
+    ports:
+      - 4200:4200
+    command: ng serve --host 0.0.0.0
+    restart: always
+
+  server:
+    build: ./server
+    command: .venv/bin/python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    restart: always

@@ -1,0 +1,20 @@
+<span id="stars-1"></span>
+<span id="stars-2"></span>
+<span id="stars-3"></span>
+
+<app-loading></app-loading>
+
+<ng-container *ngIf="!(this.utilsService.sidebarLayout | async); else sidebarLayout">
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+</ng-container>
+
+<ng-template #sidebarLayout>
+    <main class="content-wrapper" [class.shifted]="this.utilsService.isSidebarVisible">
+        <app-sidebar></app-sidebar>
+        <div class="router-outlet-wrapper" [class.shifted]="this.utilsService.isSidebarVisible">
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+</ng-template>

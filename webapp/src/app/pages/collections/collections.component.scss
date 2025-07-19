@@ -1,0 +1,15 @@
+@use "../../../assets/styles" as *;
+
+.item-card {
+    border-radius: 10px;
+    transition: background-color $transition-duration;
+    max-width: 420px;
+}
+
+.item-card:hover {
+    background-color: $blue-color;
+}
+
+.separation-border-bottom {
+    border-bottom: $separation-bar-width solid $separation-bar-color;
+}

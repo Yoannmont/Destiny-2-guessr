@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+uv pip list --outdated --format=columns

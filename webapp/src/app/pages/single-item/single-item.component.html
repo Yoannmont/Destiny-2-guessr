@@ -1,0 +1,113 @@
+<div class="layout container pb-2">
+
+    <ng-container *ngIf="item && damageTypes && categories && tiers">
+        <div class="card shadow-lg bg-dark-gradient white-border text-light mb-4 vertical-fadeIn-animation">
+            <div class="card-body d-flex flex-column flex-md-row align-items-center">
+
+                <div class="me-md-4 text-center">
+                    <span class="shining-wrapper d-block shine vertical-fadeIn-animation">
+                        <img [src]="utilsService.createIconLink(item.icon_url)" [alt]="item.localized_name"
+                            class="item-icon-lg" /></span>
+                    <div class="mt-2 {{(tiers| filter : item.tier_type)[0].name}}">{{ (tiers | filter:
+                        item.tier_type)[0]?.localized_name }}</div>
+                </div>
+
+                <div class="flex-grow-1">
+                    <h3 class="mb-2">{{ item.localized_name }}</h3>
+                    <p class="text-grey flavorText">{{ item.localized_flavor_text }}</p>
+
+                    <div class="d-flex align-items-start mt-3 flex-wrap gap-3 align-items-center">
+                        <div *ngIf="utilsService.isWeapon(item)" class="text-center mx-auto">
+                            <img [src]="utilsService.createDamageTypeLink((damageTypes | filter: item.default_damage_type)[0]?.icon_url)"
+                                alt="Damage Type" class="info-icon mb-1" />
+                            <div class="small text-light">
+                                {{ (damageTypes | filter: item.default_damage_type)[0]?.localized_name }}
+                            </div>
+                        </div>
+
+                        <div *ngIf="item" class="text-center mx-auto">
+                            <img [src]="getCategoryImgPath(item)" alt="Category"
+                                class="info-icon-big color-white mb-1" />
+                            <div class="small text-light">
+                                {{ (categories | filter: item.category)[0]?.localized_name }}
+                            </div>
+                        </div>
+
+                        <div *ngIf="item && item.class_type !== undefined && item.class_type !== null"
+                            class="text-center mx-auto">
+                            <img [src]="getClassTypeImgPath(item)" alt="Class Type"
+                                class="info-icon color-white mb-1" />
+                            <div class="small text-light">
+                                {{ (classTypes | filter: item.class_type)[0]?.localized_name }}
+                            </div>
+                        </div>
+
+                        <div *ngIf="utilsService.isWeapon(item)" class="text-center mx-auto">
+                            <img [src]="getAmmoTypeImgPath(item)" alt="Ammo Type" class="info-icon mb-1" />
+                            <div class="small text-light">
+                                {{ item.localized_weapon_ammo_type }}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-3">
+                        <div *ngIf="item.localized_perks?.length" class="col text-light">
+
+                            <h5 class="text-accent mb-2" i18n>Attributs</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <div *ngFor="let perk of item.localized_perks"
+                                    class="perk-card p-2 rounded bg-secondary bg-opacity-25">
+                                    <img *ngIf="perk.icon_url" [src]="utilsService.createIconLink(perk.icon_url)"
+                                        [alt]="perk.name" class="perk-icon me-2" />
+                                    <span>{{ perk.name }}</span>
+                                    <div class="small text-light" *ngIf="perk.desc">{{ perk.desc }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="item.localized_stats?.length" class="col-md-4 text-light mt-2 mt-md-0">
+                            <h5 class="text-accent mb-2" i18n>Statistiques</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <div *ngFor="let stat of item.localized_stats"
+                                    class="stat-card p-2 rounded bg-secondary bg-opacity-25 d-flex align-items-center w-100">
+                                    <img *ngIf="stat.icon_url" [src]="utilsService.createIconLink(stat.icon_url)"
+                                        [alt]="stat.name" class="stat-icon me-1" />
+                                    <span>{{ stat.name }}</span>
+                                    <span class="ms-auto ">{{ stat.value }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center vertical-fadeIn-animation">
+            <img [src]="utilsService.createScreenshotLink(item.screenshot_url)" [alt]="item.api_name"
+                class="img-fluid rounded shadow-sm screenshot-thumb" (click)="openViewerModal()"
+                style="cursor: pointer;" loading="lazy" (load)="imgLoaded = true" />
+        </div>
+    </ng-container>
+
+    <ng-template #screenshotModal let-modal>
+    </ng-template>
+</div>
+
+
+<button data-bs-toggle="modal" data-bs-target="#itemViewer" class="d-none"></button>
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="itemViewer" aria-labelledby="itemViewerLabel"
+    aria-hidden="false" *ngIf="item">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content bg-dark-gradient text-white">
+            <div class="modal-header border-0">
+                <h5 class="modal-title">{{ item.localized_name }}</h5>
+                <button type="button" class="btn-close btn-close-white" aria-label="Close"
+                    data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body d-flex justify-content-center align-items-center">
+                <img [src]="utilsService.createScreenshotLink(item.screenshot_url)" class="fullscreen-img" />
+            </div>
+        </div>
+    </div>
+</div>

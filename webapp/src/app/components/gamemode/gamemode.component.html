@@ -1,0 +1,298 @@
+<div class="container-fluid" [class.full-screen-sidebar]="this.utilsService.isSidebarVisible">
+    <div class="row mt-3 mb-3">
+        <div class="d-flex align-items-center justify-content-center position-relative">
+            <button class="btn toggleButton position-absolute start-0" type="button" aria-label="Toggle navigation"
+                aria-controls="sidebar" (click)="this.utilsService.toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <span class="section-title text-center" i18n>Mode de jeu</span>
+        </div>
+
+    </div>
+    <div class="row align-items-center mx-auto vertical-fadeIn-animation">
+        <div class="col-md-12">
+            <div class="textbox p-3 row align-items-center text-center my-auto">
+                <div class="row mx-auto">
+                    <div class="col-md-6 my-2 d-flex flex-column">
+                        <h1 i18n class="title mt-3 mx-auto">Exo Challenge</h1>
+                        <p class="gamemode-desc" i18n>Trouvez le nom des objets de l'arsenal en un minimum de temps.
+                        </p>
+                        <div class="mt-auto">
+                            <button class="btn btn-home p-3 mx-auto my-2" i18n (click)="saveAndLaunch('exo-challenge')">
+                                Jouer à l'Exo-Challenge
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 my-2 d-flex flex-column separation-border-left">
+                        <h1 i18n class="title mt-3">Objet Mystère</h1>
+                        <p class="gamemode-desc" i18n>En temps limité, devinez le nom des objets présentés grâce à
+                            leur description.</p>
+                        <div class="mt-auto">
+                            <button class="btn btn-home p-3 mx-auto my-2" i18n
+                                (click)="saveAndLaunch('mystery-weapon')">
+                                Jouer à l'Objet Mystère
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mt-md-5">
+                        <button class="btn btn-parameters" (click)="this.showAdvancedParameters()" i18n>Paramètres
+                            avancés </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<button data-bs-toggle="modal" data-bs-target="#itemsSelectionModal" class="d-none"></button>
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="itemsSelectionModal"
+    aria-labelledby="itemsSelectionModalLabel" aria-hidden="false" *ngIf="filteredItems">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content bg-dark-gradient text-white">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" i18n>Sélectionnez les objets du challenge</h5>
+                <button type="button" class="btn-close btn-close-white" aria-label="Close"
+                    data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row mb-3">
+                    <div class="col-lg-2 me-auto order-lg-2 mt-2">
+
+                        <div class="input-group my-3 w-100 mx-auto" style="max-width: 500px;">
+                            <input type="text" class="form-control" placeholder="Rechercher un objet..."
+                                i18n-placeholder="@@searchPlaceholder" [(ngModel)]="searchTerm"
+                                aria-label="Recherche d'objet" />
+                            <button class="input-group-text bg-light" (click)="onSearch()">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+
+                        <button class="btn btn-outline-light mx-2 my-1" (click)="selectAllFiltered()" i18n>Sélectionner
+                            tout</button>
+                        <button class="btn btn-outline-light mx-2 my-1" (click)="unselectAllFiltered()"
+                            i18n>Désélectionner
+                            tout</button>
+                        <button class="btn btn-grey mx-2 my-1" *ngIf="!!this.accountItems" i18n> <i
+                                class="bi bi-safe"></i> Mon
+                            inventaire
+                        </button>
+
+
+                        <button class="btn btn-blue d-lg-none mx-2 my-1" (click)="toggleFilterSidebar()">
+                            <i class="bi bi-funnel"></i> Filtrer
+                        </button>
+                        <button class="btn btn-red mx-2 my-1" (click)="resetFilters()" i18n> <i
+                                class="bi bi-arrow-clockwise"></i>
+                            Reset filtres
+                        </button>
+
+                        <div class="dropdown my-2">
+                            <button
+                                class="btn btn-filter dropdown-toggle mw-75 d-flex align-items-center justify-content-between mx-auto"
+                                type="button" data-bs-toggle="dropdown" aria-expanded="false" i18n>
+                                Trier par
+                                <i class="ms-2" [ngClass]="{
+      'bi bi-sort-alpha-down': this.filterSortService.sortAscending,
+      'bi bi-sort-alpha-down-alt': !this.filterSortService.sortAscending
+    }"></i>
+                            </button>
+                            <ul class="dropdown-menu mw-75">
+                                <li><a class="dropdown-item pointer" (click)="setSort('translations__name')" i18n>Ordre
+                                        alphabétique</a>
+                                </li>
+                                <li><a class="dropdown-item pointer" (click)="setSort('default_damage_type')" i18n>Type
+                                        de
+                                        dégâts</a>
+                                </li>
+                                <li><a class="dropdown-item pointer" (click)="setSort('tier_type')" i18n>Rareté</a></li>
+                                <li><a class="dropdown-item pointer" (click)="setSort('category')" i18n>Catégorie</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div #filterSidebar class="filter-sidebar d-lg-none" [class.open]="filterSidebarOpen">
+                            <div
+                                class="filter-sidebar-header px-3 py-2 justify-content-between align-items-center d-flex">
+                                <span i18n class="filter-title" i18n>Filtres</span>
+                                <button class="btn text-light p-0 m-0" (click)="toggleFilterSidebar()"
+                                    aria-label="Fermer les filtres">
+                                    <i class="bi bi-x-lg fs-4"></i>
+                                </button>
+                            </div>
+                            <div class="filter-sidebar-content px-3 pb-3">
+                                <ng-container *ngTemplateOutlet="filterContent"></ng-container>
+                            </div>
+
+                        </div>
+                        <div class="d-none d-lg-block">
+                            <span i18n class="filter-title" i18n>Filtres</span>
+                            <ng-container *ngTemplateOutlet="filterContent"></ng-container>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9 mx-auto px-auto order-lg-1 py-2 separation-border">
+                        <div class="row my-2"> <span i18n class="subsection-title text-center"
+                                *ngIf="!!this.filteredItems && this.selectedItems.length > 0">
+                                {{this.selectedItems.length}}
+                                objet{{this.selectedItems.length > 1 ? "s" : ""}} sélectionné{{this.selectedItems.length
+                                > 1
+                                ? "s" : ""}}</span></div>
+                        <div class="row row-cols-auto align-items-center">
+                            <div *ngFor="let item of filteredItems" class="col mx-auto p-2 my-1"
+                                [class.selected]="isSelected(item)" (click)="toggleItem(item)"
+                                ngbTooltip="{{item.localized_name}}" triggers="click" [autoClose]="true">
+                                <span class="shining-wrapper d-block shine">
+                                    <img [src]="utilsService.createIconLink(item.icon_url)" class="item-icon"
+                                        [alt]="item.api_name" />
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="row mt-2 align-items-center text-center">
+
+                            <div class="col-sm-2 ms-auto my-1">
+                                <button class="btn btn-outline-light" *ngIf="this.page > 1"
+                                    (click)="this.previousPage()" i18n>
+                                    <i class="bi bi-arrow-left-short"></i>Précédent
+                                </button>
+                            </div>
+
+                            <div class="col-sm-4 my-1 ">
+                                <ng-container *ngFor=" let p of paginationArray">
+
+                                    <button class="btn btn-outline-light m-1" [class.active]="p === page"
+                                        (click)="goToPage(p)">
+                                        {{ p }}
+                                    </button>
+                                </ng-container>
+                            </div>
+
+                            <div class="col-sm-2 me-auto my-1">
+                                <button class="btn btn-outline-light" *ngIf="this.page - 1 < this.totalPages"
+                                    (click)="this.nextPage()" i18n>
+                                    Suivant <i class="bi bi-arrow-right-short"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #filterContent>
+    <div class="row row-cols-auto ps-2">
+
+        <div *ngFor="let filter of filterSortService.filters" class="col btn-filter text-center filter-option m-1 p-2">
+            <div class="d-flex align-items-center gap-1">
+                <span>{{ filter.label }}</span>
+                <button (click)="deleteFilter(filter)" class="btn btn-sm text-light p-0 m-0 filter-delete"
+                    style="line-height: 1" alt="deleteFilter">
+                    <i class=" bi bi-x fs-5"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 mx-0">
+        <div class="dropdown my-2 text-start">
+            <button class="btn btn-filter dropdown-toggle mw-75" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false" i18n>
+                Rareté
+            </button>
+            <ul class="dropdown-menu mw-75">
+                <li *ngFor="let tier of tiers">
+                    <a class="dropdown-item pointer"
+                        (click)="addFilter('tier_type', tier.id.toString(), tier.localized_name)">
+                        {{tier.localized_name}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="dropdown my-2 text-start">
+            <button class="btn btn-filter dropdown-toggle mw-75" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false" i18n>
+                Catégorie
+            </button>
+            <ul class="dropdown-menu mw-75">
+                <li *ngFor="let category of categories">
+                    <a class="dropdown-item pointer"
+                        (click)="addFilter('category', category.id.toString(), category.localized_name)">
+                        {{category.localized_name}}</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="dropdown my-2 text-start">
+            <button class="btn btn-filter dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                i18n>
+                Élément
+            </button>
+            <ul class="dropdown-menu mw-75">
+                <li *ngFor="let damageType of damageTypes">
+                    <a class="dropdown-item pointer"
+                        (click)="addFilter('default_damage_type', damageType.id.toString(), damageType.localized_name)">
+                        <div class="d-flex align-items-center">
+                            <img [src]="this.utilsService.createDamageTypeLink(damageType.icon_url)"
+                                class="smallDamageType" />
+                            <span class="ms-2">{{damageType.localized_name}}</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="dropdown my-2 text-start">
+            <button class="btn btn-filter dropdown-toggle mw-75" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false" i18n>
+                Classe
+            </button>
+            <ul class="dropdown-menu mw-75">
+                <li *ngFor="let class of classTypes">
+                    <a class="dropdown-item pointer"
+                        (click)="addFilter('class_type', class.id.toString(), class.localized_name)">
+                        {{class.localized_name}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="dropdown my-2 text-start">
+            <button class="btn btn-filter dropdown-toggle mw-75" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false" i18n>
+                Emplacement d'arme
+            </button>
+            <ul class="dropdown-menu mw-75">
+                <li *ngFor="let weapon_slot of LOCALIZED_WEAPON_SLOTS">
+                    <a class="dropdown-item pointer"
+                        (click)="addFilter('weapon_slot', weapon_slot.id.toString(), weapon_slot['localized_weapon_slot'])">
+                        {{weapon_slot['localized_weapon_slot']}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="dropdown my-2 text-start">
+            <button class="btn btn-filter dropdown-toggle mw-75" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false" i18n>
+                Type de munitions
+            </button>
+            <ul class="dropdown-menu mw-75">
+                <li *ngFor="let weapon_ammo_type of LOCALIZED_WEAPON_AMMO_TYPES">
+                    <a class="dropdown-item pointer"
+                        (click)="addFilter('weapon_ammo_type', weapon_ammo_type.id.toString(), weapon_ammo_type['localized_weapon_ammo_type'])">
+                        {{weapon_ammo_type['localized_weapon_ammo_type']}}</a>
+                </li>
+            </ul>
+        </div>
+        <button class="btn btn-grey" (click)="applyFilters()">Filtrer</button>
+    </div>
+</ng-template>

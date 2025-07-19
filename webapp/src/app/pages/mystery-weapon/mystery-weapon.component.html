@@ -1,0 +1,283 @@
+<div class="container-fluid" [class.full-screen-sidebar]="this.utilsService.isSidebarVisible">
+    <div class="row mt-3 mb-3">
+        <div class="d-flex align-items-center justify-content-center position-relative">
+            <button class="btn toggleButton position-absolute start-0" type="button" aria-label="Toggle navigation"
+                aria-controls="sidebar" (click)="this.utilsService.toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <span class="section-title" i18n>Arme mystère</span>
+        </div>
+
+    </div>
+    <div class="row align-items-center">
+        <div class="col-md-4 order-md-2 my-2">
+            <div class="textbox p-3 text-end d-flex flex-column">
+                <div class="timer-wrapper p-3 row text-center border-bottom">
+                    <span class="timer-title" i18n>Temps restant</span> <br />
+                    <span class="timer" i18n *ngIf="this.gameStarted">{{ this.countdown| async| date : "s"}}
+                        secondes</span>
+                </div>
+                <span class="inputs-wrapper d-flex">
+                    <div class="inputs" *ngIf="gameStarted">
+
+                        <span *ngFor="let input of inputs">
+                            <div *ngIf="!!this.getItemIdByName(input).id then isCollectible else isNotCollectible">
+                            </div>
+                            <ng-template #isCollectible>
+                                <div class="row my-4 vertical-fadeIn-animation-reverse align-items-center"
+                                    *ngIf="this.getItemObjectByName(input) as item">
+                                    <div class="col-8">
+                                        <span
+                                            class="{{(tiers  | filter : item.tier_type)[0].name}}">{{item.localized_name}}</span><br />
+                                        <div class="d-inline-flex align-items-center">
+
+                                            <ng-container *ngIf="this.utilsService.isWeapon(item)">
+                                                <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : item.default_damage_type)[0].icon_url)"
+                                                    class="smallDamageType" />
+
+
+                                            </ng-container>
+                                            <span class="categoryItalic"> &nbsp;{{(categories |
+                                                filter
+                                                : item.category)[0].localized_name}}</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="shining-wrapper d-block new-item-effect">
+                                            <img [src]="this.utilsService.createIconLink(item.icon_url)"
+                                                [alt]="item.localized_name" class="item-icon"></span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template #isNotCollectible>
+                                <div class="row my-3">
+                                    <div class="col-8">{{input}}</div>
+                                    <div class="col-4"><i class="bi bi-x cross"></i></div>
+                                </div>
+                            </ng-template>
+                        </span>
+
+                    </div>
+
+                </span>
+                <form [formGroup]="inputGroup" (submit)="submitInput()" class="form-input text-end">
+                    <label for="userInput" i18n>Entrez votre réponse</label>
+                    <input type="text" id="userInput" i18n-placeholder placeholder="Nom de l'arme" class="form-control"
+                        formControlName="userInput" />
+                    <button type="submit" class="btn btn-secondary w-100" [disabled]="inputGroup.invalid"
+                        i18n>Valider</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-8 order-md-1 my-2">
+            <div class="hintsbox p-3">
+                <div class="score border-bottom">
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="text-start" i18n>Indices</div>
+                        </div>
+
+                        <div class="col">
+                            <div class="text-end"><small class="me-2">Score</small> {{this.points}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-2 full-height">
+                    <ng-container
+                        *ngIf="currentItem && tiers && categories && damageTypes && classTypes && gameStarted">
+                        <div class="weapons-wrapper">
+                            <span class="inputs">
+                                <div id="block-1" class="row mt-3">
+                                    <div id="itemType" class="d-none col vertical-fadeIn-animation w-100 hint-box">
+                                        <small class="underline-white" i18n>Type d'objet</small>
+                                        <div class="text-center hint">
+                                            {{ currentItem.localized_item_type }}
+
+                                        </div>
+                                    </div>
+
+
+                                    <div id="tier" class="d-none col vertical-fadeIn-animation w-100 hint-box">
+                                        <small class="underline-white" i18n> Rareté </small>
+                                        <div class="text-center hint">
+                                            <span class="{{(tiers | filter : currentItem.tier_type)[0]?.name}}">{{
+                                                (tiers |
+                                                filter : currentItem.tier_type)[0]?.localized_name }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div id="flavorText" class="d-none vertical-fadeIn-animation w-100 hint-box">
+                                        <small class="underline-white" i18n> Description</small>
+                                        <div class="text-center flavorText hint">
+                                            {{ currentItem.localized_flavor_text }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="block-2" class="row">
+                                    <div id="category" class="col d-none vertical-fadeIn-animation w-100 hint-box ">
+                                        <small class="underline-white" i18n> Catégorie </small>
+                                        <div class="text-center hint align-items-center">
+                                            {{ (categories | filter : currentItem.category)[0]?.localized_name }}
+                                            <img [src]="getCategoryImgPath(currentItem)"
+                                                class="hint-icon color-white ms-2">
+                                        </div>
+                                    </div>
+                                    <div id="weaponSlot" class="d-none col vertical-fadeIn-animation w-100 hint-box"
+                                        *ngIf="utilsService.isWeapon(currentItem)">
+                                        <small class="underline-white" i18n> Type de munitions </small>
+                                        <div class="text-center hint">
+                                            {{ currentItem.localized_weapon_ammo_type }}
+
+                                            <img [src]="getAmmoTypeImgPath(currentItem)" class="hint-icon-small ms-2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="block-3" class="row">
+                                    <div id="weaponAmmoType" class="d-none col vertical-fadeIn-animation w-100 hint-box"
+                                        *ngIf="utilsService.isWeapon(currentItem)">
+                                        <small class="underline-white" i18n> Emplacement d'arme </small>
+                                        <div class="text-center hint">
+                                            {{ currentItem.localized_weapon_slot }}
+                                        </div>
+                                    </div>
+
+                                    <div id="damageType" class="d-none col vertical-fadeIn-animation w-100 hint-box"
+                                        *ngIf="utilsService.isWeapon(currentItem)">
+                                        <small class="underline-white" i18n> Élément </small>
+                                        <div class="text-center hint">
+                                            <img [src]="utilsService.createDamageTypeLink((damageTypes | filter : currentItem.default_damage_type)[0]?.icon_url)"
+                                                class="smallDamageType me-1" />
+                                            {{ (damageTypes | filter :
+                                            currentItem.default_damage_type)[0]?.localized_name
+                                            }}
+                                        </div>
+                                    </div>
+                                    <div id="classType" class="d-none col vertical-fadeIn-animation w-100 hint-box"
+                                        *ngIf=" utilsService.isArmor(currentItem)">
+                                        <small class="underline-white" i18n> Classe</small>
+
+                                        <div class="text-center hint">
+                                            {{ (classTypes | filter : currentItem.class_type)[0]?.localized_name }}
+                                            <img [src]="getClassTypeImgPath(currentItem)"
+                                                class="hint-icon color-white ms-2">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="block-4" class="row">
+                                    <div id="intrinsicPerk" class="d-none col vertical-fadeIn-animation w-100 hint-box">
+                                        <small class="underline-white" i18n> Attribut intrinsèque</small>
+
+                                        <div class="text-center hint"
+                                            *ngIf="getIntrinsicPerk(currentItem) as intrinsicPerk">
+                                            {{ intrinsicPerk.name }}
+                                            <img [src]="this.utilsService.createIconLink(intrinsicPerk.icon_url)"
+                                                class="hint-icon text-light ms-2">
+                                            <br />
+                                            {{ intrinsicPerk.desc }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+
+
+
+                        <div id="block-5" class="vertical-fadeIn-animation " *ngIf="this.gameStarted">
+                            <p class="text-center fs-5" i18n>De quel objet s'agit-il ?</p>
+                            <div class="row vertical-fadeIn-animation align-items-center"></div>
+
+                            <div class="row vertical-fadeIn-animation align-items-center">
+                                <div class="col-8 col-sm-6 col-md-4 ms-auto text-center">
+                                    <div *ngIf="this.itemFound" class="vertical-fadeIn-animation-reverse">
+                                        <span
+                                            class="{{(tiers  | filter : currentItem.tier_type)[0].name}}">{{currentItem.localized_name}}</span><br />
+                                        <div class="d-inline-flex align-items-center">
+
+                                            <ng-container *ngIf="this.utilsService.isWeapon(currentItem)">
+                                                <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : currentItem.default_damage_type)[0].icon_url)"
+                                                    class="smallDamageType me-2" />
+                                            </ng-container>
+                                            <span class="categoryItalic"> &nbsp;{{(categories |
+                                                filter
+                                                : currentItem.category)[0].localized_name}}</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!this.itemFound" class="vertical-fadeIn-animation-reverse">
+                                        <div>????</div>
+                                    </div>
+
+                                </div>
+                                <div class="col-4 col-sm-3 col-md-2 me-auto">
+                                    <span class="shining-wrapper d-block" id="itemToFind">
+                                        <img src="assets/img/no-weapon.png" class="item-icon">
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button data-bs-toggle="modal" data-bs-target="#startModal" class="d-none"></button>
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="startModal" aria-labelledby="startModalLabel"
+    aria-hidden="false">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header ">
+                <h1 class="modal-title fs-5" id="startModalLabel" i18n>Objet Mystère</h1>
+            </div>
+            <div class="modal-body" i18n>
+                Trouvez le nom des armes et armures dans le temps imparti. À vous de jouer, Gardien !
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="this.startCountdown()"
+                    [disabled]="this.isLoading | async" i18n>Commencer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button data-bs-toggle="modal" data-bs-target="#lossModal" class="d-none"></button>
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="lossModal" aria-labelledby="lossModalLabel"
+    aria-hidden="false">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-dark  text-light">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="victoryModalLabel" i18n> Objet Mystère terminé </h1>
+            </div>
+            <div class="modal-body">
+                <ng-container *ngIf="currentItem">
+                    <span i18n>
+                        Vous avez perdu après {{points}} objet{{points > 1 ? "s": ""}} Gardien ! Le nom de l'objet était
+                        {{currentItem.localized_name}}...</span>
+                </ng-container>
+                <ng-container *ngIf="!currentItem">
+                    <span i18n>Félicitations, vous avez retrouvé toutes les armes Gardien !</span>
+                </ng-container>
+            </div>
+            <div class="modal-footer">
+                <ng-container *ngIf="currentItem">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="navigateToGamemodeSelection()" i18n>Abandonner</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="reloadPage()"
+                        i18n>Réessayer</button>
+                </ng-container>
+                <ng-container *ngIf="!currentItem">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="navigateToGamemodeSelection()" i18n>Retour</button>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

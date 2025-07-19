@@ -1,0 +1,52 @@
+<nav class="text-center py-3 sidebar-nav" [class.open]="this.utilsService.isSidebarVisible">
+
+    <a routerLink="/" class="sidebar-icon" aria-label="visit homepage" aria-current="page">
+        <img class="img-fluid pt-4" src="assets/img/mini-logo.png" />
+    </a>
+
+    <span class="blank-space"></span>
+    <div class="main-sidebarlinks">
+
+
+        <div class="navbar-nav">
+            <a *ngFor="let item of this.utilsService.navbarContent" class="navbar-item text-center my-2 py-3"
+                [routerLink]="item.link" routerLinkActive="active">
+                <div class="navbar-link">{{item.title}}</div>
+            </a>
+            <a class="navbar-item text-center mx-4 p-2 pointer" (click)="authService.startBungieLogin()"
+                *ngIf="!authService.currentAccount">
+                <div class="navbar-link" i18n>Se connecter</div>
+            </a>
+
+            <li class="dropdown navbar-item text-center my-2 py-3" *ngIf="authService.currentAccount">
+                <div class="navbar-link dropdown-toggle" id="accountDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false" i18n>
+                    Mon compte
+                </div>
+                <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+                    <li class="dropdown-header">
+                        {{ authService.currentAccount.displayName }}<br>
+                        {{ utilsService.getPlatformName(authService.currentAccount.membershipType) }}<br>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
+                    <li>
+                        <div class="dropdown-item text-dark pointer" (click)="authService.startBungieLogin()" i18n>
+                            Changer de compte</div>
+                        <div class="dropdown-item text-dark pointer" routerLink="/account-settings" i18n>Paramètres
+                        </div>
+                        <div class="dropdown-item text-danger pointer" (click)="logout()" i18n>Se déconnecter</div>
+                    </li>
+                </ul>
+            </li>
+        </div>
+
+        <div class="separator my-4"></div>
+        <span class="ms-1">
+
+            <a class="footer-icon-link p-2 my-2" alt="GitHub" href="https://github.com/Yoannmont"> <i
+                    class="bi bi-github"></i></a>
+        </span>
+    </div>
+</nav>

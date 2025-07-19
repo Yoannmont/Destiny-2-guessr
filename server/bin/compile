@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+uv pip compile --output-file requirements.lock requirements.in
+if [ $? -ne 0 ]; then
+    echo "Failed to compile requirements."
+    exit 1
+fi
+echo "Requirements compiled successfully to requirements.lock."

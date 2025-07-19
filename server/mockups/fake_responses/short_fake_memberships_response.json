@@ -1,0 +1,55 @@
+{
+    "Response": {
+        "destinyMemberships": [
+            {
+                "LastSeenDisplayName": "fakeDisplayName",
+                "LastSeenDisplayNameType": 1,
+                "iconPath": "/img/theme/bungienet/icons/xboxLiveLogo.png",
+                "crossSaveOverride": 1,
+                "applicableMembershipTypes": [
+                    1
+                ],
+                "isPublic": true,
+                "membershipType": 1,
+                "membershipId": "100",
+                "displayName": "fakeDisplayName",
+                "bungieGlobalDisplayName": "fakeDisplayName",
+                "bungieGlobalDisplayNameCode": 9739
+            }
+        ],
+        "primaryMembershipId": "100",
+        "bungieNetUser": {
+            "membershipId": "10863088",
+            "uniqueName": "fakeDisplayName#9739",
+            "displayName": "fakeDisplayName",
+            "profilePicture": 70489,
+            "profileTheme": 111,
+            "userTitle": 0,
+            "successMessageFlags": "0",
+            "isDeleted": false,
+            "about": "",
+            "firstAccess": "2025-01-01T00:00:00.000Z",
+            "lastUpdate": "2025-01-01T00:00:00.000Z",
+            "psnDisplayName": null,
+            "xboxDisplayName": "fakeDisplayName",
+            "showActivity": true,
+            "locale": "en",
+            "localeInheritDefault": false,
+            "showGroupMessaging": true,
+            "profilePicturePath": "/img/profile/avatars/shield2.jpg",
+            "profileThemeName": "d2cover",
+            "userTitleDisplay": "Newbie",
+            "statusText": "",
+            "statusDate": "0001-01-01T00:00:00Z",
+            "steamDisplayName": null,
+            "cachedBungieGlobalDisplayName": "fakeDisplayName",
+            "cachedBungieGlobalDisplayNameCode": 9739,
+            "egsDisplayName": "fakeDisplayName"
+        }
+    },
+    "ErrorCode": 1,
+    "ThrottleSeconds": 0,
+    "ErrorStatus": "Success",
+    "Message": "Ok",
+    "MessageData": {}
+}

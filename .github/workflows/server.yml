@@ -1,0 +1,39 @@
+name: Server CI
+
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ "*" ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    
+    - name: Install python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    
+    
+    - name: Install dependencies, ruff and test
+      run: |
+        cd server
+        pip install uv
+        uv venv
+        source .venv/bin/activate
+        uv pip install -r requirements.lock
+        ruff check
+        ruff format --check .
+        bin/pytest_cov
+    
+    - name: Upload HTML coverage report
+      uses: actions/upload-artifact@v4
+      with:
+        name: html-coverage-report
+        path: server/htmlcov

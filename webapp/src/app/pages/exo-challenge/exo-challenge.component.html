@@ -1,0 +1,170 @@
+<div class="container-fluid" [class.full-screen-sidebar]="this.utilsService.isSidebarVisible">
+    <div class="row mt-3 mb-3">
+        <div class="d-flex align-items-center justify-content-center position-relative">
+            <button class="btn toggleButton position-absolute start-0" type="button" aria-label="Toggle navigation"
+                aria-controls="sidebar" (click)="this.utilsService.toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <span class="section-title" i18n>Exo-Challenge</span>
+        </div>
+
+    </div>
+    <div class="row align-items-center">
+        <div class="col-md-4 order-md-2 my-2">
+
+            <div class="textbox p-3 text-end d-flex flex-column">
+                <div class="timer-wrapper p-3 row text-center border-bottom">
+                    <span class="timer-title" i18n>Temps</span> <br />
+                    <span class="timer">{{ convertToDateTime((this.timer| async))}}</span>
+                </div>
+                <span class="inputs-wrapper d-flex">
+                    <div class="inputs">
+                        <span *ngFor="let input of inputs">
+                            <div *ngIf="!!this.getItemIdByName(input).id then isCollectible else isNotCollectible">
+                            </div>
+                            <ng-template #isCollectible>
+                                <div class="row my-4 vertical-fadeIn-animation-reverse align-items-center"
+                                    *ngIf="this.getItemObjectByName(input) as item">
+                                    <div class="col-8">
+                                        <span
+                                            class="{{(tiers  | filter : item.tier_type)[0].name}}">{{item.localized_name}}</span><br />
+                                        <div class="d-inline-flex align-items-center">
+
+                                            <ng-container *ngIf="this.utilsService.isWeapon(item)">
+                                                <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : item.default_damage_type)[0].icon_url)"
+                                                    class="smallDamageType" />
+
+
+                                            </ng-container>
+                                            <span class="categoryItalic"> &nbsp;{{(categories |
+                                                filter
+                                                : item.category)[0].localized_name}}</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="shining-wrapper d-block new-item-effect">
+                                            <img [src]="this.utilsService.createIconLink(item.icon_url)"
+                                                [alt]="item.localized_name" class="item-icon"></span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template #isNotCollectible>
+                                <div class="row my-3">
+                                    <div class="col-8">{{input}}</div>
+                                    <div class="col-4"><i class="bi bi-x cross"></i></div>
+                                </div>
+                            </ng-template>
+                        </span>
+                    </div>
+                </span>
+                <form [formGroup]="inputGroup" (submit)="submitInput()" class="form-input text-end">
+                    <label for="userInput" i18n>Entrez votre réponse</label>
+                    <input type="text" id="userInput" i18n-placeholder placeholder="Nom de l'arme" class="form-control"
+                        formControlName="userInput" />
+                    <button type="submit" class="btn btn-secondary w-100" [disabled]="inputGroup.invalid"
+                        i18n>Valider</button>
+                </form>
+
+            </div>
+        </div>
+        <div class="col-md-8 order-md-1 my-2">
+            <div class="itemsbox p-3">
+
+                <div class="score border-bottom">
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="text-start" i18n>Objets</div>
+                        </div>
+
+                        <div class="col">
+                            <div class="text-end">{{this.points}} <small *ngIf="this.filteredItems"> /
+                                    {{this.filteredItems.length}}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-auto mt-3 g-2 weapons-wrapper">
+
+                    <div *ngFor="let item of filteredItems" class="mx-auto">
+                        <div class="position-relative">
+                            <div class="item-tooltip bg-dark p-2 d-none"
+                                [id]="'tooltip-' + ArmorOrWeapon(item) + '-' + item.id"
+                                *ngIf="this.alreadyRevealed(item.id)">
+                                <span
+                                    class="{{(tiers  | filter : item.tier_type)[0].name}}">{{item.localized_name}}</span><br />
+                                <div class="align-items-center">
+
+
+                                    <ng-container *ngIf="this.utilsService.isWeapon(item)">
+                                        <img [src]="this.utilsService.createDamageTypeLink((damageTypes | filter : item.default_damage_type)[0].icon_url)"
+                                            class="smallDamageType" />
+
+
+                                    </ng-container>
+                                    <span class="categoryItalic"> &nbsp;{{(categories |
+                                        filter
+                                        : item.category)[0].localized_name}}</span>
+
+                                </div>
+                            </div>
+                            <div class="col position-relative"
+                                (click)="toggleTooltip($event, ArmorOrWeapon(item), item.id)">
+                                <span class="shining-wrapper d-block" id="{{ArmorOrWeapon(item)}}-{{item.id}}">
+                                    <img src="assets/img/no-weapon.png" class="item-icon">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<button data-bs-toggle="modal" data-bs-target="#startModal" class="d-none"></button>
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="startModal" aria-labelledby="startModalLabel"
+    aria-hidden="false">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header ">
+                <h1 class="modal-title fs-5" id="startModalLabel" i18n>Exo Challenge</h1>
+
+            </div>
+            <div class="modal-body" i18n>
+                Trouvez les noms de toutes les armes et armures en un temps minimum. À vous de jouer, Gardien !
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="startTimer()"
+                    [disabled]="this.isLoading | async" i18n>Commencer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button data-bs-toggle="modal" data-bs-target="#victoryModal" class="d-none"></button>
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="victoryModal" aria-labelledby="victoryModalLabel"
+    aria-hidden="false">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header ">
+                <h1 class="modal-title fs-5" id="victoryModalLabel" i18n>Exo Challenge réussi </h1>
+                <button type="button" class="bg-dark btn btn-dark ms-auto" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="bi bi-x"></i></button>
+            </div>
+            <div class="modal-body" i18n>
+                Bravo gardien ! Vous avez retrouvé tous les objets en {{convertToDateTime((timer | async ))}} !
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="this.navigateToGamemodeSelection()" i18n>OK</button>
+            </div>
+        </div>
+    </div>
+</div>

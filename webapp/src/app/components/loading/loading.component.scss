@@ -1,0 +1,14 @@
+.loading {
+    position: fixed;
+    top: calc(50vh - 25px);
+    left: calc(50vw - 115px);
+    z-index: 1214;
+    border-radius: 10px;
+    background-color: #616881f5;
+}
+
+.title {
+    font-weight: 300;
+    letter-spacing: 1px;
+    font-size: 18px;
+}

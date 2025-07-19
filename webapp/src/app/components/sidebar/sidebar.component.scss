@@ -1,0 +1,53 @@
+@use "../../../assets/styles" as *;
+
+
+.sidebar-nav {
+    width: 220px;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    transform: translateX(-100%);
+    background: linear-gradient(180deg, rgba(30, 33, 45, 1) 0%, rgba(30, 33, 45, 1) 50%, rgba(74, 79, 98, 1) 100%);
+    border-bottom-right-radius: 15px;
+    transition: left $transition-duration;
+}
+
+
+
+.navbar-nav {
+    width: 90%;
+    left: 10px;
+    position: relative;
+}
+
+.hamburger {
+    display: none;
+}
+
+
+.sidebar-item {
+    text-decoration: none;
+    font-family: Futura;
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    background-color: transparent;
+    color: white;
+    transition: background-color $transition-duration;
+}
+
+.sidebar-item:hover,
+.active {
+    background-color: white;
+    color: black;
+}
+
+.navbar-nav {
+    min-height: 50%;
+}
+
+.sidebar-nav.open {
+    transform: translateX(0%);
+}
+
+@media screen and (max-width:992px) {}
