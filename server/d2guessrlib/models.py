@@ -269,7 +269,7 @@ class ItemStat(models.Model):
 class ItemTranslation(models.Model):
     item = models.ForeignKey(Item, related_name="translations", on_delete=models.CASCADE)
     language = models.CharField(max_length=10)
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, null=False)
     flavor_text = models.TextField(null=True)
 
     class Meta:

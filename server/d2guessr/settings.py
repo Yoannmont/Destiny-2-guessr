@@ -454,4 +454,11 @@ class Test(Dev):
 class Preview(Dev):
     NAME = "PREVIEW"
     DEBUG = False
+
+    FRONTEND_URL = values.Value(environ_prefix=NAME)
+    SOCIAL_AUTH_BUNGIE_API_KEY = values.SecretValue(environ_prefix=NAME)
+    SOCIAL_AUTH_BUNGIE_KEY = values.SecretValue(environ_prefix=NAME)
+    SOCIAL_AUTH_BUNGIE_SECRET = values.SecretValue(environ_prefix=NAME)
+    SOCIAL_AUTH_BUNGIE_ORIGIN = values.Value(environ_prefix=NAME)
+    HOST_IP = values.Value(environ_prefix=NAME)
     CORS_ALLOW_ALL_ORIGINS = False

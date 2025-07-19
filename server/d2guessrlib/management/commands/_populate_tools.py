@@ -68,7 +68,6 @@ def create_or_update_object_translations(
             row["hash"]: row
             for row in load_table(cursor, table_name=table_name, hashset=hashset, extra_query=extra_query)
         }
-        logger.debug(f"Got {len(translations_by_hash)} for {model_name}_{lang_code}")
 
         display_props = translations_by_hash.get(target_object.id_bungie, {}).get("displayProperties", {})
         translated_fields = {"name": display_props.get("name")}
@@ -380,6 +379,20 @@ def create_or_update_items(english_cursor, localized_cursors=None, exotic_only=F
 
     for hash_id, item_def in item_defs_en.items():
         # Parse key properties for the Item
+        try:
+            item = Item.objects.get(id_bungie=hash_id)
+            logger.debug("Found %s(%s)", item, hash_id)
+            translation = item.translations.first().name
+
+            continue
+        except Item.DoesNotExist:
+            pass
+        except Exception:
+            logger.critical(
+                "exception %s",
+                item,
+            )
+
         display = item_def.get("displayProperties", {})
         api_name = display.get("name")
         icon_url = display.get("icon")
@@ -493,9 +506,15 @@ def create_or_update_items(english_cursor, localized_cursors=None, exotic_only=F
 
         # Process localized item translations
         for lang_code, defs in localized_item_defs.items():
-            logger.debug(f"Got {len(defs)} items in {lang_code.upper()}")
-            item_def_lang = defs.get(hash_id, {})
-            name_lang = item_def_lang.get("displayProperties", {}).get("name", "")
+            item_def_lang = defs.get(int(hash_id), {})
+            name_lang = item_def_lang.get("displayProperties", {}).get("name")
+            if not name_lang:
+                logger.critical(
+                    "Error when processing %s -> Name not found for translation %s. Skipping",
+                    hash_id,
+                    lang_code.upper(),
+                )
+                continue
             flavor_text_lang = item_def_lang.get("flavorText")
 
             ItemTranslation.objects.update_or_create(
