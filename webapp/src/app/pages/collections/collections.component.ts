@@ -127,7 +127,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     start = Math.max(1, start);
 
     this.paginationArray = [];
-    for (let i = start; i <= end; i++) {
+    for (let i = start; i <= end + 1; i++) {
       this.paginationArray.push(i);
     }
   }
@@ -217,26 +217,24 @@ export class CollectionsComponent implements OnInit, OnDestroy {
   }
 
   getAccountItems(page: number = this.page): void {
-    if (!this.fromAccount) {
-      if (this.authService.currentAccount) {
-        this.authService
-          .getAccountItemsFromPage(
-            page,
-            this.langService.currentLocaleID,
-            this.authService.currentAccount.membershipId,
-            this.item_filters,
-            this.sortOption,
-            this.searchTerm
-          )
-          .subscribe((response: any) => {
-            this.itemCount = response.count;
-            this.filteredItems = response.results;
-            this.fromAccount = true;
-            this.updatePaginationArray();
-          });
-      } else {
-        console.warn(">>> Couldn't fetch inventory: not connected");
-      }
+    if (this.authService.currentAccount) {
+      this.authService
+        .getAccountItemsFromPage(
+          page,
+          this.langService.currentLocaleID,
+          this.authService.currentAccount.membershipId,
+          this.item_filters,
+          this.sortOption,
+          this.searchTerm
+        )
+        .subscribe((response: any) => {
+          this.itemCount = response.count;
+          this.filteredItems = response.results;
+          this.fromAccount = true;
+          this.updatePaginationArray();
+        });
+    } else {
+      console.warn(">>> Couldn't fetch inventory: not connected");
     }
   }
 
