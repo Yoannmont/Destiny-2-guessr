@@ -50,8 +50,8 @@
 <target xml:space="preserve">Immerse yourself in the Destiny 2 universe and test your knowledge by finding the names of exotic objects.</target>
 </trans-unit>
 <trans-unit datatype="html" id="1953013685417393077">
-<source xml:space="preserve">Arme mystère</source>
-<target xml:space="preserve">Mystery weapon</target>
+<source xml:space="preserve">Objet mystère</source>
+<target xml:space="preserve">Mystery item</target>
 </trans-unit>
 <trans-unit datatype="html" id="1961861928422837439">
 <source xml:space="preserve">Plateforme</source>
@@ -212,8 +212,8 @@
 <target xml:space="preserve"> Find the names of the weapons and armors within the time limit. It&apos;s up to you to play, Guardian ! </target>
 </trans-unit>
 <trans-unit datatype="html" id="5202601909039901741">
-<source xml:space="preserve">Arme Mystère - Destiny 2 Guessr</source>
-<target xml:space="preserve">Mystery Weapon - Destiny 2 Guessr</target>
+<source xml:space="preserve">Objet Mystère - Destiny 2 Guessr</source>
+<target xml:space="preserve">Mystery Item - Destiny 2 Guessr</target>
 </trans-unit>
 <trans-unit datatype="html" id="5326760932385679678">
 <source xml:space="preserve"> Bravo gardien ! Vous avez retrouvé tous les objets en <x equiv-text="{{convertToDateTime((timer | async ))}}" id="INTERPOLATION"/> ! </source>
@@ -275,7 +275,7 @@
 <source xml:space="preserve">
 <x equiv-text="{{ this.countdown| async| date : &quot;s&quot;}}" id="INTERPOLATION"/> secondes</source>
 <target xml:space="preserve">
-<x equiv-text="{{ this.countdown| async| date : &quot;s&quot;}}" id="INTERPOLATION"/>seconds</target>
+<x equiv-text="{{ this.countdown| async| date : &quot;s&quot;}}" id="INTERPOLATION"/> seconds</target>
 </trans-unit>
 <trans-unit datatype="html" id="6452619769236126966">
 <source xml:space="preserve">La mission n&apos;est pas terminée Gardien. Êtes-vous sûr de vouloir quitter ?</source>

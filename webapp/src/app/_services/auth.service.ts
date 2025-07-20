@@ -6,6 +6,7 @@ import {
   EMPTY,
   expand,
   map,
+  mergeMap,
   Observable,
   of,
   reduce,
@@ -72,28 +73,7 @@ export class AuthService {
   }
 
   initializeSession(): void {
-    const accessToken = this.getAccessToken();
-
-    let refresh$: Observable<string | null>;
-
-    if (!accessToken || this.isTokenExpired(accessToken)) {
-      refresh$ = this.httpClient
-        .post<any>(this.BASE_URL + '/token/refresh/', {
-          withCredentials: true,
-        })
-        .pipe(
-          map((res) => {
-            localStorage.setItem('access_token', res.access);
-            return res.access;
-          }),
-          catchError((err) => {
-            console.warn('Refresh failed', err);
-            return of(null);
-          })
-        );
-    } else {
-      refresh$ = of(accessToken);
-    }
+    let refresh$ = this.refreshToken();
 
     refresh$
       .pipe(
@@ -157,6 +137,32 @@ export class AuthService {
     this.startBungieLogin();
   }
 
+  refreshToken(): Observable<string | null> {
+    const accessToken = this.getAccessToken();
+
+    let refresh$: Observable<string | null>;
+
+    if (!accessToken || this.isTokenExpired(accessToken)) {
+      refresh$ = this.httpClient
+        .post<any>(this.BASE_URL + '/token/refresh/', {
+          withCredentials: true,
+        })
+        .pipe(
+          map((res) => {
+            localStorage.setItem('access_token', res.access);
+            return res.access;
+          }),
+          catchError((err) => {
+            console.warn('Refresh failed', err);
+            return of(null);
+          })
+        );
+    } else {
+      refresh$ = of(accessToken);
+    }
+    return refresh$;
+  }
+
   getAccountItems(
     lang: string = 'en',
     membershipId: string
@@ -167,11 +173,20 @@ export class AuthService {
     } else {
       const initialUrl = this.BASE_URL + '/auth/account-items/';
 
-      return this.fetchAllPaginated<Item>(initialUrl + membershipId + '/', {
-        lang,
-      }).pipe(
-        tap((items) => {
-          this.accountItemsCache.set(cacheKey, items);
+      return this.refreshToken().pipe(
+        mergeMap((token) => {
+          if (token) {
+            return this.fetchAllPaginated<Item>(
+              initialUrl + membershipId + '/',
+              { lang }
+            ).pipe(
+              tap((items) => {
+                this.accountItemsCache.set(cacheKey, items);
+              })
+            );
+          } else {
+            return throwError(() => new Error('Unable to refresh token.'));
+          }
         })
       );
     }
@@ -200,9 +215,17 @@ export class AuthService {
       params.search = search;
     }
 
-    return this.httpClient
-      .get<any>(url, { params })
-      .pipe(catchError(this.handleError));
+    return this.refreshToken().pipe(
+      mergeMap((token) => {
+        if (token) {
+          return this.httpClient
+            .get<any>(url, { params })
+            .pipe(catchError(this.handleError));
+        } else {
+          return throwError(() => new Error('Unable to refresh token'));
+        }
+      })
+    );
   }
 
   disconnectAccount(): Observable<any> {
@@ -228,8 +251,8 @@ export class AuthService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      console.error('An error occurred:', error.error);
+    if (error.status === 401) {
+      console.log('Access token needed ');
     } else {
       console.error(
         `Backend returned code ${error.status}, body was: `,

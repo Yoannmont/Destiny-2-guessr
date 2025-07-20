@@ -269,7 +269,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="5202601909039901741" datatype="html">
-        <source>Arme Mystère - Destiny 2 Guessr</source>
+        <source>Objet Mystère - Destiny 2 Guessr</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.routes.ts</context>
           <context context-type="linenumber">31</context>
@@ -342,7 +342,7 @@
           <context context-type="linenumber">29,30</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">238,239</context>
         </context-group>
       </trans-unit>
@@ -472,7 +472,7 @@
           <context context-type="linenumber">51,52</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">95,96</context>
         </context-group>
       </trans-unit>
@@ -515,7 +515,7 @@
           <context context-type="linenumber">193</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">104,105</context>
         </context-group>
       </trans-unit>
@@ -530,7 +530,7 @@
           <context context-type="linenumber">205</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">122,123</context>
         </context-group>
       </trans-unit>
@@ -545,7 +545,7 @@
           <context context-type="linenumber">219</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">150,151</context>
         </context-group>
       </trans-unit>
@@ -571,7 +571,7 @@
           <context context-type="linenumber">250</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">142,143</context>
         </context-group>
       </trans-unit>
@@ -586,7 +586,7 @@
           <context context-type="linenumber">263</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">131,132</context>
         </context-group>
       </trans-unit>
@@ -791,7 +791,7 @@
           <context context-type="linenumber">63,64</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">66,67</context>
         </context-group>
       </trans-unit>
@@ -802,7 +802,7 @@
           <context context-type="linenumber">64</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
@@ -813,7 +813,7 @@
           <context context-type="linenumber">67,68</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">70,71</context>
         </context-group>
       </trans-unit>
@@ -838,7 +838,7 @@
           <context context-type="linenumber">144,145</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">245,246</context>
         </context-group>
       </trans-unit>
@@ -870,7 +870,7 @@
           <context context-type="linenumber">276</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.ts</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.ts</context>
           <context context-type="linenumber">365</context>
         </context-group>
       </trans-unit>
@@ -903,107 +903,107 @@
         </context-group>
       </trans-unit>
       <trans-unit id="1953013685417393077" datatype="html">
-        <source>Arme mystère</source>
+        <source>Objet mystère</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">9,10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3782220081378128732" datatype="html">
         <source>Temps restant</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6114755528643596059" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ this.countdown| async| date : &quot;s&quot;}}"/> secondes</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">18,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="297586283935365973" datatype="html">
         <source>Indices</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">79,80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4556215123825736249" datatype="html">
         <source> Description</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">114,115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="150517092671093029" datatype="html">
         <source> Classe</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">161,163</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8149071162190852135" datatype="html">
         <source> Attribut intrinsèque</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">173,175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3974901240739209346" datatype="html">
         <source>De quel objet s&apos;agit-il ?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">191,192</context>
         </context-group>
       </trans-unit>
       <trans-unit id="516958296235356455" datatype="html">
         <source> Trouvez le nom des armes et armures dans le temps imparti. À vous de jouer, Gardien ! </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">241</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5436510033506741185" datatype="html">
         <source> Objet Mystère terminé </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">258,259</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2868733534334098190" datatype="html">
         <source> Vous avez perdu après <x id="INTERPOLATION" equiv-text="{{points}}"/> objet<x id="INTERPOLATION_1" equiv-text="{{points &gt; 1 ? &quot;s&quot;: &quot;&quot;}}"/> Gardien ! Le nom de l&apos;objet était <x id="INTERPOLATION_2" equiv-text="{{currentItem.localized_name}}"/>...</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">263,265</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4881298760692100495" datatype="html">
         <source>Félicitations, vous avez retrouvé toutes les armes Gardien !</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">267,268</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2301331841798252546" datatype="html">
         <source>Abandonner</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">273,274</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1467566692562963830" datatype="html">
         <source>Réessayer</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">275,276</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8168765646794661881" datatype="html">
         <source>Retour</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/mystery-weapon/mystery-weapon.component.html</context>
+          <context context-type="sourcefile">src/app/pages/mystery-item/mystery-item.component.html</context>
           <context context-type="linenumber">279,280</context>
         </context-group>
       </trans-unit>

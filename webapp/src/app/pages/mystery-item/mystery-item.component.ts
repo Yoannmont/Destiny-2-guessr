@@ -28,12 +28,12 @@ import { FilterPipe } from '../../_pipes/filter.pipe';
 import { GamemodeService } from '../../_services/gamemode.service';
 
 @Component({
-  selector: 'app-mystery-weapon',
-  templateUrl: './mystery-weapon.component.html',
-  styleUrl: './mystery-weapon.component.scss',
+  selector: 'app-mystery-item',
+  templateUrl: './mystery-item.component.html',
+  styleUrl: './mystery-item.component.scss',
   imports: [CommonModule, ReactiveFormsModule, FilterPipe],
 })
-export class MysteryWeaponComponent
+export class MysteryItemComponent
   implements OnInit, OnDestroy, CanComponentDeactivate
 {
   inputGroup!: FormGroup;

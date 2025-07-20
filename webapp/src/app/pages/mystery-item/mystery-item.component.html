@@ -6,7 +6,7 @@
                 <i class="bi bi-list"></i>
             </button>
 
-            <span class="section-title" i18n>Arme mystère</span>
+            <span class="section-title" i18n>Objet mystère</span>
         </div>
 
     </div>
@@ -15,8 +15,8 @@
             <div class="textbox p-3 text-end d-flex flex-column">
                 <div class="timer-wrapper p-3 row text-center border-bottom">
                     <span class="timer-title" i18n>Temps restant</span> <br />
-                    <span class="timer" i18n *ngIf="this.gameStarted">{{ this.countdown| async| date : "s"}}
-                        secondes</span>
+                    <span class="timer" i18n *ngIf="this.gameStarted">
+                        {{this.countdown| async| date : "s"}} secondes</span>
                 </div>
                 <span class="inputs-wrapper d-flex">
                     <div class="inputs" *ngIf="gameStarted">
@@ -103,7 +103,8 @@
                                     <div id="tier" class="d-none col vertical-fadeIn-animation w-100 hint-box">
                                         <small class="underline-white" i18n> Rareté </small>
                                         <div class="text-center hint">
-                                            <span class="{{(tiers | filter : currentItem.tier_type)[0]?.name}}">{{
+                                            <span
+                                                class="{{(tiers | filter : currentItem.tier_type)[0]?.name}} inherit-font-size">{{
                                                 (tiers |
                                                 filter : currentItem.tier_type)[0]?.localized_name }}
                                             </span>

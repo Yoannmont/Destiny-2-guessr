@@ -101,7 +101,7 @@ export class GamemodeComponent implements OnInit {
     };
   }
 
-  saveAndLaunch(gamemode: 'exo-challenge' | 'mystery-weapon'): void {
+  saveAndLaunch(gamemode: 'exo-challenge' | 'mystery-item'): void {
     this.saveSelectedItems();
     this.router.navigate(['/gamemode', gamemode]);
   }

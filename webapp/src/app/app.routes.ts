@@ -5,7 +5,7 @@ import { CollectionsComponent } from './pages/collections/collections.component'
 import { ExoChallengeComponent } from './pages/exo-challenge/exo-challenge.component';
 import { AboutComponent } from './pages/about/about.component';
 import { GamemodeComponent } from './components/gamemode/gamemode.component';
-import { MysteryWeaponComponent } from './pages/mystery-weapon/mystery-weapon.component';
+import { MysteryItemComponent } from './pages/mystery-item/mystery-item.component';
 import { BeforeLeavingGamemodeGuard } from './_guards/candeactivate.guard';
 import { SingleItemComponent } from './pages/single-item/single-item.component';
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
@@ -27,9 +27,9 @@ export const routes: Routes = [
         canDeactivate: [BeforeLeavingGamemodeGuard],
       },
       {
-        path: 'mystery-weapon',
-        title: $localize`Arme Mystère - Destiny 2 Guessr`,
-        component: MysteryWeaponComponent,
+        path: 'mystery-item',
+        title: $localize`Objet Mystère - Destiny 2 Guessr`,
+        component: MysteryItemComponent,
         canDeactivate: [BeforeLeavingGamemodeGuard],
       },
     ],
