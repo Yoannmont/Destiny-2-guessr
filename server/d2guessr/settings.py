@@ -50,7 +50,7 @@ class Dev(Configuration):
 
     @property
     def ALLOWED_HOSTS(self):
-        return ["localhost", str(self.HOST_IP), str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://"), ".vercel.app"]
+        return ["localhost", str(self.HOST_IP), str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://"), ".onrender.com"]
 
     # Application definition
 
@@ -420,3 +420,16 @@ class Preview(Dev):
     DEBUG = False
     CORS_ALLOW_ALL_ORIGINS = False
     DATABASES = values.DatabaseURLValue(environ_prefix=NAME)
+
+    FRONTEND_URL = values.Value(environ_prefix=NAME)
+    SOCIAL_AUTH_BUNGIE_API_KEY = values.SecretValue(environ_prefix=NAME)
+
+    SOCIAL_AUTH_BUNGIE_KEY = values.SecretValue(environ_prefix=NAME)
+
+    SOCIAL_AUTH_BUNGIE_SECRET = values.SecretValue(environ_prefix=NAME)
+
+    SOCIAL_AUTH_BUNGIE_ORIGIN = values.Value(environ_prefix=NAME)
+
+    @property
+    def ALLOWED_HOSTS(self):
+        return ["localhost", str(self.HOST_IP), str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://"), ".onrender.com"]
