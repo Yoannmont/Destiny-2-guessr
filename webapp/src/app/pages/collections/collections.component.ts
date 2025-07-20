@@ -237,8 +237,6 @@ export class CollectionsComponent implements OnInit, OnDestroy {
       } else {
         console.warn(">>> Couldn't fetch inventory: not connected");
       }
-    } else {
-      this.fromAccount = false;
     }
   }
 
