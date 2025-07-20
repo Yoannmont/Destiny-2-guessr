@@ -136,7 +136,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     if (p !== this.page) {
       this.page = p;
       this.utilsService.goToTop();
-      this.getItems();
+      this.reloadItems();
     }
   }
 
@@ -148,7 +148,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     if (this.page - 1 < this.totalPages) {
       this.page++;
       this.utilsService.goToTop();
-      this.getItems();
+      this.reloadItems();
     }
   }
 

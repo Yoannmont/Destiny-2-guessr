@@ -422,6 +422,7 @@ class Prod(Dev):
 
 
 class Test(Dev):
+    NAME = "TEST"
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -440,7 +441,6 @@ class Test(Dev):
     SOCIAL_AUTH_BUNGIE_API_KEY = "dummy_api_key"
     SOCIAL_AUTH_BUNGIE_KEY = "dummy_client_id"
     SOCIAL_AUTH_BUNGIE_SECRET = "dummy_secret_key"
-    SOCIAL_AUTH_BUNGIE_ORIGIN = "http://dummy_origin"
 
     @property
     def SOCIAL_AUTH_BUNGIE_FRONTEND_MEMBERSHIP_SELECTION_URL(self):

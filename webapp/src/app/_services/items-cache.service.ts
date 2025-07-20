@@ -181,12 +181,6 @@ export class ItemsCacheService {
     );
   }
 
-  private fetchPage<T>(url: string, params: any): Observable<T[]> {
-    return this.httpClient
-      .get<any>(url, { params })
-      .pipe(map(this.getResults), catchError(this.handleError));
-  }
-
   getResults(response: any) {
     return response.results || [];
   }

@@ -183,7 +183,8 @@ export class AuthService {
     membershipId: string,
     item_filters: ItemFilter,
     ordering: ItemOrdering = 'translations__name',
-    search: string = ''
+    search: string = '',
+    page_size: number = 42
   ): Observable<Item[]> {
     const url = `${this.BASE_URL}/auth/account-items/${membershipId}/`;
     const filterParams = item_filter_to_request(item_filters);
@@ -193,6 +194,7 @@ export class AuthService {
       page: page.toString(),
       ...filterParams,
       ordering,
+      page_size,
     };
     if (search !== '') {
       params.search = search;
