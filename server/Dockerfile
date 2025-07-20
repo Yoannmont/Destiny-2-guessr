@@ -27,12 +27,10 @@ RUN uv pip sync requirements.lock
 
 
 COPY . .
-RUN .venv/bin/python manage.py collectstatic --noinput
 RUN mkdir -p logs
 
 EXPOSE 8000
-ENV DJANGO_SETTINGS_MODULE=d2guessr.settings
-ENV DJANGO_CONFIGURATION=Preview
 
 
-CMD ["gunicorn", "d2guessr.wsgi:application", "--bind" "0.0.0.0:8000"]
+CMD ["sh", "-c", ".venv/bin/python manage.py collectstatic --noinput && .venv/bin/gunicorn d2guessr.wsgi:application --bind 0.0.0.0:8000"]
+
