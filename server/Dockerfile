@@ -25,19 +25,16 @@ COPY requirements.lock requirements.lock
 
 RUN uv pip sync requirements.lock
 
-
+RUN .venv/bin/python manage.py collectstatic --noinput
 COPY . .
 
-RUN [ -f .env ] || cp .env.example .env
-
-RUN .venv/bin/python manage.py makemigrations d2guessrlib d2guessrauth
-RUN .venv/bin/python manage.py migrate
-
-
-RUN .venv/bin/python manage.py populate_db --exotic-only
 RUN mkdir -p logs
 
+ENV PORT 8000
+
 EXPOSE 8000
+ENV DJANGO_SETTINGS_MODULE=d2guessr.settings
+ENV DJANGO_CONFIGURATION=Preview
 
 
-CMD [".venv/bin/python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD gunicorn d2guessr.wsgi:application --bind 0.0.0.0:$PORT

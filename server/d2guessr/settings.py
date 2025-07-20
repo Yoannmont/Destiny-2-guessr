@@ -14,7 +14,6 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
-import dj_database_url
 from configurations import Configuration, values
 from dotenv import load_dotenv
 
@@ -373,53 +372,6 @@ class Dev(Configuration):
     SWAGGER_USE_COMPAT_RENDERERS = False
 
 
-class Prod(Dev):
-    NAME = "PROD"
-
-    @property
-    def DB_NAME(self):
-        return values.Value(environ_prefix=self.NAME)
-
-    @property
-    def DB_PORT(self):
-        return values.Value(environ_prefix=self.NAME)
-
-    @property
-    def DB_USER(self):
-        return values.Value(environ_prefix=self.NAME)
-
-    @property
-    def DB_PASSWORD(self):
-        return values.SecretValue(environ_prefix=self.NAME)
-
-    @property
-    def DB_HOST(self):
-        return values.Value(environ_prefix=self.NAME)
-
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": DB_NAME,
-            "USER": DB_USER,
-            "PASSWORD": DB_PASSWORD,
-            "HOST": DB_HOST,
-            "PORT": DB_PORT,
-        }
-    }
-
-    DEBUG = False
-
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
-    SOCIAL_AUTH_JSONFIELD_ENABLED = True
-
-    CORS_ALLOW_CREDENTIALS = True
-    SESSION_COOKIE_SECURE = True
-
-    SOCIAL_AUTH_BUNGIE_FRONTEND_CALLBACK_URL = "?????"
-
-
 class Test(Dev):
     DATABASES = {
         "default": {
@@ -450,16 +402,21 @@ class Test(Dev):
         return "http://localhost:8000/mock-frontend/auth-callback/"
 
 
+class Prod(Dev):
+    NAME = "PROD"
+
+    DATABASES = values.DatabaseURLValue(environ_prefix=NAME)
+
+    DEBUG = False
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+    SOCIAL_AUTH_JSONFIELD_ENABLED = True
+
+    SOCIAL_AUTH_BUNGIE_FRONTEND_CALLBACK_URL = "?????"
+
+
 class Preview(Dev):
     NAME = "PREVIEW"
     DEBUG = False
     CORS_ALLOW_ALL_ORIGINS = False
-    WSGI_APPLICATION = "d2guessr.wsgi.app"
-    # DATABASE_URL = values.DatabaseURLValue(environ_prefix=NAME)
-    # DATABASES = {
-    #     "default": dj_database_url.parse(
-    #         str(DATABASE_URL),
-    #         conn_max_age=600,
-    #         conn_health_checks=True,
-    #     )
-    # }
+    DATABASES = values.DatabaseURLValue(environ_prefix=NAME)

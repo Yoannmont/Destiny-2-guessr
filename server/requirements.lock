@@ -130,9 +130,5 @@ uritemplate==4.1.1
     # via drf-yasg
 urllib3==2.4.0
     # via requests
-uwsgi==2.0.30
-    # via -r requirements.in
-uwsgitop==0.12
-    # via -r requirements.in
 whitenoise==6.9.0
     # via -r requirements.in
