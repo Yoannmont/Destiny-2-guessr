@@ -108,18 +108,27 @@ export class CollectionsComponent implements OnInit, OnDestroy {
   updatePaginationArray() {
     const maxVisible = 9;
     const half = Math.floor(maxVisible / 2);
+    const totalPages = this.totalPages;
+    const currentPage = this.page;
 
-    let start = Math.max(0, this.page - half);
-    let end = start + maxVisible - 1;
+    let start = currentPage - half;
+    let end = currentPage + half;
 
-    if (end >= this.totalPages) {
-      end = this.totalPages;
-      start = Math.max(0, end - maxVisible + 1);
+    if (start < 1) {
+      end += 1 - start;
+      start = 1;
     }
+
+    if (end > totalPages) {
+      start -= end - totalPages;
+      end = totalPages;
+    }
+
+    start = Math.max(1, start);
 
     this.paginationArray = [];
     for (let i = start; i <= end; i++) {
-      this.paginationArray.push(i + 1);
+      this.paginationArray.push(i);
     }
   }
 
@@ -201,6 +210,10 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     this.page = 1;
     this.sortOption = this.filterSortService.sortOption;
     this.reloadItems();
+  }
+
+  get isConnected() {
+    return !!this.authService.currentAccount;
   }
 
   getAccountItems(page: number = this.page): void {
@@ -332,13 +345,6 @@ export class CollectionsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroy.next(true);
-  }
-
-  get LOCALIZED_ITEM_TYPES() {
-    return this.langService.reduceLabels(
-      ITEM_TYPE_LABELS,
-      'localized_item_type'
-    );
   }
 
   get LOCALIZED_WEAPON_SLOTS() {

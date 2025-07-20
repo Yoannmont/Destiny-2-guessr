@@ -296,7 +296,9 @@ export class MysteryWeaponComponent
   getItems(): void {
     if (this.gamemodeService.selectedItems.length === 0) {
       this.itemsCacheService
-        .getAllItems(this.langService.currentLocaleID)
+        .getAllItems(this.langService.currentLocaleID, {
+          tier_type: [{ property: 'tier_type', value: '2', label: 'Exotic' }],
+        })
         .pipe(takeUntil(this.destroy))
         .subscribe((items: Item[]) => {
           this.filteredItems = items;

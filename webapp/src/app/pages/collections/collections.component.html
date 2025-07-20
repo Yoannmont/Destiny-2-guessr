@@ -18,8 +18,9 @@
                     <i class="bi bi-search"></i>
                 </button>
             </div>
-            <button class="btn btn-grey mx-2 my-1" *ngIf="!!this.accountItems" (click)="true" i18n> <i
-                    class="bi bi-safe"></i> Mon inventaire
+            <button class="btn btn-grey mx-2 my-1" *ngIf="isConnected" (click)="getAccountItems()" i18n> <i
+                    class="bi bi-safe"></i>
+                Mon inventaire
             </button>
             <button class="btn btn-red mx-2 my-1" (click)="resetFilters()" i18n> <i class="bi bi-arrow-clockwise"></i>
                 Reset

@@ -6,8 +6,5 @@ import { Item } from '../_classes/item';
 })
 export class GamemodeService {
   selectedItems: Item[] = [];
-
-  mysteryWeaponParams = {};
-  exoChallengeParams = {};
   constructor() {}
 }

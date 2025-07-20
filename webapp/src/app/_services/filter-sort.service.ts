@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Filter } from '../_classes/filter';
 import {
-  Item,
   ITEM_TYPE_LABELS,
-  WEAPON_SLOT_LABELS,
-  WEAPON_AMMO_TYPE_LABELS,
   ItemOrdering,
   switchOrdering,
 } from '../_classes/item';
@@ -15,7 +12,6 @@ import { LangService } from './lang.service';
   providedIn: 'root',
 })
 export class FilterSortService {
-  sortAscending: any;
   constructor(
     public utilsService: UtilsService,
     private langService: LangService
@@ -25,15 +21,15 @@ export class FilterSortService {
   fromAccount: boolean = false;
 
   sortOption: ItemOrdering = 'translations__name';
+  sortAscending: boolean = false;
 
   filters: Array<Filter> = [];
   filterSidebarOpen: boolean = false;
 
   setSort(option: ItemOrdering): void {
     if (this.sortOption === option) {
-      if (this.sortOption.charAt(0) == '-') {
-        this.sortOption = switchOrdering(option);
-      }
+      this.sortAscending = !this.sortAscending;
+      this.sortOption = switchOrdering(option);
     } else {
       this.sortOption = option;
     }
@@ -45,6 +41,13 @@ export class FilterSortService {
     label: string | number
   ): Filter[] {
     const filter = { property: property, value: value, label: label };
+    const isWeaponOrArmorFilter = this.LOCALIZED_ITEM_TYPES.filter(
+      (reducedLabel) => reducedLabel['localized_item_type'] === label
+    );
+    if (filter.property === 'category' && isWeaponOrArmorFilter.length !== 0) {
+      filter.property = 'item_type';
+      filter.value = isWeaponOrArmorFilter[0].id.toString();
+    }
     const foundFilter = this.filters.find(
       (_filter) =>
         _filter.property === filter.property && _filter.value === filter.value
@@ -52,8 +55,10 @@ export class FilterSortService {
     if (!foundFilter) {
       this.filters.push(filter);
     }
+    console.log(this.filters);
     return this.filters;
   }
+
   deleteFilter(filter: Filter): Filter[] {
     const index = this.filters.findIndex((_filter) => _filter === filter);
     this.filters.splice(index, 1);
@@ -63,35 +68,6 @@ export class FilterSortService {
     this.filters = [];
     this.searchTerm = '';
     this.fromAccount = false;
-  }
-
-  applyFilters(sourceItems: Item[]): Item[] {
-    const filteredItems = sourceItems.filter((item: Item) => {
-      const groupedFilters = this.groupFiltersByProperty();
-
-      return Object.keys(groupedFilters).every((property: any) => {
-        const filtersForProperty = groupedFilters[property];
-        return filtersForProperty.some(
-          (filter: {
-            property: string;
-            value: string | number;
-            label: string | number;
-          }) => {
-            if (this.utilsService.isArmorLabel(<string>filter.label)) {
-              return this.utilsService.isArmor(item);
-            }
-            if (this.utilsService.isWeaponLabel(<string>filter.label)) {
-              return this.utilsService.isWeapon(item);
-            }
-            return (
-              item.hasOwnProperty(filter.property) &&
-              item[filter.property] === filter.value
-            );
-          }
-        );
-      });
-    });
-    return filteredItems;
   }
 
   groupFiltersByProperty(): any {
@@ -109,20 +85,6 @@ export class FilterSortService {
     return this.langService.reduceLabels(
       ITEM_TYPE_LABELS,
       'localized_item_type'
-    );
-  }
-
-  get LOCALIZED_WEAPON_SLOTS() {
-    return this.langService.reduceLabels(
-      WEAPON_SLOT_LABELS,
-      'localized_weapon_slot'
-    );
-  }
-
-  get LOCALIZED_WEAPON_AMMO_TYPES() {
-    return this.langService.reduceLabels(
-      WEAPON_AMMO_TYPE_LABELS,
-      'localized_weapon_ammo_type'
     );
   }
 }
