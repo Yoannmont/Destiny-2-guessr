@@ -50,11 +50,7 @@ class Dev(Configuration):
 
     @property
     def ALLOWED_HOSTS(self):
-        return [
-            "localhost",
-            str(self.HOST_IP),
-            str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://"),
-        ]
+        return ["localhost", str(self.HOST_IP), str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://"), ".onrender.com"]
 
     # Application definition
 
@@ -75,6 +71,7 @@ class Dev(Configuration):
         "drf_yasg",
         "rest_framework_simplejwt.token_blacklist",
         "ip_filter",
+        "whitenoise.runserver_nostatic",
     ]
 
     MIDDLEWARE = [
@@ -88,6 +85,7 @@ class Dev(Configuration):
         "django.contrib.messages.middleware.MessageMiddleware",
         "django.middleware.clickjacking.XFrameOptionsMiddleware",
         "d2guessr.middleware.restrict_admin_ip.RestrictAdminIPMiddleware",
+        "whitenoise.middleware.WhiteNoiseMiddleware",
     ]
 
     # Logging
@@ -199,7 +197,7 @@ class Dev(Configuration):
     # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
     STATIC_URL = "static/"
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles", "static")
     MEDIA_URLS = "/media/"
     MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
@@ -374,53 +372,6 @@ class Dev(Configuration):
     SWAGGER_USE_COMPAT_RENDERERS = False
 
 
-class Prod(Dev):
-    NAME = "PROD"
-
-    @property
-    def DB_NAME(self):
-        return values.Value(environ_prefix=self.NAME)
-
-    @property
-    def DB_PORT(self):
-        return values.Value(environ_prefix=self.NAME)
-
-    @property
-    def DB_USER(self):
-        return values.Value(environ_prefix=self.NAME)
-
-    @property
-    def DB_PASSWORD(self):
-        return values.SecretValue(environ_prefix=self.NAME)
-
-    @property
-    def DB_HOST(self):
-        return values.Value(environ_prefix=self.NAME)
-
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": DB_NAME,
-            "USER": DB_USER,
-            "PASSWORD": DB_PASSWORD,
-            "HOST": DB_HOST,
-            "PORT": DB_PORT,
-        }
-    }
-
-    DEBUG = False
-
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
-    SOCIAL_AUTH_JSONFIELD_ENABLED = True
-
-    CORS_ALLOW_CREDENTIALS = True
-    SESSION_COOKIE_SECURE = True
-
-    SOCIAL_AUTH_BUNGIE_FRONTEND_CALLBACK_URL = "?????"
-
-
 class Test(Dev):
     NAME = "TEST"
     DATABASES = {
@@ -451,6 +402,19 @@ class Test(Dev):
         return "http://localhost:8000/mock-frontend/auth-callback/"
 
 
+class Prod(Dev):
+    NAME = "PROD"
+
+    DATABASES = values.DatabaseURLValue(environ_prefix=NAME)
+
+    DEBUG = False
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+    SOCIAL_AUTH_JSONFIELD_ENABLED = True
+
+    SOCIAL_AUTH_BUNGIE_FRONTEND_CALLBACK_URL = "?????"
+
+
 class Preview(Dev):
     NAME = "PREVIEW"
     DEBUG = False
@@ -462,3 +426,17 @@ class Preview(Dev):
     SOCIAL_AUTH_BUNGIE_ORIGIN = values.Value(environ_prefix=NAME)
     HOST_IP = values.Value(environ_prefix=NAME)
     CORS_ALLOW_ALL_ORIGINS = False
+    DATABASES = values.DatabaseURLValue(environ_prefix=NAME)
+
+    FRONTEND_URL = values.Value(environ_prefix=NAME)
+    SOCIAL_AUTH_BUNGIE_API_KEY = values.SecretValue(environ_prefix=NAME)
+
+    SOCIAL_AUTH_BUNGIE_KEY = values.SecretValue(environ_prefix=NAME)
+
+    SOCIAL_AUTH_BUNGIE_SECRET = values.SecretValue(environ_prefix=NAME)
+
+    SOCIAL_AUTH_BUNGIE_ORIGIN = values.Value(environ_prefix=NAME)
+
+    @property
+    def ALLOWED_HOSTS(self):
+        return ["localhost", str(self.HOST_IP), str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://"), ".onrender.com"]

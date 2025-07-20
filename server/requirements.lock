@@ -22,10 +22,13 @@ defusedxml==0.7.1
     # via
     #   python3-openid
     #   social-auth-core
+dj-database-url==3.0.1
+    # via -r requirements.in
 django==5.2.4
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
+    #   dj-database-url
     #   django-configurations
     #   django-cors-headers
     #   django-crispy-forms
@@ -127,7 +130,5 @@ uritemplate==4.1.1
     # via drf-yasg
 urllib3==2.4.0
     # via requests
-uwsgi==2.0.30
-    # via -r requirements.in
-uwsgitop==0.12
+whitenoise==6.9.0
     # via -r requirements.in

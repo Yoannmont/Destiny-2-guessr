@@ -27,17 +27,10 @@ RUN uv pip sync requirements.lock
 
 
 COPY . .
-
-RUN [ -f .env ] || cp .env.example .env
-
-RUN .venv/bin/python manage.py makemigrations d2guessrlib d2guessrauth
-RUN .venv/bin/python manage.py migrate
-
-
-RUN .venv/bin/python manage.py populate_db --exotic-only
 RUN mkdir -p logs
 
 EXPOSE 8000
 
 
-CMD [".venv/bin/python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["sh", "-c", ".venv/bin/python manage.py collectstatic --noinput && .venv/bin/gunicorn d2guessr.wsgi:application --bind 0.0.0.0:8000"]
+
