@@ -216,16 +216,21 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     return !!this.authService.currentAccount;
   }
 
-  getAccountItems(page: number = this.page): void {
+  getAccountItems(
+    page: number = this.page,
+    item_filters: ItemFilter = this.item_filters,
+    ordering: ItemOrdering = this.sortOption,
+    searchTerm: string = this.searchTerm
+  ): void {
     if (this.authService.currentAccount) {
       this.authService
         .getAccountItemsFromPage(
           page,
           this.langService.currentLocaleID,
           this.authService.currentAccount.membershipId,
-          this.item_filters,
-          this.sortOption,
-          this.searchTerm
+          item_filters,
+          ordering,
+          searchTerm
         )
         .subscribe((response: any) => {
           this.itemCount = response.count;
@@ -332,10 +337,10 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     }
     this.page = 1;
 
-    if (this.fromAccount) {
+    if (!this.fromAccount) {
       this.getItems(this.page, this.item_filters, this.sortOption, term);
     } else {
-      this.getAccountItems(this.page);
+      this.getAccountItems(this.page, this.item_filters, this.sortOption, term);
     }
   }
 

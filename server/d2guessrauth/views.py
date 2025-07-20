@@ -19,6 +19,7 @@ from social_core.actions import do_disconnect
 from social_django.utils import load_backend, load_strategy
 
 from d2guessrauth.models import BungieAccount
+from d2guessrlib.filters import ItemFilterSet
 from d2guessrlib.models import ItemTranslation
 from d2guessrlib.paginations import ItemPagination
 from d2guessrlib.serializers import ItemSerializer
@@ -103,6 +104,7 @@ class BungieAccountItemView(ListAPIView):
     pagination_class = ItemPagination
     serializer_class = ItemSerializer
     permission_classes = [IsAuthenticated]
+    filterset_class = ItemFilterSet
 
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     ordering_fields = ["translations__name", "tier_type", "default_damage_type", "category"]

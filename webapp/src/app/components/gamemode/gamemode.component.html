@@ -77,13 +77,14 @@
                             </button>
                         </div>
 
-                        <button class="btn btn-outline-light mx-2 my-1" (click)="selectAllFiltered()" i18n>Sélectionner
+                        <button class="btn btn-outline-light mx-auto my-1" (click)="selectAllFiltered()"
+                            i18n>Sélectionner
                             tout</button>
-                        <button class="btn btn-outline-light mx-2 my-1" (click)="unselectAllFiltered()"
+                        <button class="btn btn-outline-light mx-auto my-1" (click)="unselectAllFiltered()"
                             i18n>Désélectionner
                             tout</button>
-                        <button class="btn btn-grey mx-2 my-1" *ngIf="!!this.accountItems" i18n> <i
-                                class="bi bi-safe"></i> Mon
+                        <button class="btn btn-grey mx-auto my-1" *ngIf="isConnected" (click)="getAccountItems()" i18n>
+                            <i class="bi bi-safe"></i> Mon
                             inventaire
                         </button>
 

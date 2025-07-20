@@ -141,18 +141,27 @@ export class GamemodeComponent implements OnInit {
   updatePaginationArray() {
     const maxVisible = 9;
     const half = Math.floor(maxVisible / 2);
+    const totalPages = this.totalPages;
+    const currentPage = this.page;
 
-    let start = Math.max(0, this.page - half);
-    let end = start + maxVisible - 1;
+    let start = currentPage - half;
+    let end = currentPage + half;
 
-    if (end >= this.totalPages) {
-      end = this.totalPages;
-      start = Math.max(0, end - maxVisible + 1);
+    if (start < 1) {
+      end += 1 - start;
+      start = 1;
     }
 
+    if (end > totalPages) {
+      start -= end - totalPages;
+      end = totalPages;
+    }
+
+    start = Math.max(1, start);
+
     this.paginationArray = [];
-    for (let i = start; i <= end; i++) {
-      this.paginationArray.push(i + 1);
+    for (let i = start; i <= end + 1; i++) {
+      this.paginationArray.push(i);
     }
   }
 
@@ -191,15 +200,31 @@ export class GamemodeComponent implements OnInit {
       });
   }
 
-  getAccountItems(): void {
+  get isConnected() {
+    return !!this.authService.currentAccount;
+  }
+
+  getAccountItems(
+    page: number = this.page,
+    item_filters: ItemFilter = this.item_filters,
+    ordering: ItemOrdering = this.sortOption,
+    searchTerm: string = this.searchTerm
+  ): void {
     if (this.authService.currentAccount) {
       this.authService
-        .getAccountItems(
+        .getAccountItemsFromPage(
+          page,
           this.langService.currentLocaleID,
-          this.authService.currentAccount.membershipId
+          this.authService.currentAccount.membershipId,
+          item_filters,
+          ordering,
+          searchTerm
         )
-        .subscribe((items: Item[]) => {
-          this.accountItems = items;
+        .subscribe((response: any) => {
+          this.itemCount = response.count;
+          this.filteredItems = response.results;
+          this.fromAccount = true;
+          this.updatePaginationArray();
         });
     } else {
       console.warn(">>> Couldn't fetch inventory: not connected");
@@ -299,13 +324,25 @@ export class GamemodeComponent implements OnInit {
     }
     this.page = 1;
 
-    this.getItems(this.page, this.item_filters, this.sortOption, term);
+    if (!this.fromAccount) {
+      this.getItems(this.page, this.item_filters, this.sortOption, term);
+    } else {
+      this.getAccountItems(this.page, this.item_filters, this.sortOption, term);
+    }
+  }
+
+  reloadItems(): void {
+    if (this.fromAccount) {
+      this.getAccountItems();
+    } else {
+      this.getItems();
+    }
   }
 
   goToPage(p: number): void {
     if (p !== this.page) {
       this.page = p;
-      this.getItems();
+      this.reloadItems();
     }
   }
 
@@ -317,14 +354,14 @@ export class GamemodeComponent implements OnInit {
     if (this.page - 1 < this.totalPages) {
       this.page++;
 
-      this.getItems();
+      this.reloadItems();
     }
   }
 
   previousPage() {
     if (this.page > 1) {
       this.page--;
-      this.getItems();
+      this.reloadItems();
     }
   }
 
