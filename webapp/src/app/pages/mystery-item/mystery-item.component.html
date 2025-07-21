@@ -242,7 +242,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="this.startCountdown()"
-                    [disabled]="this.isLoading | async" i18n>Commencer</button>
+                    [disabled]="(this.isLoading | async) || !currentItem" i18n>Commencer</button>
             </div>
         </div>
     </div>
