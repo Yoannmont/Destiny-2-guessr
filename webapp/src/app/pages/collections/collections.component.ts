@@ -93,6 +93,8 @@ export class CollectionsComponent implements OnInit, OnDestroy {
         console.warn('Request timed out.');
       }
     });
+    this.filterSortService.resetFilters();
+    this.updatePaginationArray();
 
     this.getCategories();
     this.getTiers();
