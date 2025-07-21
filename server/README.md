@@ -28,3 +28,9 @@ Key features include:
 - OAuth-based Bungie account linking
 - Fetching and storing inventory data from the user's Bungie account
 - This integration is powered by the social-auth-app-django package (formerly social_django), using Bungie as an OAuth2 provider.
+
+
+To run:
+- copy .env.example content to a new .env and replace with your settings.
+- run bin/mkvenv
+- Ready !

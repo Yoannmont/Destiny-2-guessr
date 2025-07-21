@@ -8,7 +8,16 @@ services:
 
   server:
     build: ./server
-    command: .venv/bin/python manage.py runserver 0.0.0.0:8000
     ports:
       - 8000:8000
+    environment:
+      - DJANGO_SETTINGS_MODULE=d2guessr.settings
+      - DJANGO_CONFIGURATION=Dev
+      - DEV_DJANGO_SOCIAL_AUTH_BUNGIE_API_KEY=API_KEY
+      - DEV_DJANGO_SOCIAL_AUTH_BUNGIE_KEY=CLIENT_ID
+      - DEV_DJANGO_SOCIAL_AUTH_BUNGIE_SECRET=SECRET
+      - DEV_DJANGO_SOCIAL_AUTH_BUNGIE_ORIGIN=https://ORIGIN
+      - DEV_DJANGO_FRONTEND_URL=http://localhost:4200
+      - DEV_DJANGO_HOST_IP=127.0.0.1
+      - PROD_DATABASE_URL=postgres://d2guessr_user:d2guessr_password@127.0.0.1:5432/d2guessr_db
     restart: always

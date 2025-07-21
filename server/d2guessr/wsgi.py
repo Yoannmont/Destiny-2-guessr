@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
 
 import os
 
-from configurations.wsgi import get_wsgi_application
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d2guessr.settings")  # noqa
+os.environ.setdefault("DJANGO_CONFIGURATION", "Dev")  # noqa
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d2guessr.settings")
-os.environ.setdefault("DJANGO_CONFIGURATION", "Dev")
+from configurations.wsgi import get_wsgi_application
 
 application = get_wsgi_application()

@@ -90,6 +90,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
       if (this.loading) {
         this.timedOut = true;
         this.loading = false;
+        console.warn('Request timed out.');
       }
     });
 

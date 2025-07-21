@@ -48,3 +48,10 @@ urlpatterns = [
 
 if settings.ACTIVATE_MOCKUPS:
     urlpatterns += [path("", include("mockups.urls"))]
+
+if settings.DEBUG:
+    import debug_toolbar  # noqa
+
+    urlpatterns = [
+        path("__debug__/", include(debug_toolbar.urls)),
+    ] + urlpatterns

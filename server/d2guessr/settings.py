@@ -17,11 +17,10 @@ from pathlib import Path
 from configurations import Configuration, values
 from dotenv import load_dotenv
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(dotenv_path=BASE_DIR / ".env")
-
 
 class Dev(Configuration):
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    load_dotenv(dotenv_path=BASE_DIR / ".env")
     # Build paths inside the project like this: BASE_DIR / 'subdir'.
     NAME = "DEV"
 
@@ -48,6 +47,11 @@ class Dev(Configuration):
 
     SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
+    INTERNAL_IPS = [
+        "127.0.0.1",
+        "localhost",
+    ]
+
     @property
     def ALLOWED_HOSTS(self):
         return ["localhost", str(self.HOST_IP), str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://"), ".onrender.com"]
@@ -72,9 +76,11 @@ class Dev(Configuration):
         "rest_framework_simplejwt.token_blacklist",
         "ip_filter",
         "whitenoise.runserver_nostatic",
+        "debug_toolbar",
     ]
 
     MIDDLEWARE = [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
         "log_request_id.middleware.RequestIDMiddleware",
         "django.middleware.security.SecurityMiddleware",
         "django.contrib.sessions.middleware.SessionMiddleware",
@@ -408,7 +414,7 @@ class Prod(Dev):
     DATABASES = values.DatabaseURLValue(environ_prefix=NAME)
 
     DEBUG = False
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+    STATIC_ROOT = os.path.join(Dev.BASE_DIR, "static")
 
     SOCIAL_AUTH_JSONFIELD_ENABLED = True
 

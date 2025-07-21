@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Install the 'uv' tool globally (used for fast Python dependency management)
+pip install uv
+
+# Delete any existing virtual environment named 'env'
+rm -rf env
+
+# Create a new virtual environment in the 'env' directory using uv
+uv venv env
+
+# Activate the new virtual environment
+source env/bin/activate
+
+# Synchronize the environment with the exact dependencies from the lock file
+uv pip sync ./requirements.lock
