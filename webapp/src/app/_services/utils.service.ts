@@ -9,7 +9,7 @@ import { getPlatformName } from '../_classes/platform';
 export class UtilsService {
   sidebarLayout: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isSidebarVisible: boolean = this.isScreenSizeLarge();
-  readonly timeoutDuration: number = 15000;
+  readonly timeoutDuration: number = 65000;
 
   public readonly navbarContent = [
     { title: $localize`Jouer`, link: 'gamemode/' },

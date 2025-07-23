@@ -33,7 +33,7 @@ export class ItemsCacheService {
   private classTypesCache: Map<string, ClassType[]> = new Map();
 
   private readonly BASE_URL = environment.SERVER_BASE_URL + '/d2g';
-  readonly timeoutDuration: number = 30000;
+  readonly timeoutDuration: number = 65000;
 
   constructor(private httpClient: HttpClient) {}
 
