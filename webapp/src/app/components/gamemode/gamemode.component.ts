@@ -40,7 +40,7 @@ export class GamemodeComponent implements OnInit {
   filteredItems!: Item[];
   selectedItems: Item[] = [];
 
-  pageSize: number = 100;
+  pageSize: number = 200;
   page: number = 1;
   itemCount: number = 0;
 

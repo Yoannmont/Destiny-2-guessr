@@ -243,6 +243,10 @@ $shadows-small : multiple-box-shadow(400);
     }
 }
 
+.new-item-effect {
+    --item-border-color: white;
+}
+
 
 .new-item-effect::before {
     content: "";
@@ -252,8 +256,29 @@ $shadows-small : multiple-box-shadow(400);
 
 
     position: absolute;
-    border: 1px solid #FFC800;
+    border: 1px solid var(--item-border-color);
     animation: 2000ms linear 2000ms infinite newCollectible;
+}
+
+.new-item-effect.Exotic-border {
+    --item-border-color: #FFC800;
+}
+
+.new-item-effect.Legendary-border {
+    --item-border-color: #9855bc;
+}
+
+.new-item-effect.Rare-border {
+    --item-border-color: #70a5e6;
+}
+
+
+.new-item-effect.Common-border {
+    --item-border-color: #4fa25f
+}
+
+.new-item-effect.Basic-border {
+    --item-border-color: grey
 }
 
 

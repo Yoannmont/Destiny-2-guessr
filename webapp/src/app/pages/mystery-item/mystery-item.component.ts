@@ -66,7 +66,7 @@ export class MysteryItemComponent
     { time: 20000, revealedProp: 'weaponAmmoType' },
     { time: 20000, revealedProp: 'damageType' },
     { time: 20000, revealedProp: 'classType' },
-    { time: 12500, revealedProp: 'intrinsicPerk' },
+    { time: 15000, revealedProp: 'intrinsicPerk' },
   ];
 
   constructor(
@@ -157,16 +157,73 @@ export class MysteryItemComponent
     });
   }
 
-  getItemIdByName(name: string) {
-    const validName = this.validateName(name);
-    const item = this.filteredItems.find(
-      (_item) => this.validateName(<string>_item.localized_name) === validName
-    );
+  getItemIdByName(name: string, maxDistance = 2) {
+    const inputName = this.validateName(name);
+
+    let closestItem: Item | null = null;
+    let minDistance = Infinity;
+
+    for (const item of this.filteredItems) {
+      const itemName = this.validateName(item.localized_name as string);
+      const distance = this.levenshteinDistance(inputName, itemName);
+
+      if (distance < minDistance && distance <= maxDistance) {
+        minDistance = distance;
+        closestItem = item;
+      }
+    }
 
     return {
-      id: item?.id,
-      armorOrWeapon: item?.item_type,
+      id: closestItem?.id,
+      armorOrWeapon: closestItem?.item_type,
     };
+  }
+
+  getItemObjectByName(name: string, maxDistance = 2): Item | undefined {
+    const inputName = this.validateName(name);
+
+    let closestItem: Item | undefined;
+    let minDistance = Infinity;
+
+    for (const item of this.filteredItems) {
+      const itemName = this.validateName(item.localized_name as string);
+      const distance = this.levenshteinDistance(inputName, itemName);
+
+      if (distance < minDistance && distance <= maxDistance) {
+        minDistance = distance;
+        closestItem = item;
+      }
+    }
+
+    return closestItem;
+  }
+
+  levenshteinDistance(a: string, b: string): number {
+    const matrix: number[][] = [];
+
+    for (let i = 0; i <= b.length; i++) {
+      matrix[i] = [i];
+    }
+
+    for (let j = 0; j <= a.length; j++) {
+      matrix[0][j] = j;
+    }
+
+    for (let i = 1; i <= b.length; i++) {
+      for (let j = 1; j <= a.length; j++) {
+        if (b.charAt(i - 1).toLowerCase() === a.charAt(j - 1).toLowerCase()) {
+          matrix[i][j] = matrix[i - 1][j - 1];
+        } else {
+          matrix[i][j] = Math.min(
+            matrix[i - 1][j] + 1, // suppression
+            matrix[i][j - 1] + 1, // insertion
+            matrix[i - 1][j - 1] + 1 // substitution
+          );
+        }
+      }
+    }
+
+    return matrix[b.length][a.length];
   }
 
   getItemObjectById(item_type: number, id: number): Item | undefined {
@@ -174,6 +231,7 @@ export class MysteryItemComponent
       (item) => item.id === id && item.item_type === item_type
     );
   }
+
   revealImage(): void {
     let spanElement = document.getElementById('itemToFind');
 
@@ -200,15 +258,6 @@ export class MysteryItemComponent
       .subscribe((item: Item) => {
         this.currentItem = item;
       });
-  }
-
-  getItemObjectByName(name: string): Item | undefined {
-    const validName = this.validateName(name);
-    const item = this.filteredItems.find(
-      (_item) => this.validateName(<string>_item.localized_name) === validName
-    );
-
-    return item;
   }
 
   submitInput(): void {

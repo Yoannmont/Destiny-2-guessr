@@ -1,6 +1,6 @@
-<div class="loading-container d-flex justify-content-center align-items-center" *ngIf="this.isLoading | async">
-    <div class="d-flex align-items-center">
-        <div class="spinner-border me-3" role="status"></div>
+<div class="loading-container d-flex justify-content-center align-items-center" *ngIf="(this.isLoading | async)">
+    <div class="text-center">
+        <div class="spinner-border" role="status"></div>
         <div i18n class="title text-center">Chargement en cours...</div>
     </div>
 </div>

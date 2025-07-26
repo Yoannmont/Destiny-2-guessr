@@ -45,7 +45,8 @@
 
                                     </div>
                                     <div class="col-4">
-                                        <span class="shining-wrapper d-block new-item-effect">
+                                        <span
+                                            class="shining-wrapper d-block new-item-effect {{(tiers  | filter : item.tier_type)[0].name}}-border">
                                             <img [src]="this.utilsService.createIconLink(item.icon_url)"
                                                 [alt]="item.localized_name" class="item-icon"></span>
                                     </div>
