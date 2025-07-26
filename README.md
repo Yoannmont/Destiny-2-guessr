@@ -4,7 +4,7 @@
 
 </p> 
 
-Destiny 2 Guessr web application with games and quizz about Destiny 2 developed with Django, PostgreSQL and Docker.
+Destiny 2 Guessr web application with games and quizz about Destiny 2 developed with Django 5.2 and Angular CLI 20.
 
 
 ![d2g_preview](assets/Destiny_2_Guessr_preview.png)
