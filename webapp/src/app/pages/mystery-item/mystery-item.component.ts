@@ -265,7 +265,7 @@ export class MysteryItemComponent
     this.pushInput();
     this.inputGroup.reset();
 
-    const itemIdOrUndefined = this.getCollectibleIdByName(userInput);
+    const itemIdOrUndefined = this.getItemIdByName(userInput).id;
     if (
       itemIdOrUndefined === this.currentItem?.id &&
       itemIdOrUndefined !== undefined
@@ -393,23 +393,11 @@ export class MysteryItemComponent
     return this.utilsService.validateName(name);
   }
 
-  getCollectibleIdByName(name: string): number | undefined {
-    const validName = this.validateName(name);
-    return this.filteredItems.find(
-      (item) => this.validateName(item.localized_name || '') === validName
-    )?.id;
-  }
 
   getCollectibleObjectById(id: number): Item | undefined {
     return this.filteredItems.find((item) => item.id === id);
   }
 
-  getCollectibleObjectByName(name: string): Item | undefined {
-    const validName = this.validateName(name);
-    return this.filteredItems.find(
-      (item) => this.validateName(item.localized_name || '') === validName
-    );
-  }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     return confirm(
