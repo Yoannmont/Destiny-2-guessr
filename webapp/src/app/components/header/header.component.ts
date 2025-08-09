@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
     ).click();
     setTimeout(() => {
       this.authService.startBungieLogin();
-    }, 3000);
+    }, 2000);
   }
 
   logout(): void {

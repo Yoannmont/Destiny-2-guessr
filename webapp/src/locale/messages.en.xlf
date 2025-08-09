@@ -3,11 +3,11 @@
 <body>
 <trans-unit datatype="html" id="1008809283133775686">
 <source xml:space="preserve">Attributs</source>
-<target xml:space="preserve">Perks</target>
+<target xml:space="preserve">Attributes</target>
 </trans-unit>
 <trans-unit datatype="html" id="1026846705857013000">
 <source xml:space="preserve">Nom de l&apos;arme</source>
-<target xml:space="preserve">Name of the weapon</target>
+<target xml:space="preserve">Name of weapon</target>
 </trans-unit>
 <trans-unit datatype="html" id="1030562982351061618">
 <source xml:space="preserve">Une erreur est survenue lors de votre authentification Bungie. Veuillez réessayer ultérieurement.</source>
@@ -15,11 +15,15 @@
 </trans-unit>
 <trans-unit datatype="html" id="1087900872515566478">
 <source xml:space="preserve">Objets</source>
-<target xml:space="preserve">Items</target>
+<target xml:space="preserve">Objects</target>
 </trans-unit>
 <trans-unit datatype="html" id="1446578836728028301">
 <source xml:space="preserve">Entrez votre réponse</source>
 <target xml:space="preserve">Enter your answer</target>
+</trans-unit>
+<trans-unit datatype="html" id="1449013712702309503">
+<source xml:space="preserve">Objet Mystère - Destiny 2 Guessr</source>
+<target xml:space="preserve">Mystery Object - Destiny 2 Guessr</target>
 </trans-unit>
 <trans-unit datatype="html" id="1467566692562963830">
 <source xml:space="preserve">Réessayer</source>
@@ -27,11 +31,11 @@
 </trans-unit>
 <trans-unit datatype="html" id="150517092671093029">
 <source xml:space="preserve"> Classe</source>
-<target xml:space="preserve"> Class</target>
+<target xml:space="preserve"> Class </target>
 </trans-unit>
 <trans-unit datatype="html" id="1548760616073902320">
 <source xml:space="preserve"> Type de munitions </source>
-<target xml:space="preserve"> Ammo type </target>
+<target xml:space="preserve"> Type of ammunition </target>
 </trans-unit>
 <trans-unit datatype="html" id="159116427623732952">
 <source xml:space="preserve">La page recherchée n&apos;existe pas.</source>
@@ -43,15 +47,11 @@
 </trans-unit>
 <trans-unit datatype="html" id="1647099651016019774">
 <source xml:space="preserve">Paramètres </source>
-<target xml:space="preserve">Settings </target>
+<target xml:space="preserve">Parameters </target>
 </trans-unit>
 <trans-unit datatype="html" id="1841807441021525719">
 <source xml:space="preserve">Plongez dans l&apos;univers de Destiny 2 et testez vos connaissances en retrouvant les noms des objets exotiques.</source>
-<target xml:space="preserve">Immerse yourself in the Destiny 2 universe and test your knowledge by finding the names of exotic objects.</target>
-</trans-unit>
-<trans-unit datatype="html" id="1953013685417393077">
-<source xml:space="preserve">Objet mystère</source>
-<target xml:space="preserve">Mystery item</target>
+<target xml:space="preserve">Immerse yourself in the world of Destiny 2 and test your knowledge by finding the names of exotic items.</target>
 </trans-unit>
 <trans-unit datatype="html" id="1961861928422837439">
 <source xml:space="preserve">Plateforme</source>
@@ -67,7 +67,7 @@
 </trans-unit>
 <trans-unit datatype="html" id="2301331841798252546">
 <source xml:space="preserve">Abandonner</source>
-<target xml:space="preserve">Quit</target>
+<target xml:space="preserve">Give up</target>
 </trans-unit>
 <trans-unit datatype="html" id="247273445495725571">
 <source xml:space="preserve">Trouvez le nom des objets de l&apos;arsenal en un minimum de temps. </source>
@@ -81,39 +81,43 @@
 <source xml:space="preserve">Type de dégâts</source>
 <target xml:space="preserve">Damage type</target>
 </trans-unit>
+<trans-unit datatype="html" id="262543659949726710">
+<source xml:space="preserve">Objet mystère</source>
+<target xml:space="preserve">Mystery Object</target>
+</trans-unit>
 <trans-unit datatype="html" id="2676602280765826700">
 <source xml:space="preserve">Nom du compte</source>
 <target xml:space="preserve">Account name</target>
 </trans-unit>
 <trans-unit datatype="html" id="2713111888071198842">
 <source xml:space="preserve"> Jouer</source>
-<target xml:space="preserve"> Play</target>
+<target xml:space="preserve">Play</target>
 </trans-unit>
 <trans-unit datatype="html" id="2756988478440209580">
 <source xml:space="preserve">Une erreur est survenue lors de la récupération de vos comptes Destiny 2. Veuillez réessayer ultérieurement. </source>
-<target xml:space="preserve">There was an error retrieving your Destiny 2 accounts. Please try again later. </target>
+<target xml:space="preserve">An error occurred while retrieving your Destiny 2 accounts. Please try again later. </target>
 </trans-unit>
 <trans-unit datatype="html" id="2783569493941578247">
 <source xml:space="preserve"> Trier par <x ctype="x-i" equiv-text="&lt;i class=&quot;ms-2&quot; [ngClass]=&quot;{       &apos;bi bi-sort-alpha-down&apos;: this.filterSortService.sortAscending,       &apos;bi bi-sort-alpha-down-alt&apos;: !this.filterSortService.sortAscending     }&quot;&gt;" id="START_ITALIC_TEXT"/>
 <x ctype="x-i" equiv-text="&lt;/i&gt;" id="CLOSE_ITALIC_TEXT"/></source>
-<target xml:space="preserve"> Filter by <x ctype="x-i" equiv-text="&lt;i class=&quot;ms-2&quot; [ngClass]=&quot;{       &apos;bi bi-sort-alpha-down&apos;: this.filterSortService.sortAscending,       &apos;bi bi-sort-alpha-down-alt&apos;: !this.filterSortService.sortAscending     }&quot;&gt;" id="START_ITALIC_TEXT"/>
+<target xml:space="preserve"> Sort by <x ctype="x-i" equiv-text="&lt;i class=&quot;ms-2&quot; [ngClass]=&quot;{       &apos;bi bi-sort-alpha-down&apos;: this.filterSortService.sortAscending,       &apos;bi bi-sort-alpha-down-alt&apos;: !this.filterSortService.sortAscending     }&quot;&gt;" id="START_ITALIC_TEXT"/>
 <x ctype="x-i" equiv-text="&lt;/i&gt;" id="CLOSE_ITALIC_TEXT"/></target>
 </trans-unit>
 <trans-unit datatype="html" id="2843631620783643341">
 <source xml:space="preserve">Désélectionner tout</source>
-<target xml:space="preserve">Deselect All</target>
+<target xml:space="preserve">Deselect all</target>
 </trans-unit>
 <trans-unit datatype="html" id="2868733534334098190">
 <source xml:space="preserve"> Vous avez perdu après <x equiv-text="{{points}}" id="INTERPOLATION"/> objet<x equiv-text="{{points &gt; 1 ? &quot;s&quot;: &quot;&quot;}}" id="INTERPOLATION_1"/> Gardien ! Le nom de l&apos;objet était <x equiv-text="{{currentItem.localized_name}}" id="INTERPOLATION_2"/>...</source>
-<target xml:space="preserve"> You lost after <x equiv-text="{{points}}" id="INTERPOLATION"/> objects<x equiv-text="{{points &gt; 1 ? &quot;s&quot;: &quot;&quot;}}" id="INTERPOLATION_1"/>  Guardian ! The object was <x equiv-text="{{currentItem.localized_name}}" id="INTERPOLATION_2"/>...</target>
+<target xml:space="preserve"> You lost after <x equiv-text="{{points}}" id="INTERPOLATION"/> object<x equiv-text="{{points &gt; 1 ? &quot;s&quot;: &quot;&quot;}}" id="INTERPOLATION_1"/>, Guardian! The name of the object was <x equiv-text="{{currentItem.localized_name}}" id="INTERPOLATION_2"/>...</target>
 </trans-unit>
 <trans-unit datatype="html" id="297586283935365973">
 <source xml:space="preserve">Indices</source>
-<target xml:space="preserve">Hints</target>
+<target xml:space="preserve">Clues</target>
 </trans-unit>
 <trans-unit datatype="html" id="3247434319520697704">
 <source xml:space="preserve">Chargement en cours...</source>
-<target xml:space="preserve">Loading…</target>
+<target xml:space="preserve">Loading...</target>
 </trans-unit>
 <trans-unit datatype="html" id="3486184701684864276">
 <source xml:space="preserve">Connexion en cours...</source>
@@ -145,7 +149,7 @@
 </trans-unit>
 <trans-unit datatype="html" id="4003387801369922138">
 <source xml:space="preserve">Valider</source>
-<target xml:space="preserve">Confirm</target>
+<target xml:space="preserve">Validate</target>
 </trans-unit>
 <trans-unit datatype="html" id="4025256031004677037">
 <source xml:space="preserve">Sélectionnez votre compte Destiny 2</source>
@@ -161,11 +165,11 @@
 </trans-unit>
 <trans-unit datatype="html" id="4079557636174543046">
 <source xml:space="preserve">Reformez notre arsenal exotique, Gardien !</source>
-<target xml:space="preserve">Reform our exotic arsenal, Guardian !</target>
+<target xml:space="preserve">Reform our exotic arsenal, Guardian!</target>
 </trans-unit>
 <trans-unit datatype="html" id="4233639285847409078">
 <source xml:space="preserve">Ordre alphabétique</source>
-<target xml:space="preserve">Alphabet Order</target>
+<target xml:space="preserve">Alphabetical order</target>
 </trans-unit>
 <trans-unit datatype="html" id="437849076533942997">
 <source xml:space="preserve"> Supprimer mon compte </source>
@@ -173,7 +177,7 @@
 </trans-unit>
 <trans-unit datatype="html" id="4401064957660419659">
 <source xml:space="preserve">Exo Challenge réussi </source>
-<target xml:space="preserve">Exo Challenge passed </target>
+<target xml:space="preserve">Exo Challenge completed </target>
 </trans-unit>
 <trans-unit datatype="html" id="4515094156785803561">
 <source xml:space="preserve">Paramètres avancés </source>
@@ -185,11 +189,11 @@
 </trans-unit>
 <trans-unit datatype="html" id="4565852369280832068">
 <source xml:space="preserve">Rareté</source>
-<target xml:space="preserve">Tier</target>
+<target xml:space="preserve">Rarity</target>
 </trans-unit>
 <trans-unit datatype="html" id="464275144564736722">
-<source xml:space="preserve"> <x equiv-text="{{this.filteredItems.length}}" id="INTERPOLATION"/> objet<x equiv-text="{{this.filteredItems.length &gt; 1 ? &quot;s&quot; : &quot;&quot;}}" id="INTERPOLATION_1"/></source>
-<target xml:space="preserve"> <x equiv-text="{{this.filteredItems.length}}" id="INTERPOLATION"/> object<x equiv-text="{{this.filteredItems.length &gt; 1 ? &quot;s&quot; : &quot;&quot;}}" id="INTERPOLATION_1"/></target>
+<source xml:space="preserve"> <x equiv-text="{{this.itemCount}}" id="INTERPOLATION"/> objet<x equiv-text="{{this.itemCount &gt; 1 ? &quot;s&quot; : &quot;&quot;}}" id="INTERPOLATION_1"/></source>
+<target xml:space="preserve"> <x equiv-text="{{this.itemCount}}" id="INTERPOLATION"/> object<x equiv-text="{{this.itemCount &gt; 1 ? &quot;s&quot; : &quot;&quot;}}" id="INTERPOLATION_1"/></target>
 </trans-unit>
 <trans-unit datatype="html" id="4672816138170214107">
 <source xml:space="preserve">Paramètres du compte</source>
@@ -197,7 +201,7 @@
 </trans-unit>
 <trans-unit datatype="html" id="4881298760692100495">
 <source xml:space="preserve">Félicitations, vous avez retrouvé toutes les armes Gardien !</source>
-<target xml:space="preserve">Congratulations, you have found all the objects !</target>
+<target xml:space="preserve">Congratulations, you have found all the Guardian weapons!</target>
 </trans-unit>
 <trans-unit datatype="html" id="4904035543622003527">
 <source xml:space="preserve">Chargement des comptes...</source>
@@ -209,15 +213,11 @@
 </trans-unit>
 <trans-unit datatype="html" id="516958296235356455">
 <source xml:space="preserve"> Trouvez le nom des armes et armures dans le temps imparti. À vous de jouer, Gardien ! </source>
-<target xml:space="preserve"> Find the names of the weapons and armors within the time limit. It&apos;s up to you to play, Guardian ! </target>
-</trans-unit>
-<trans-unit datatype="html" id="5202601909039901741">
-<source xml:space="preserve">Objet Mystère - Destiny 2 Guessr</source>
-<target xml:space="preserve">Mystery Item - Destiny 2 Guessr</target>
+<target xml:space="preserve"> Find the names of the weapons and armour within the time limit. It&apos;s up to you, Guardian! </target>
 </trans-unit>
 <trans-unit datatype="html" id="5326760932385679678">
 <source xml:space="preserve"> Bravo gardien ! Vous avez retrouvé tous les objets en <x equiv-text="{{convertToDateTime((timer | async ))}}" id="INTERPOLATION"/> ! </source>
-<target xml:space="preserve"> Bravo Guardian ! You have found all the items in<x equiv-text="{{convertToDateTime((timer | async ))}}" id="INTERPOLATION"/>! </target>
+<target xml:space="preserve"> Well done, caretaker! You found all the items in " <x equiv-text="{{convertToDateTime((timer | async ))}}" id="INTERPOLATION"/> "! </target>
 </trans-unit>
 <trans-unit datatype="html" id="533194069818443443">
 <source xml:space="preserve">Objet Mystère</source>
@@ -225,11 +225,11 @@
 </trans-unit>
 <trans-unit datatype="html" id="5398907870980838814">
 <source xml:space="preserve"> Catégorie </source>
-<target xml:space="preserve"> Category </target>
+<target xml:space="preserve">Category</target>
 </trans-unit>
 <trans-unit datatype="html" id="5436510033506741185">
 <source xml:space="preserve"> Objet Mystère terminé </source>
-<target xml:space="preserve"> Mystery Item completed </target>
+<target xml:space="preserve"> Mystery Object Completed </target>
 </trans-unit>
 <trans-unit datatype="html" id="5491081266313732174">
 <source xml:space="preserve">Filtres</source>
@@ -237,23 +237,23 @@
 </trans-unit>
 <trans-unit datatype="html" id="5502031485165544765">
 <source xml:space="preserve"> Trouvez les noms de toutes les armes et armures en un temps minimum. À vous de jouer, Gardien ! </source>
-<target xml:space="preserve"> Find the names of all the weapons and armors in the shortest amount of time. It&apos;s up to you to play, Guardian ! </target>
+<target xml:space="preserve"> Find the names of all the weapons and armour in the shortest time possible. It&apos;s up to you, Guardian! </target>
 </trans-unit>
 <trans-unit datatype="html" id="5573756547088256292">
 <source xml:space="preserve">L&apos;application web Destiny 2 Guessr est un jeu en ligne sur l&apos;univers du jeu <x ctype="x-a" equiv-text="&lt;a                 href=&quot;https://www.bungie.net/7/en/Destiny/NewLight&quot;&gt;" id="START_LINK"/>Destiny 2<x ctype="x-a" equiv-text="&lt;/a&gt;" id="CLOSE_LINK"/> développé par <x equiv-text="&lt;a                 href=&quot;https://www.bungie.net/&quot;&gt;" id="START_LINK_1"/>Bungie<x ctype="x-a" equiv-text="&lt;/a&gt;" id="CLOSE_LINK"/>. Site à usage non commercial. Réalisé par Yoann MONTEIRO. </source>
-<target xml:space="preserve">The Destiny 2 Guessr web application is an online game about the <x ctype="x-a" equiv-text="&lt;a                 href=&quot;https://www.bungie.net/7/en/Destiny/NewLight&quot;&gt;" id="START_LINK"/> Destiny 2 game universe <x ctype="x-a" equiv-text="&lt;/a&gt;" id="CLOSE_LINK"/> developed by <x equiv-text="&lt;a                 href=&quot;https://www.bungie.net/&quot;&gt;" id="START_LINK_1"/> Bungie. <x ctype="x-a" equiv-text="&lt;/a&gt;" id="CLOSE_LINK"/> Site for non-commercial use. Directed by Yoann MONTEIRO. </target>
-</trans-unit>
-<trans-unit datatype="html" id="5590035214481275185">
-<source xml:space="preserve">
-<x ctype="x-i" equiv-text="&lt;i class=&quot;bi bi-safe&quot;&gt;" id="START_ITALIC_TEXT"/>
-<x ctype="x-i" equiv-text="&lt;/i&gt;" id="CLOSE_ITALIC_TEXT"/> De mon inventaire </source>
-<target xml:space="preserve">
-<x ctype="x-i" equiv-text="&lt;i class=&quot;bi bi-safe&quot;&gt;" id="START_ITALIC_TEXT"/>
-<x ctype="x-i" equiv-text="&lt;/i&gt;" id="CLOSE_ITALIC_TEXT"/> My inventory </target>
+<target xml:space="preserve">The Destiny 2 Guessr web application is an online game based on the game universe <x ctype="x-a" equiv-text="&lt;a                 href=&quot;https://www.bungie.net/7/en/Destiny/NewLight&quot;&gt;" id="START_LINK"/>Destiny 2<x ctype="x-a" equiv-text="&lt;/a&gt;" id="CLOSE_LINK"/> developed by <x equiv-text="&lt;a                 href=&quot;https://www.bungie.net/&quot;&gt;" id="START_LINK_1"/>Bungie<x ctype="x-a" equiv-text="&lt;/a&gt;" id="CLOSE_LINK"/>. Site for non-commercial use. Created by Yoann MONTEIRO. </target>
 </trans-unit>
 <trans-unit datatype="html" id="5604867390069644853">
 <source xml:space="preserve"> Rareté </source>
-<target xml:space="preserve"> Tier </target>
+<target xml:space="preserve">Rarity</target>
+</trans-unit>
+<trans-unit datatype="html" id="5699967244879710688">
+<source xml:space="preserve"> <x equiv-text="{{this.countdown| async| date : &quot;s&quot;}}" id="INTERPOLATION"/> secondes</source>
+<target xml:space="preserve"> <x equiv-text="{{this.countdown| async| date : &quot;s&quot;}}" id="INTERPOLATION"/> seconds</target>
+</trans-unit>
+<trans-unit datatype="html" id="5831985829809767394">
+<source xml:space="preserve">Catégorie</source>
+<target xml:space="preserve">Category</target>
 </trans-unit>
 <trans-unit datatype="html" id="5889669299389737087">
 <source xml:space="preserve">Redirection vers Bungie.net </source>
@@ -269,22 +269,18 @@
 </trans-unit>
 <trans-unit datatype="html" id="6039002342850572547">
 <source xml:space="preserve"> <x equiv-text="{{this.selectedItems.length}}" id="INTERPOLATION"/> objet<x equiv-text="{{this.selectedItems.length &gt; 1 ? &quot;s&quot; : &quot;&quot;}}" id="INTERPOLATION_1"/> sélectionné<x equiv-text="{{this.selectedItems.length                                 &gt; 1                                 ? &quot;s&quot; : &quot;&quot;}}" id="INTERPOLATION_2"/></source>
-<target xml:space="preserve"> <x equiv-text="{{this.selectedItems.length}}" id="INTERPOLATION"/>object <x equiv-text="{{this.selectedItems.length &gt; 1 ? &quot;s&quot; : &quot;&quot;}}" id="INTERPOLATION_1"/> selected <x equiv-text="{{this.selectedItems.length                                 &gt; 1                                 ? &quot;s&quot; : &quot;&quot;}}" id="INTERPOLATION_2"/></target>
-</trans-unit>
-<trans-unit datatype="html" id="6114755528643596059">
-<source xml:space="preserve">
-<x equiv-text="{{ this.countdown| async| date : &quot;s&quot;}}" id="INTERPOLATION"/> secondes</source>
-<target xml:space="preserve">
-<x equiv-text="{{ this.countdown| async| date : &quot;s&quot;}}" id="INTERPOLATION"/> seconds</target>
+<target xml:space="preserve"> <x equiv-text="{{this.selectedItems.length}}" id="INTERPOLATION"/> selected item<x equiv-text="{{this.selectedItems.length &gt; 1 ? &quot;s&quot; : &quot;&quot;}}" id="INTERPOLATION_1"/>
+<x equiv-text="{{this.selectedItems.length                                 &gt; 1                                 ? &quot;s&quot; : &quot;&quot;}}" id="INTERPOLATION_2"/></target>
 </trans-unit>
 <trans-unit datatype="html" id="6452619769236126966">
 <source xml:space="preserve">La mission n&apos;est pas terminée Gardien. Êtes-vous sûr de vouloir quitter ?</source>
-<target xml:space="preserve">Guardian, the mission is not over yet. Are you sure you want to leave?</target>
+<target xml:space="preserve">The mission isn&apos;t over, Guardian. Are you sure you want to leave?</target>
 </trans-unit>
 <trans-unit datatype="html" id="6495963235686196674">
 <source xml:space="preserve"> Suivant <x ctype="x-i" equiv-text="&lt;i class=&quot;bi bi-arrow-right-short&quot;&gt;" id="START_ITALIC_TEXT"/>
 <x ctype="x-i" equiv-text="&lt;/i&gt;" id="CLOSE_ITALIC_TEXT"/></source>
-<target xml:space="preserve"> Next <x ctype="x-i" equiv-text="&lt;i class=&quot;bi bi-arrow-right-short&quot;&gt;" id="START_ITALIC_TEXT"/> <x ctype="x-i" equiv-text="&lt;/i&gt;" id="CLOSE_ITALIC_TEXT"/></target>
+<target xml:space="preserve"> Next <x ctype="x-i" equiv-text="&lt;i class=&quot;bi bi-arrow-right-short&quot;&gt;" id="START_ITALIC_TEXT"/>
+<x ctype="x-i" equiv-text="&lt;/i&gt;" id="CLOSE_ITALIC_TEXT"/></target>
 </trans-unit>
 <trans-unit datatype="html" id="6497544826155835104">
 <source xml:space="preserve">Se déconnecter</source>
@@ -292,15 +288,19 @@
 </trans-unit>
 <trans-unit datatype="html" id="6539880109151642170">
 <source xml:space="preserve"> Emplacement d&apos;arme </source>
-<target xml:space="preserve"> Weapon slot </target>
+<target xml:space="preserve"> Weapon location </target>
 </trans-unit>
 <trans-unit datatype="html" id="6707800253753466795">
 <source xml:space="preserve"> Collections</source>
-<target xml:space="preserve"> Collections</target>
+<target xml:space="preserve">Collections</target>
+</trans-unit>
+<trans-unit datatype="html" id="673430564078029527">
+<source xml:space="preserve">Filtrer</source>
+<target xml:space="preserve">Filter</target>
 </trans-unit>
 <trans-unit datatype="html" id="6821510995281525142">
 <source xml:space="preserve"> Changer de compte</source>
-<target xml:space="preserve"> Switch account</target>
+<target xml:space="preserve"> Switch accounts</target>
 </trans-unit>
 <trans-unit datatype="html" id="6853019803842439396">
 <source xml:space="preserve">Sélectionnez les objets du challenge</source>
@@ -316,7 +316,7 @@
 </trans-unit>
 <trans-unit datatype="html" id="7244733076457962946">
 <source xml:space="preserve"> Élément </source>
-<target xml:space="preserve"> Damage type </target>
+<target xml:space="preserve"> Element </target>
 </trans-unit>
 <trans-unit datatype="html" id="7561272866534453804">
 <source xml:space="preserve">
@@ -327,8 +327,8 @@
 <x ctype="x-i" equiv-text="&lt;/i&gt;" id="CLOSE_ITALIC_TEXT"/>Previous </target>
 </trans-unit>
 <trans-unit datatype="html" id="7630611470314659100">
-<source xml:space="preserve"> <x equiv-text="{{this.page * this.pageSize + 1 }}" id="INTERPOLATION"/>-<x equiv-text="{{this.visibleItemsCount}}" id="INTERPOLATION_1"/> sur <x equiv-text="{{this.filteredItems.length}}" id="INTERPOLATION_2"/> objets</source>
-<target xml:space="preserve"> <x equiv-text="{{this.page * this.pageSize + 1 }}" id="INTERPOLATION"/>- <x equiv-text="{{this.visibleItemsCount}}" id="INTERPOLATION_1"/> on <x equiv-text="{{this.filteredItems.length}}" id="INTERPOLATION_2"/> objects</target>
+<source xml:space="preserve"> <x equiv-text="{{(this.page -1) * this.pageSize + 1 }}" id="INTERPOLATION"/>-<x equiv-text="{{this.visibleItemsCount}}" id="INTERPOLATION_1"/> sur <x equiv-text="{{this.itemCount}}" id="INTERPOLATION_2"/> objets</source>
+<target xml:space="preserve"> <x equiv-text="{{(this.page -1) * this.pageSize + 1 }}" id="INTERPOLATION"/>-<x equiv-text="{{this.visibleItemsCount}}" id="INTERPOLATION_1"/> on <x equiv-text="{{this.itemCount}}" id="INTERPOLATION_2"/> objects</target>
 </trans-unit>
 <trans-unit datatype="html" id="7631405440758027758">
 <source xml:space="preserve">Temps</source>
@@ -336,7 +336,7 @@
 </trans-unit>
 <trans-unit datatype="html" id="7666021847804584098">
 <source xml:space="preserve">Dernière actualisation Bungie</source>
-<target xml:space="preserve">Bungie latest update</target>
+<target xml:space="preserve">Last update Bungie</target>
 </trans-unit>
 <trans-unit datatype="html" id="773527048551115074">
 <source xml:space="preserve">Mode de jeu</source>
@@ -348,7 +348,7 @@
 </trans-unit>
 <trans-unit datatype="html" id="7930327423987694267">
 <source xml:space="preserve">Exo-Challenge - Destiny 2 Guessr</source>
-<target xml:space="preserve">Exo-Challenge - Destiny 2 Guessr</target>
+<target xml:space="preserve">Exo Challenge - Destiny 2 Guessr</target>
 </trans-unit>
 <trans-unit datatype="html" id="7973310766913541663">
 <source xml:space="preserve">Type d&apos;objet</source>
@@ -364,11 +364,11 @@
 </trans-unit>
 <trans-unit datatype="html" id="8149071162190852135">
 <source xml:space="preserve"> Attribut intrinsèque</source>
-<target xml:space="preserve"> Intrinsic perk</target>
+<target xml:space="preserve"> Intrinsic attribute</target>
 </trans-unit>
 <trans-unit datatype="html" id="8168765646794661881">
 <source xml:space="preserve">Retour</source>
-<target xml:space="preserve">Return</target>
+<target xml:space="preserve">Back</target>
 </trans-unit>
 <trans-unit datatype="html" id="8224276635213925136">
 <source xml:space="preserve"> Classe </source>
@@ -405,134 +405,6 @@
 <trans-unit datatype="html" id="9043952365725675246">
 <source xml:space="preserve">Exo Challenge</source>
 <target xml:space="preserve">Exo Challenge</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.alert.close">
-<source xml:space="preserve">Close</source>
-<target xml:space="preserve">Close</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.carousel.next">
-<source xml:space="preserve">Next</source>
-<target xml:space="preserve">Next</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.carousel.previous">
-<source xml:space="preserve">Previous</source>
-<target xml:space="preserve">Previous</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.carousel.slide-number">
-<source xml:space="preserve"> Slide <x id="INTERPOLATION"/> of <x id="INTERPOLATION_1"/> </source>
-<target xml:space="preserve"> Slide <x id="INTERPOLATION"/> of <x id="INTERPOLATION_1"/> </target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.datepicker.next-month">
-<source xml:space="preserve">Next month</source>
-<target xml:space="preserve">Next month</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.datepicker.previous-month">
-<source xml:space="preserve">Previous month</source>
-<target xml:space="preserve">Previous month</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.datepicker.select-month">
-<source xml:space="preserve">Select month</source>
-<target xml:space="preserve">Select month</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.datepicker.select-year">
-<source xml:space="preserve">Select year</source>
-<target xml:space="preserve">Select year</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.first">
-<source xml:space="preserve">««</source>
-<target xml:space="preserve">««</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.first-aria">
-<source xml:space="preserve">First</source>
-<target xml:space="preserve">First</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.last">
-<source xml:space="preserve">»»</source>
-<target xml:space="preserve">»»</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.last-aria">
-<source xml:space="preserve">Last</source>
-<target xml:space="preserve">Last</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.next">
-<source xml:space="preserve">»</source>
-<target xml:space="preserve">»</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.next-aria">
-<source xml:space="preserve">Next</source>
-<target xml:space="preserve">Next</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.previous">
-<source xml:space="preserve">«</source>
-<target xml:space="preserve">«</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.pagination.previous-aria">
-<source xml:space="preserve">Previous</source>
-<target xml:space="preserve">Previous</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.progressbar.value">
-<source xml:space="preserve">
-<x id="INTERPOLATION"/></source>
-<target xml:space="preserve">
-<x id="INTERPOLATION"/></target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.HH">
-<source xml:space="preserve">HH</source>
-<target xml:space="preserve">HH</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.MM">
-<source xml:space="preserve">MM</source>
-<target xml:space="preserve">MM</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.PM">
-<source xml:space="preserve">
-<x id="INTERPOLATION"/></source>
-<target xml:space="preserve">
-<x id="INTERPOLATION"/></target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.SS">
-<source xml:space="preserve">SS</source>
-<target xml:space="preserve">SS</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.decrement-hours">
-<source xml:space="preserve">Decrement hours</source>
-<target xml:space="preserve">Decrement hours</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.decrement-minutes">
-<source xml:space="preserve">Decrement minutes</source>
-<target xml:space="preserve">Decrement minutes</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.decrement-seconds">
-<source xml:space="preserve">Decrement seconds</source>
-<target xml:space="preserve">Decrement seconds</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.hours">
-<source xml:space="preserve">Hours</source>
-<target xml:space="preserve">Hours</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.increment-hours">
-<source xml:space="preserve">Increment hours</source>
-<target xml:space="preserve">Increment hours</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.increment-minutes">
-<source xml:space="preserve">Increment minutes</source>
-<target xml:space="preserve">Increment minutes</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.increment-seconds">
-<source xml:space="preserve">Increment seconds</source>
-<target xml:space="preserve">Increment seconds</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.minutes">
-<source xml:space="preserve">Minutes</source>
-<target xml:space="preserve">Minutes</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.timepicker.seconds">
-<source xml:space="preserve">Seconds</source>
-<target xml:space="preserve">Seconds</target>
-</trans-unit>
-<trans-unit datatype="html" id="ngb.toast.close-aria">
-<source xml:space="preserve">Close</source>
-<target xml:space="preserve">Close</target>
 </trans-unit>
 <trans-unit datatype="html" id="searchPlaceholder">
 <source xml:space="preserve">Rechercher un objet...</source>
