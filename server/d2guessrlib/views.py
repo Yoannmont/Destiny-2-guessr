@@ -79,8 +79,7 @@ class ItemViewSet(CachedReadOnlyViewSet):
         lang = self.request.query_params.get("lang", "en")
 
         return (
-            Item.objects
-            .all()
+            Item.objects.all()
             .prefetch_related(
                 Prefetch(
                     "translations",
