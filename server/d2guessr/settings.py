@@ -423,7 +423,7 @@ class Prod(Dev):
 
     DATABASES = values.DatabaseURLValue(environ_prefix=NAME)
 
-    DEBUG = False
+    DEBUG = values.BooleanValue(environ_prefix=NAME)
 
     @property
     def CORS_ALLOWED_ORIGINS(self):
