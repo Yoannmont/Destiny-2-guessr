@@ -407,11 +407,25 @@ class Test(Dev):
 
 class Prod(Dev):
     NAME = "PROD"
-    load_dotenv(dotenv_path=Dev.BASE_DIR / ".env.prod")
+    DOTENV = Dev.BASE_DIR / ".env.prod"
+
+    SOCIAL_AUTH_BUNGIE_API_KEY = values.SecretValue(environ_prefix=NAME)
+
+    SOCIAL_AUTH_BUNGIE_KEY = values.SecretValue(environ_prefix=NAME)
+
+    SOCIAL_AUTH_BUNGIE_SECRET = values.SecretValue(environ_prefix=NAME)
+
+    SOCIAL_AUTH_BUNGIE_ORIGIN = values.Value(environ_prefix=NAME)
+
+    FRONTEND_URL = values.Value(environ_prefix=NAME)
 
     DATABASES = values.DatabaseURLValue(environ_prefix=NAME)
 
     DEBUG = False
+
+    @property
+    def CORS_ALLOWED_ORIGINS(self):
+        return [str(self.FRONTEND_URL)]
 
     SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
