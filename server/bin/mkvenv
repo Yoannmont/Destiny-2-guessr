@@ -1,16 +1,22 @@
-#!/bin/sh
+#!/bin/bash
 
-# Install the 'uv' tool globally (used for fast Python dependency management)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BACKEND_DIR="$(dirname "$SCRIPT_DIR")"
+
+ENV_DIR="$BACKEND_DIR/env"
+MODE=${1:-dev}
+
+if [ -d "$ENV_DIR" ]; then
+    echo "Deleting found env"
+    rm -rf "$ENV_DIR"
+fi
+
+virtualenv "$ENV_DIR" -p python3.12
+
+source "$ENV_DIR/bin/activate"
+
+# installing uv
 pip install uv
 
-# Delete any existing virtual environment named 'env'
-rm -rf env
-
-# Create a new virtual environment in the 'env' directory using uv
-uv venv env
-
-# Activate the new virtual environment
-source env/bin/activate
-
-# Synchronize the environment with the exact dependencies from the lock file
-uv pip sync ./requirements.lock
+# installing dependencies
+uv pip sync requirements.lock

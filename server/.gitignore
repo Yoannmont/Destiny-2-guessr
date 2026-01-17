@@ -21,3 +21,8 @@ tmp
 uwsgi*
 */static/*
 bin/sync
+
+.env.prod
+
+.content
+*.sqlite3
