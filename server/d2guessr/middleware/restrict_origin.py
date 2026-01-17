@@ -10,11 +10,7 @@ class RestrictOriginMiddleware:
         origin = request.META.get("HTTP_ORIGIN") or request.headers.get("Origin")
         if (
             not settings.DEBUG
-            and not (
-                request.path.startswith("/d2g/d2g-admin-7895/")
-                or request.path.startswith("/d2g/swagger/")
-                or request.path.startswith("/d2g/redoc/")
-            )
+            and (request.path.startswith("/d2g/api/v1/") or request.path.startswith("/d2g/auth/"))
             and (not origin or origin not in settings.CORS_ALLOWED_ORIGINS)
         ):
             return HttpResponseForbidden("Access denied. Unauthorized origin. ")

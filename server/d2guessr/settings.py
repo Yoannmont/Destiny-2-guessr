@@ -411,6 +411,8 @@ class Prod(Dev):
     NAME = "PROD"
     DOTENV = Dev.BASE_DIR / ".env.prod"
 
+    SECRET_KEY = values.SecretValue(environ_prefix=NAME)
+
     SOCIAL_AUTH_BUNGIE_API_KEY = values.SecretValue(environ_prefix=NAME)
 
     SOCIAL_AUTH_BUNGIE_KEY = values.SecretValue(environ_prefix=NAME)
