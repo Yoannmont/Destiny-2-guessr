@@ -43,8 +43,6 @@ class Dev(Configuration):
 
     SOCIAL_AUTH_BUNGIE_ORIGIN = values.Value(environ_prefix=NAME)
 
-    HOST_IP = values.Value(environ_prefix=NAME)
-
     SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
     INTERNAL_IPS = [
@@ -54,7 +52,7 @@ class Dev(Configuration):
 
     @property
     def ALLOWED_HOSTS(self):
-        return ["localhost", str(self.HOST_IP), str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://"), ".onrender.com"]
+        return ["localhost", str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://"), ".onrender.com"]
 
     # Application definition
 
@@ -80,6 +78,7 @@ class Dev(Configuration):
     ]
 
     MIDDLEWARE = [
+        "d2guessr.middleware.restrict_origin.RestrictOriginMiddleware",
         "debug_toolbar.middleware.DebugToolbarMiddleware",
         "log_request_id.middleware.RequestIDMiddleware",
         "django.middleware.security.SecurityMiddleware",
@@ -203,9 +202,9 @@ class Dev(Configuration):
     # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
     STATIC_URL = "static/"
-    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles", "static")
-    MEDIA_URLS = "/media/"
-    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+    STATIC_ROOT = BASE_DIR / "static"
+    MEDIA_URL = "media/"
+    MEDIA_ROOT = BASE_DIR / "media"
 
     # Default primary key field type
     # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -410,15 +409,29 @@ class Test(Dev):
 
 class Prod(Dev):
     NAME = "PROD"
+    DOTENV = Dev.BASE_DIR / ".env.prod"
+
+    SECRET_KEY = values.SecretValue(environ_prefix=NAME)
+
+    SOCIAL_AUTH_BUNGIE_API_KEY = values.SecretValue(environ_prefix=NAME)
+
+    SOCIAL_AUTH_BUNGIE_KEY = values.SecretValue(environ_prefix=NAME)
+
+    SOCIAL_AUTH_BUNGIE_SECRET = values.SecretValue(environ_prefix=NAME)
+
+    SOCIAL_AUTH_BUNGIE_ORIGIN = values.Value(environ_prefix=NAME)
+
+    FRONTEND_URL = values.Value(environ_prefix=NAME)
 
     DATABASES = values.DatabaseURLValue(environ_prefix=NAME)
 
-    DEBUG = False
-    STATIC_ROOT = os.path.join(Dev.BASE_DIR, "static")
+    DEBUG = values.BooleanValue(environ_prefix=NAME, default=True)
+
+    @property
+    def CORS_ALLOWED_ORIGINS(self):
+        return [str(self.FRONTEND_URL)]
 
     SOCIAL_AUTH_JSONFIELD_ENABLED = True
-
-    SOCIAL_AUTH_BUNGIE_FRONTEND_CALLBACK_URL = "?????"
 
 
 class Preview(Dev):
@@ -430,7 +443,6 @@ class Preview(Dev):
     SOCIAL_AUTH_BUNGIE_KEY = values.SecretValue(environ_prefix=NAME)
     SOCIAL_AUTH_BUNGIE_SECRET = values.SecretValue(environ_prefix=NAME)
     SOCIAL_AUTH_BUNGIE_ORIGIN = values.Value(environ_prefix=NAME)
-    HOST_IP = values.Value(environ_prefix=NAME)
     CORS_ALLOW_ALL_ORIGINS = False
     DATABASES = values.DatabaseURLValue(environ_prefix=NAME)
 
@@ -445,4 +457,4 @@ class Preview(Dev):
 
     @property
     def ALLOWED_HOSTS(self):
-        return ["localhost", str(self.HOST_IP), str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://"), ".onrender.com"]
+        return ["localhost", str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://"), ".onrender.com"]
