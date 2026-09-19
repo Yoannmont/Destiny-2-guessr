@@ -34,3 +34,17 @@ To run:
 - copy .env.example content to a new .env and replace with your settings.
 - run bin/mkvenv
 - Ready !
+
+## Destiny 2 weapons/armor database updates
+The `populate_db` management command (`d2guessrlib/management/commands/populate_db.py`)
+downloads Bungie's manifest and imports/updates weapons, armor and related reference data.
+It is a no-op if the manifest version hasn't changed since the last run.
+
+In the Docker image, this command is scheduled automatically via cron
+(`server/cron/populate_db.cron`, wrapped by `server/bin/update_weapons_db.sh`) and runs
+once a day. Logs are written to `logs/cron_populate_db.log` inside the container.
+
+To run it manually:
+```
+.venv/bin/python manage.py populate_db --force-update
+```

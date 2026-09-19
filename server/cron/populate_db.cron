@@ -1,0 +1,6 @@
+# crontab for the D2Guessr server container.
+# Refreshes the Destiny 2 weapons/armor database from Bungie's manifest once a day.
+# Runs at 05:00 UTC: after Bungie's daily reset (17:00 UTC) has settled and outside
+# the weekly reset window (Tuesdays 17:00 UTC), to avoid hitting the API while it updates.
+# The populate_db command itself is a no-op if the manifest version hasn't changed.
+0 5 * * * root /server/bin/update_weapons_db.sh >> /server/logs/cron_populate_db.log 2>&1
