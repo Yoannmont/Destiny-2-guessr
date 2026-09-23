@@ -1,6 +1,6 @@
 <p align="center">
 
-<img src="assets/d2g-logo.png"/>
+<img src="assets/logo.png"/>
 
 </p> 
 
