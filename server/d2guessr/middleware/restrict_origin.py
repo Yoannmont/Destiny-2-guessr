@@ -9,7 +9,7 @@ class RestrictOriginMiddleware:
     def __call__(self, request):
         origin = request.META.get("HTTP_ORIGIN") or request.headers.get("Origin")
         if (
-            not settings.DEBUG
+            settings.RESTRICT_ORIGIN
             and (request.path.startswith("/d2g/api/v1/") or request.path.startswith("/d2g/auth/"))
             and (not origin or origin not in settings.CORS_ALLOWED_ORIGINS)
         ):

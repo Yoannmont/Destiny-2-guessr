@@ -32,6 +32,7 @@ class Dev(Configuration):
 
     # SECURITY WARNING: don't un with debug turned on in production!
     DEBUG = True
+    RESTRICT_ORIGIN = False
 
     SOCIAL_AUTH_URL_NAMESPACE = "social"
 
@@ -410,6 +411,7 @@ class Test(Dev):
 class Prod(Dev):
     NAME = "PROD"
     DOTENV = Dev.BASE_DIR / ".env.prod"
+    RESTRICT_ORIGIN = True
 
     SECRET_KEY = values.SecretValue(environ_prefix=NAME)
 
@@ -437,6 +439,7 @@ class Prod(Dev):
 class Preview(Dev):
     NAME = "PREVIEW"
     DEBUG = False
+    RESTRICT_ORIGIN = True
 
     FRONTEND_URL = values.Value(environ_prefix=NAME)
     SOCIAL_AUTH_BUNGIE_API_KEY = values.SecretValue(environ_prefix=NAME)
