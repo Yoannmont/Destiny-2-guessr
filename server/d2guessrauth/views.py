@@ -3,7 +3,9 @@ from typing import Iterable
 
 from django.conf import settings
 from django.db.models import Prefetch
+from django.shortcuts import render
 from django.urls import reverse
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -25,6 +27,11 @@ from d2guessrlib.paginations import ItemPagination
 from d2guessrlib.serializers import ItemSerializer
 
 logger = logging.getLogger("views")
+
+
+@ensure_csrf_cookie
+def start_bungie_login(request):
+    return render(request, "d2guessrauth/start_bungie_login.html")
 
 
 class AccountInfoView(APIView):

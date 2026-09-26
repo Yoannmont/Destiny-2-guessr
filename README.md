@@ -4,7 +4,7 @@
 
 </p> 
 
-Destiny 2 Guessr web application with games and quizz about Destiny 2 developed with Django 5.2 and Angular CLI 20.
+Destiny 2 Guessr web application with games and quizz about Destiny 2 developed with Django 6.1 and Angular CLI 22.
 
 
 ![d2g_preview](assets/Destiny_2_Guessr_preview.png)
@@ -14,7 +14,7 @@ Destiny 2 Guessr web application with games and quizz about Destiny 2 developed 
 ### 🏡 Setup for local deployment
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) ![Node.js](	https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-1. Install [Python env](https://www.python.org/downloads/), [Postgres](https://www.postgresql.org) and [Node.js](https://nodejs.org/en).
+1. Install Python 3.12+, [Postgres](https://www.postgresql.org) and [Node.js 26+](https://nodejs.org/en).
 
 
 2. Clone git repository :
@@ -45,7 +45,7 @@ In terminal :
 
 ## Developed with 
 
-- **Django**: Python backend for API.
+- **Django 6.1**: Python backend for API.
 - **PostgreSQL** : Database management system.
-- **Angular CLI 20.1**: Front-end framework for user interface development.
+- **Angular CLI 22.2 / TypeScript 6.0**: Front-end framework and compiler. Angular 22 currently requires TypeScript `>=6.0 <6.1`; TypeScript 7 is not yet supported.
 - **Docker**: Application containerization.

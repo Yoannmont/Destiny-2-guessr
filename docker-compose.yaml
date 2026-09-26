@@ -3,7 +3,7 @@ services:
     build: ./webapp
     ports:
       - 4200:4200
-    command: ng serve --host 0.0.0.0
+    command: npm run start:dev -- --host 0.0.0.0
     restart: always
 
   server:

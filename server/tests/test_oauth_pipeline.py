@@ -1,6 +1,7 @@
 import mock
 import pytest
 from django.contrib.auth.models import User
+from django.test import Client
 from django.urls import reverse
 from rest_framework.test import APIClient
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -55,7 +56,7 @@ class TestBungieOAuthPipeline:
         multiple Destiny 2 accounts. 
         'public-urls:select_membership_view' allows to select which account to use. 
         """
-        response = client.get(reverse("social:begin", args=("bungie",)), follow=True)
+        response = client.post(reverse("social:begin", args=("bungie",)), follow=True)
         assert response.status_code == 200, response.content
         assert (
             client.session.get("memberships")
@@ -105,6 +106,19 @@ class TestBungieOAuthPipeline:
 
         assert BungieAccount.objects.count() == 0
         assert BungieUser.objects.count() == 0
+
+    def test_bungie_login_start_provides_csrf_token(self):
+        client = Client(enforce_csrf_checks=True)
+        response = client.get(reverse("bungie-login-start"))
+
+        assert response.status_code == 200
+        assert b"csrfmiddlewaretoken" in response.content
+        assert "csrftoken" in client.cookies
+        response = client.post(
+            reverse("social:begin", args=("bungie",)),
+            HTTP_X_CSRFTOKEN=client.cookies["csrftoken"].value,
+        )
+        assert response.status_code == 302
 
     def test_bungie_auth_workflow_one_account(self, client: APIClient):
         assert BungieUser.objects.count() == 0

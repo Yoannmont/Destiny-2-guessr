@@ -26,6 +26,7 @@ def get_json_mockup(
     method="GET",
     headers=None,
     data=None,
+    json=None,
     auth=None,
     params=None,
 ):

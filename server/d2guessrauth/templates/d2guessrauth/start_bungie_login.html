@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>Connexion Bungie</title>
+  </head>
+  <body>
+    <form id="bungie-login" method="post" action="{% url 'social:begin' 'bungie' %}">
+      {% csrf_token %}
+      <noscript><button type="submit">Continuer vers Bungie</button></noscript>
+    </form>
+    <script>
+      document.getElementById('bungie-login').submit();
+    </script>
+  </body>
+</html>

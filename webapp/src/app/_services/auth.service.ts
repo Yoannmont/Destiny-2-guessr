@@ -33,7 +33,7 @@ export class AuthService {
   private readonly BASE_URL = environment.SERVER_BASE_URL + '/d2g';
 
   startBungieLogin(): void {
-    window.location.href = this.BASE_URL + '/login/bungie/';
+    window.location.href = this.BASE_URL + '/login/bungie/start/';
   }
 
   lockAccount(membership: ShortMembership): void {
