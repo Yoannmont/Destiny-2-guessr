@@ -82,7 +82,7 @@ def create_or_update_object_translations(
                 field_name=field_name,
                 content_type=content_type,
                 object_id=target_object.id,
-                text=translated_text,
+                defaults={"text": translated_text},
             )
             logger.info(
                 f"Created {lang_code.upper()} - ContentTranslation({field_name}) for {model_name}"
