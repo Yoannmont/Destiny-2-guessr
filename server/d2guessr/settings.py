@@ -92,6 +92,9 @@ class Dev(Configuration):
         "django.middleware.clickjacking.XFrameOptionsMiddleware",
         "d2guessr.middleware.restrict_admin_ip.RestrictAdminIPMiddleware",
         "whitenoise.middleware.WhiteNoiseMiddleware",
+        # Catches any SocialAuthBaseException raised during the pipeline and
+        # redirects to SOCIAL_AUTH_LOGIN_ERROR_URL instead of a raw 500.
+        "social_django.middleware.SocialAuthExceptionMiddleware",
     ]
 
     # Logging
@@ -336,6 +339,18 @@ class Dev(Configuration):
         return str(self.FRONTEND_URL) + "/#/auth-error"
 
     SOCIAL_AUTH_REQUESTS_TIMEOUT = 5
+
+    # Any exception raised in the pipeline (Bungie API hiccups, timeouts,
+    # cancelled auth, expired state, ...) redirects here instead of a 500.
+    SOCIAL_AUTH_RAISE_EXCEPTIONS = False
+
+    @property
+    def RAISE_EXCEPTIONS(self):
+        return self.DEBUG
+
+    @property
+    def SOCIAL_AUTH_LOGIN_ERROR_URL(self):
+        return self.SOCIAL_AUTH_BUNGIE_FRONTEND_ERROR_URL
 
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True

@@ -79,9 +79,24 @@ def choose_destiny_membership(strategy, response, details, user, *args, **kwargs
 
     access_token = response.get("access_token")
     bungie_client = BungieClient()
-    destiny_memberships_info = bungie_client.get_user_destiny_memberships_info(
-        access_token=access_token, bungie_membership_id=details["bungie_membership_id"]
-    )
+    try:
+        destiny_memberships_info = bungie_client.get_user_destiny_memberships_info(
+            access_token=access_token, bungie_membership_id=details["bungie_membership_id"]
+        )
+    except Exception as e:
+        logger.error(
+            "Error when trying to retrieve Destiny memberships for (bungie_membership_id: %s): %s.",
+            details["bungie_membership_id"],
+            repr(e),
+        )
+        return strategy.redirect(settings.SOCIAL_AUTH_BUNGIE_FRONTEND_ERROR_URL)
+
+    if not destiny_memberships_info:
+        logger.error(
+            "No Destiny memberships found for (bungie_membership_id: %s).",
+            details["bungie_membership_id"],
+        )
+        return strategy.redirect(settings.SOCIAL_AUTH_BUNGIE_FRONTEND_ERROR_URL)
 
     if len(destiny_memberships_info) == 1:
         logger.info(

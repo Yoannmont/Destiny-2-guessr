@@ -339,6 +339,28 @@ def populate_item_stats(item, i_def_stats):
         logger.info(f"Created Stat({stat_type_obj}) for Item({item.api_name})")
 
 
+def get_unique_api_name(api_name, hash_id):
+    """
+    Return an api_name guaranteed not to collide with another Item's api_name.
+
+    Bungie sometimes reissues items under a new hash while keeping the same
+    display name, which would otherwise violate the
+    Item.api_name unique constraint.
+    """
+    if not Item.objects.filter(api_name=api_name).exclude(id_bungie=hash_id).exists():
+        return api_name
+
+    suffix = f" ({hash_id})"
+    disambiguated_name = f"{api_name[: 100 - len(suffix)]}{suffix}"
+    logger.warning(
+        "api_name %r already used by another Item, renaming to %r for hash %s",
+        api_name,
+        disambiguated_name,
+        hash_id,
+    )
+    return disambiguated_name
+
+
 def create_or_update_items(english_cursor, localized_cursors=None, exotic_only=False):
     """
     Create or update Item objects and their related data (e.g. stats, perks, translations).
@@ -460,7 +482,7 @@ def create_or_update_items(english_cursor, localized_cursors=None, exotic_only=F
         item_obj, created = Item.objects.update_or_create(
             id_bungie=hash_id,
             defaults={
-                "api_name": api_name,
+                "api_name": get_unique_api_name(api_name, hash_id),
                 "item_type": classification_info["itemTypeHash"],
                 "tier_type": tier_type_obj,
                 "class_type": class_obj,

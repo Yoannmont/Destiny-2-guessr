@@ -41,6 +41,9 @@ export class AuthCallbackComponent implements OnInit {
 
       this.authService.initializeSession();
       this.goToHomeWithLocale();
+    } else {
+      this.loading = false;
+      this.error = 'No access token received from Bungie.';
     }
   }
 }

@@ -59,6 +59,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
 
   loading: boolean = true;
   timedOut: boolean = false;
+  error: boolean = false;
 
   @ViewChild('filterSidebar') filterSidebarRef!: ElementRef;
 
@@ -226,6 +227,8 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     searchTerm: string = this.searchTerm
   ): void {
     if (this.authService.currentAccount) {
+      this.loading = true;
+      this.error = false;
       this.authService
         .getAccountItemsFromPage(
           page,
@@ -234,6 +237,17 @@ export class CollectionsComponent implements OnInit, OnDestroy {
           item_filters,
           ordering,
           searchTerm
+        )
+        .pipe(
+          takeUntil(this.destroy),
+          timeout(this.itemsCacheService.timeoutDuration),
+          catchError(() => {
+            this.error = true;
+            return of({ count: 0, results: [] });
+          }),
+          finalize(() => {
+            this.loading = false;
+          })
         )
         .subscribe((response: any) => {
           this.itemCount = response.count;
@@ -253,6 +267,8 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     searchTerm: string = this.searchTerm
   ): void {
     const term = this.utilsService.validateName(searchTerm);
+    this.loading = true;
+    this.error = false;
     this.itemsCacheService
       .getItemsFromPage(
         page,
@@ -265,7 +281,8 @@ export class CollectionsComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy),
         timeout(this.itemsCacheService.timeoutDuration),
         catchError(() => {
-          return of([]);
+          this.error = true;
+          return of({ count: 0, results: [] });
         }),
         finalize(() => {
           this.loading = false;

@@ -17,7 +17,12 @@ class BungieClient(BungieOAuth2):
         super().__init__(*args, **kwargs)
 
         self.session = requests.Session()
-        retries = Retry(total=3, backoff_factor=0.3, status_forcelist=[502, 503, 504])
+        retries = Retry(
+            total=3,
+            backoff_factor=0.3,
+            status_forcelist=[429, 502, 503, 504],
+            respect_retry_after_header=True,
+        )
         adapter = HTTPAdapter(max_retries=retries)
         self.session.mount("https://", adapter)
         self.session.mount("http://", adapter)
@@ -53,12 +58,15 @@ class BungieClient(BungieOAuth2):
                 proxies=self.proxies,
                 verify=self.verify_ssl,
             )
-        except requests.ConnectionError as err:
+        except (requests.ConnectionError, requests.Timeout) as err:
             raise AuthConnectionError(self, str(err)) from err
 
         if response.status_code != 200:
             logger.critical("Error when fetching response %s", response.content)
-            response.raise_for_status()
+            try:
+                response.raise_for_status()
+            except requests.HTTPError as err:
+                raise AuthConnectionError(self, str(err)) from err
 
         return response
 

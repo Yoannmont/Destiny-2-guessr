@@ -117,11 +117,11 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="!loading && timedOut && itemCount === 0" class="col w-100 vertical-fadeIn-animation" i18n>
-                    Aucun équipement trouvé.
+                <div *ngIf="!loading && error" class="col w-100 vertical-fadeIn-animation text-danger" i18n>
+                    Une erreur est survenue lors de la récupération des données. Veuillez réessayer plus tard.
                 </div>
 
-                <div *ngIf="!loading && !timedOut && itemCount === 0" class="col w-100 vertical-fadeIn-animation" i18n>
+                <div *ngIf="!loading && !error && itemCount === 0" class="col w-100 vertical-fadeIn-animation" i18n>
                     Aucun équipement trouvé.
                 </div>
 

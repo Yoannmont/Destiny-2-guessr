@@ -59,9 +59,13 @@ export class AuthService {
   isTokenExpired(token: string | null): boolean {
     if (!token) return true;
 
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    const expiry = payload.exp;
-    return Date.now() / 1000 >= expiry;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expiry = payload.exp;
+      return !expiry || Date.now() / 1000 >= expiry;
+    } catch {
+      return true;
+    }
   }
 
   logout(): Observable<any> {
@@ -144,9 +148,11 @@ export class AuthService {
 
     if (!accessToken || this.isTokenExpired(accessToken)) {
       refresh$ = this.httpClient
-        .post<any>(this.BASE_URL + '/token/refresh/', {
-          withCredentials: true,
-        })
+        .post<any>(
+          this.BASE_URL + '/token/refresh/',
+          {},
+          { withCredentials: true }
+        )
         .pipe(
           map((res) => {
             localStorage.setItem('access_token', res.access);
