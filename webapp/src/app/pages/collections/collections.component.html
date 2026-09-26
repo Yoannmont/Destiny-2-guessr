@@ -135,7 +135,7 @@
                         objets</span>
                 </div>
             </div>
-            <div class="row mt-2 align-items-center">
+            <div class="row mt-2 align-items-center" *ngIf="!loading">
 
                 <div class="col-sm-2 ms-auto my-1">
                     <button class="btn btn-outline-light" *ngIf="this.page > 1" (click)="this.previousPage()" i18n>
