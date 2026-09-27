@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
 import { Subject, takeUntil } from 'rxjs';
@@ -35,7 +35,8 @@ export class SingleItemComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public itemsCacheService: ItemsCacheService,
     private langService: LangService,
-    public utilsService: UtilsService
+    public utilsService: UtilsService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.destroy = new Subject<boolean>();
     this.utilsService.sidebarLayout.next(false);
@@ -55,6 +56,7 @@ export class SingleItemComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe((item: Item) => {
         this.item = item;
+        this.changeDetectorRef.markForCheck();
       });
   }
 
@@ -64,6 +66,7 @@ export class SingleItemComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe((damageTypes: DamageType[]) => {
         this.damageTypes = damageTypes;
+        this.changeDetectorRef.markForCheck();
       });
   }
 
@@ -73,6 +76,7 @@ export class SingleItemComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe((tiers: Tier[]) => {
         this.tiers = tiers;
+        this.changeDetectorRef.markForCheck();
       });
   }
 
@@ -82,6 +86,7 @@ export class SingleItemComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe((categories: Category[]) => {
         this.categories = categories;
+        this.changeDetectorRef.markForCheck();
       });
   }
 
@@ -91,6 +96,7 @@ export class SingleItemComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe((classTypes: ClassType[]) => {
         this.classTypes = classTypes;
+        this.changeDetectorRef.markForCheck();
       });
   }
 
@@ -107,9 +113,12 @@ export class SingleItemComponent implements OnInit, OnDestroy {
       ? 'weapon_categories/'
       : 'armor_categories/';
 
-    const categoryObj = this.categories.find(
+    const categoryObj = this.categories?.find(
       (c) => c.id === currentItem.category
     );
+    if (!categoryObj) {
+      return null;
+    }
     let fileName: string;
     // Grenade launchers case
     if (categoryObj?.name === 'Grenade Launchers') {
@@ -127,9 +136,12 @@ export class SingleItemComponent implements OnInit, OnDestroy {
   getClassTypeImgPath(currentItem: Item): string | null {
     const basePath = 'assets/img/class_types/';
 
-    const classTypeObj = this.classTypes.find(
+    const classTypeObj = this.classTypes?.find(
       (c) => c.id === currentItem.class_type
     );
+    if (!classTypeObj) {
+      return null;
+    }
     const fileName = classTypeObj?.id_bungie + '.svg';
 
     const fullPath = basePath + fileName;
