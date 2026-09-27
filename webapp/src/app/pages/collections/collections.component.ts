@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -80,7 +81,8 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     public utilsService: UtilsService,
     public langService: LangService,
     private authService: AuthService,
-    public filterSortService: FilterSortService
+    public filterSortService: FilterSortService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.destroy = new Subject<boolean>();
     this.utilsService.sidebarLayout.next(false);
@@ -247,6 +249,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
           }),
           finalize(() => {
             this.loading = false;
+            this.changeDetectorRef.markForCheck();
           })
         )
         .subscribe((response: any) => {
@@ -286,6 +289,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
         }),
         finalize(() => {
           this.loading = false;
+          this.changeDetectorRef.markForCheck();
         })
       )
       .subscribe((response: any) => {
@@ -301,6 +305,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe((damageTypes: DamageType[]) => {
         this.damageTypes = damageTypes;
+        this.changeDetectorRef.markForCheck();
       });
   }
 
@@ -310,6 +315,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe((tiers: Tier[]) => {
         this.tiers = tiers;
+        this.changeDetectorRef.markForCheck();
       });
   }
 
@@ -319,6 +325,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe((categories: Category[]) => {
         this.categories = categories;
+        this.changeDetectorRef.markForCheck();
       });
   }
 
@@ -328,6 +335,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe((classTypes: ClassType[]) => {
         this.classTypes = classTypes;
+        this.changeDetectorRef.markForCheck();
       });
   }
 

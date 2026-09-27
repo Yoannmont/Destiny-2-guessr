@@ -327,6 +327,16 @@ class TestBungieOAuthPipeline:
                 **kwargs,
             )
 
+    def test_bungie_client_request_forwards_json(self):
+        bungie_client = BungieClient()
+        payload = {"code": "authorization-code"}
+        response = mock.Mock(status_code=200)
+
+        with mock.patch.object(bungie_client.session, "request", return_value=response) as session_request:
+            assert bungie_client.request("https://example.com/token", method="POST", json=payload) is response
+
+        assert session_request.call_args.kwargs["json"] == payload
+
     def test_account_info(self, client: APIClient):
         # Beginning pipeline
         self._authenticate_one_account_user(client)

@@ -53,7 +53,7 @@ class Dev(Configuration):
 
     @property
     def ALLOWED_HOSTS(self):
-        return ["localhost", str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://"), ".onrender.com"]
+        return ["localhost", str(self.SOCIAL_AUTH_BUNGIE_ORIGIN).lstrip("https://")]
 
     # Application definition
 

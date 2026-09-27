@@ -41,7 +41,7 @@ class BungieClient(BungieOAuth2):
 
         return self.get_json(url=url, headers=headers)
 
-    def request(self, url, *, method="GET", headers=None, data=None, auth=None, params=None):
+    def request(self, url, *, method="GET", headers=None, data=None, json=None, auth=None, params=None):
         headers = {} if headers is None else dict(headers)
         if self.SEND_USER_AGENT and "User-Agent" not in headers:
             headers["User-Agent"] = self.session.headers.get("User-Agent")
@@ -52,6 +52,7 @@ class BungieClient(BungieOAuth2):
                 url,
                 headers=headers,
                 data=data,
+                json=json,
                 auth=auth,
                 params=params,
                 timeout=self.timeout,
