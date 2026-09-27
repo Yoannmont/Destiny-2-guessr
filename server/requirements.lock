@@ -37,7 +37,6 @@ django==6.1.1
     #   django-configurations
     #   django-cors-headers
     #   django-crispy-forms
-    #   django-debug-toolbar
     #   django-filter
     #   django-log-request-id
     #   djangorestframework
@@ -50,8 +49,6 @@ django-cors-headers==4.9.0
     # via -r requirements.in
 django-crispy-forms==2.7
     # via crispy-bootstrap5
-django-debug-toolbar==8.0.0
-    # via -r requirements.in
 django-filter==26.1
     # via -r requirements.in
 django-log-request-id==2.1.2
@@ -130,9 +127,7 @@ social-auth-app-django==6.0.1
 social-auth-core==5.1.1
     # via social-auth-app-django
 sqlparse==0.6.0
-    # via
-    #   django
-    #   django-debug-toolbar
+    # via django
 traitlets==5.16.1
     # via -r requirements.in
 tzdata==2026.4

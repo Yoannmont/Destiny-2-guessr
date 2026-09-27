@@ -16,7 +16,7 @@ class BungieClient(BungieOAuth2):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.session = requests.Session()
+        self.request_session = requests.Session()
         retries = Retry(
             total=3,
             backoff_factor=0.3,
@@ -24,14 +24,14 @@ class BungieClient(BungieOAuth2):
             respect_retry_after_header=True,
         )
         adapter = HTTPAdapter(max_retries=retries)
-        self.session.mount("https://", adapter)
-        self.session.mount("http://", adapter)
+        self.request_session.mount("https://", adapter)
+        self.request_session.mount("http://", adapter)
 
         self.timeout = self.setting("REQUESTS_TIMEOUT") or self.setting("URLOPEN_TIMEOUT") or 5
         self.proxies = self.setting("PROXIES")
         self.verify_ssl = self.setting("VERIFY_SSL", True)
 
-        self.session.headers["User-Agent"] = self.setting("USER_AGENT") or user_agent()
+        self.request_session.headers["User-Agent"] = self.setting("USER_AGENT") or user_agent()
 
     def make_bungie_request(self, url, access_token, kwargs):
         """Helper function to get data from Bungie API with bearer token and timeout."""
@@ -44,10 +44,10 @@ class BungieClient(BungieOAuth2):
     def request(self, url, *, method="GET", headers=None, data=None, json=None, auth=None, params=None, timeout=None):
         headers = {} if headers is None else dict(headers)
         if self.SEND_USER_AGENT and "User-Agent" not in headers:
-            headers["User-Agent"] = self.session.headers.get("User-Agent")
+            headers["User-Agent"] = self.request_session.headers.get("User-Agent")
 
         try:
-            response = self.session.request(
+            response = self.request_session.request(
                 method,
                 url,
                 headers=headers,

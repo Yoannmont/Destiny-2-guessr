@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -23,7 +23,8 @@ export class SelectMembershipComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private utilsService: UtilsService,
-    private itemsCacheService: ItemsCacheService
+    private itemsCacheService: ItemsCacheService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.utilsService.sidebarLayout.next(false);
   }
@@ -33,6 +34,7 @@ export class SelectMembershipComponent implements OnInit {
       if (this.loading) {
         this.timedOut = true;
         this.loading = false;
+        this.changeDetectorRef.markForCheck();
       }
     });
     this.getMemberships();
@@ -42,6 +44,7 @@ export class SelectMembershipComponent implements OnInit {
     this.authService.getMemberships().subscribe((memberships: Membership[]) => {
       this.memberships = memberships;
       this.loading = false;
+      this.changeDetectorRef.markForCheck();
     });
   }
 

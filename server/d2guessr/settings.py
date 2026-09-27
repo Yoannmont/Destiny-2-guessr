@@ -75,12 +75,10 @@ class Dev(Configuration):
         "rest_framework_simplejwt.token_blacklist",
         "ip_filter",
         "whitenoise.runserver_nostatic",
-        "debug_toolbar",
     ]
 
     MIDDLEWARE = [
         "d2guessr.middleware.restrict_origin.RestrictOriginMiddleware",
-        "debug_toolbar.middleware.DebugToolbarMiddleware",
         "log_request_id.middleware.RequestIDMiddleware",
         "django.middleware.security.SecurityMiddleware",
         "django.contrib.sessions.middleware.SessionMiddleware",
@@ -352,12 +350,10 @@ class Dev(Configuration):
     def SOCIAL_AUTH_LOGIN_ERROR_URL(self):
         return self.SOCIAL_AUTH_BUNGIE_FRONTEND_ERROR_URL
 
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SAMESITE = "None"
-
-    CSRF_COOKIE_SECURE = True
-    CSRF_COOKIE_SAMESITE = "None"
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SESSION_COOKIE_SAMESITE = "Lax"
+    CSRF_COOKIE_SAMESITE = "Lax"
 
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -427,6 +423,12 @@ class Prod(Dev):
     NAME = "PROD"
     DOTENV = Dev.BASE_DIR / ".env.prod"
     RESTRICT_ORIGIN = True
+
+    SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SAMESITE = "None"
+    CSRF_COOKIE_SAMESITE = "None"
 
     SECRET_KEY = values.SecretValue(environ_prefix=NAME)
 

@@ -332,7 +332,7 @@ class TestBungieOAuthPipeline:
         payload = {"code": "authorization-code"}
         response = mock.Mock(status_code=200)
 
-        with mock.patch.object(bungie_client.session, "request", return_value=response) as session_request:
+        with mock.patch.object(bungie_client.request_session, "request", return_value=response) as session_request:
             assert bungie_client.request("https://example.com/token", method="POST", json=payload) is response
 
         assert session_request.call_args.kwargs["json"] == payload
